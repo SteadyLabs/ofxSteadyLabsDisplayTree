@@ -24,24 +24,23 @@
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE.
  **************************************************************************/
-
+#pragma once
 #ifndef DisplayTreeTest_VideoSprite_h
 #define DisplayTreeTest_VideoSprite_h
 
-//#include "ofMain.h" //for ofVideoPlayer
 #include "BaseMovie.h"
-#include "ofxQTKitVideoPlayer.h"
+
 
 class VideoSprite : public BaseMovie{
     
 public:
     VideoSprite();
-    VideoSprite( string inFile, bool inHasAlpha = false );
-	VideoSprite( string inFile, bool inHasAlpha = false, bool inIsLooped = true );
+    VideoSprite( string inFile );
+	VideoSprite( string inFile, bool inIsLooped );
     
     void update();
     
-	void loadFile( string inFile, bool inHasHalpha = false, bool inIsLooped = true );
+	void loadFile( string inFile, bool inIsLooped = true );
     void play();
 //	void stop();
 	void close();
@@ -58,9 +57,9 @@ public:
     
 private:
     ofVideoPlayer* video;
-    ofxQTKitVideoPlayer* alphaVideo;
+//    ofxQTKitVideoPlayer* alphaVideo;
 	bool _isLooped;
-    bool hasAlpha;
+//    bool hasAlpha;
 
     
 };

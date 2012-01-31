@@ -32,170 +32,96 @@ VideoSprite::VideoSprite(){
 
 }
 
-VideoSprite::VideoSprite( string inFile, bool inHasAlpha ){
+VideoSprite::VideoSprite( string inFile ){
     
-    loadFile(inFile, inHasAlpha);
+    loadFile(inFile);
 }
 
-VideoSprite::VideoSprite( string inFile, bool inHasAlpha, bool inIsLooped ){
+VideoSprite::VideoSprite( string inFile, bool inIsLooped ){
     
-    loadFile(inFile, inHasAlpha, inIsLooped);
+    loadFile(inFile, inIsLooped);
     
 }
 
 void VideoSprite::update(){
-    //video.idleMovie();
-    if (hasAlpha ){
-        alphaVideo->update();
-    }
-    else{
-        video->update();
-    }
+
+    video->update();
     BaseSprite::update();//aka super.update();
 }
 
 
 
-void  VideoSprite::loadFile( string inFile, bool inHasAlpha, bool inIsLooped ){
+void  VideoSprite::loadFile( string inFile, bool inIsLooped ){
 	_isLooped = inIsLooped;
-    if ( inHasAlpha ){
-        hasAlpha = true;
-        int mode = OFXQTVIDEOPLAYER_MODE_TEXTURE_ONLY;
-        alphaVideo = new ofxQTKitVideoPlayer();
-        alphaVideo->loadMovie( inFile.c_str(), mode );   
-		if( !_isLooped ) alphaVideo->setLoopState(OF_LOOP_NONE);
-    }
-    else{
-        hasAlpha = false;
-        video = new ofVideoPlayer();
-        video->loadMovie( inFile.c_str() );
-		if( !_isLooped ) video->setLoopState(OF_LOOP_NONE);
-    }
+
+    video = new ofVideoPlayer();
+    video->loadMovie( inFile.c_str() );
+    if( !_isLooped ) video->setLoopState(OF_LOOP_NONE);
+
 }
 
 void VideoSprite::setPosition(float per)
 {
-    if (hasAlpha ){
-        alphaVideo->setPosition(per);
-    }
-    else{
-        video->setPosition(per);
-    } 
+
+    video->setPosition(per);
 }
 
 void VideoSprite::setFrame(int frame)
 {
-    if (hasAlpha ){
-        alphaVideo->setFrame(frame);
-    }
-    else{
-        video->setFrame(frame);
-    } 
+    
+    video->setFrame(frame);
+     
 }
 
 int VideoSprite::getCurrentVideoFrame() 
 {
-    if (hasAlpha ){
-        return alphaVideo->getCurrentFrame();
-    }
-    else{
-        return video->getCurrentFrame();
-    }  
+    video->getCurrentFrame();
 }
 
 int VideoSprite::getTotalVideoFrames() 
 {
-    if (hasAlpha ){
-        return alphaVideo->getTotalNumFrames();
-    }
-    else{
-        return video->getTotalNumFrames();
-    }
+    return video->getTotalNumFrames();
 }
 
 void  VideoSprite::render(){
    
-    if (hasAlpha ){
-        alphaVideo->draw( 0, 0);
-    }
-    else{
-        video->draw( 0, 0 );
-    }    
+    video->draw( 0, 0 );
+
 
 }
 
-//// Added because was having problems unloading movies from overlay controller -seb
-//void VideoSprite::stop() {
-//	
-//    if (hasAlpha ){
-//        alphaVideo->pause();
-//    }
-//    else{
-//        video->stop();
-//    }    
-//	
-//}
 
 void VideoSprite::close() {
     
-	if (hasAlpha ){
-        alphaVideo->closeMovie();
-    }
-    else{
-        video->closeMovie();
-    }	
+
+    video->closeMovie();
+
 	
 }
 
 float VideoSprite::getWidth()
 {
-	if (hasAlpha ){
-        alphaVideo->getWidth();
-    }
-    else{
-        video->getWidth();
-    }	
+    video->getWidth();
+
 }
 
 float VideoSprite::getHeight()
 {
-	if (hasAlpha ){
-        alphaVideo->getHeight();
-    }
-    else{
-        video->getHeight();
-    }	
+
+    video->getHeight();
 }
 
 bool VideoSprite::isLoaded()
 {
-	if(hasAlpha)
-	{
-		if(alphaVideo->isLoaded())
-		{
-			return alphaVideo->isLoaded();
-		}
-	} else
-	{
-		if( video->isLoaded() )
-		{
-			return video->isLoaded();
-		}
-	}
-	
-	return false;
+    return video->isLoaded();
 }
 
 
 void  VideoSprite::play(){
-    if (hasAlpha ){
-        alphaVideo->play();
-    }
-    else{
-        video->play();
-    }
+    video->play();
+
 }
 
 VideoSprite::~ VideoSprite(){
-    //todo: write a destructor, deallocate mem
+    delete video;
 }
