@@ -110,21 +110,6 @@ void ButtonSprite::loadAnimSequence(ButtonState thisState, string inDir)
     }
 }
 
-// function to load the default image
-
-/*
-void ButtonSprite::update()
-{
-
-}
-
-void ButtonSprite::render()
-{
-        
-}
- */
-
-
 void ButtonSprite::onPress(int x, int y, int button)
 {
     if (!BaseSprite::visible || !BaseSprite::worldMouseEnabled ) return;
@@ -238,7 +223,7 @@ void ButtonSprite::onRollOver(int x, int y)
     
     buttonState = ROLLOVER;
     rollover_anim->gotoAndPlay(1);
-    traceTransformChain();
+    //traceTransformChain();
     this->dispatchEvent(ON_ROLLOVER, name);
 }
 

@@ -104,8 +104,8 @@ public:
        
 protected:
     //refactored from baseSprite
-    float worldX;
-    float worldY;
+    //float worldX;
+    //float worldY;
     float worldAlpha;
     bool worldMouseEnabled;
     

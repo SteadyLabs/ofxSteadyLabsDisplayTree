@@ -80,7 +80,7 @@ void copyCurMatrix( ofMatrix4x4 &outMat){
 }
 
 int DisplayObject::draw( int inRenderOrder){
-    if ( isRoot ){ //ok we will need people to specify if something is root... gone are the innocent days when you could just draw shit whenever
+    if ( isRoot ){ //ok we will need people to specify if something is root... gone are the innocent days when you could just draw whenever
         
         copyCurMatrix(DisplayObject::baseMatrix);
         inRenderOrder = 0;
@@ -96,8 +96,10 @@ int DisplayObject::draw( int inRenderOrder){
         return inRenderOrder;
         
     }
-    calcTransform();
-
+    calcTransform(); 
+    //calc transform only calculates alpha transforms, since the matrices are taken care of
+    
+    ofSetColor(255, 255, 255, worldAlpha * 255);
     ofTranslate( x, y );
     
     
@@ -207,15 +209,15 @@ void DisplayObject::addChild( DisplayObject* inSprite ){
 
 void DisplayObject::calcTransform(){
     if ( parentSprite ==NULL ){ //root or not on stage
-        worldX = x;
-        worldY = y;
+        //worldX = x;
+        //worldY = y;
         worldAlpha = alpha;
 		// cout<< "root sprite's alpha is:"<<worldAlpha<< "\n";
     }
     else{
         
-        worldX = parentSprite-> worldX + x;
-        worldY = parentSprite-> worldY + y;
+        //worldX = parentSprite-> worldX + x;
+        //worldY = parentSprite-> worldY + y;
         
         
         worldAlpha = parentSprite-> worldAlpha * alpha; //alpha is expected to be between 0 and 1
@@ -224,7 +226,7 @@ void DisplayObject::calcTransform(){
     
     int alphaConverted = worldAlpha * 255;
     // std::cout<< "alphaConverted:" << alphaConverted << "\n";
-    ofSetColor(255, 255, 255, alphaConverted);
+    //ofSetColor(255, 255, 255, alphaConverted);
     
 }
 

@@ -132,7 +132,6 @@ void BitmapSequence::update(){
     }
     if( totalFrames == 1 ){
         curFrame = 0;
-        //setDimensions();
         return;
     }
     if ( usingFrames && playing ){
@@ -167,7 +166,7 @@ void BitmapSequence::update(){
                 dispatchEvent( BitmapSequence::ON_PLAY_COMPLETE , name );
             }
         }
-        cout<< "BitmapSequence::update::1::curFrame:"<< curFrame<< "\n";
+        //cout<< "BitmapSequence::update::1::curFrame:"<< curFrame<< "\n";
     }
     else{
         //umm i dunno, use time?
@@ -182,15 +181,7 @@ void BitmapSequence::render(){
         ofEnableAlphaBlending();
     }
     
-    //cout<<"wtf\n"<<width <<"," <<height;
-    
     images[ curFrame ]-> draw( 0, 0 );
-
-    
-    //if( hasAlpha ){
-        //ofDisableAlphaBlending();
-    //}
-    
 
 }
 

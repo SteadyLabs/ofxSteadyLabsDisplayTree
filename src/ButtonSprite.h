@@ -1,6 +1,6 @@
 /***********************************************************************
  
- Copyright (c) 2011,2012, Mike Manh
+ Copyright (c) 2011,2012, Carrie Kengle
  ***STEADY LTD http://steadyltd.com ***
  All rights reserved.
  
