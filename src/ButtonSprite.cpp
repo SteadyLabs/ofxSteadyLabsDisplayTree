@@ -1,6 +1,6 @@
 /***********************************************************************
  
- Copyright (c) 2011,2012, Mike Manh
+ Copyright (c) 2011,2012, Carrie Kengle, Mike Manh
  ***STEADY LTD http://steadyltd.com ***
  All rights reserved.
  
@@ -36,8 +36,6 @@ string ButtonSprite::ON_ROLLOUT = "onRollout";
 
 ButtonSprite::ButtonSprite(){
     // image = new ofImage();
-    
-    hasAlpha = true;
     init();
 
 }
@@ -59,6 +57,14 @@ void ButtonSprite::loadFile(string inDir){
     loadAnimSequence(ROLLOUT, rollout_dir);
     loadAnimSequence(ROLLOVER, rollover_dir);
     loadAnimSequence(PRESS, press_dir);
+    
+    states.push_back(default_state);
+    states.push_back(rollout_anim);
+    states.push_back(rollover_anim);
+    states.push_back(press_anim);
+    setState(DEFAULT);
+    setAlphaHitThreshold(20);
+    setUseAlpha(true);
 }
 
 void ButtonSprite::init(){
@@ -70,12 +76,10 @@ void ButtonSprite::init(){
 
     rollover_anim = NULL;
     rollout_anim = NULL;
-    press_anim = NULL;
-    
+    press_anim = NULL;    
     default_state = NULL;
+    curState = NULL;
     
-    
-    // cout<< "ButtonSprite::constructor::rollover_anim:"<< rollover_anim<< "rollout_anim:" << rollout_anim <<"\n";
 }
 
 // function to load sequences
@@ -84,9 +88,9 @@ void ButtonSprite::loadAnimSequence(ButtonState thisState, string inDir)
     switch (thisState) {
         case DEFAULT:
             default_state = new BitmapSequence(inDir);
+            default_state->name = "default_state";
             if (default_state->parentSprite == NULL){
-                //cout << " default addChild " << name << endl;
-                BaseSprite::addChild(default_state);
+                addChild(default_state);
             }
             BaseSprite::width = default_state->width;
             BaseSprite::height = default_state->height;
@@ -95,14 +99,18 @@ void ButtonSprite::loadAnimSequence(ButtonState thisState, string inDir)
         case ROLLOUT:
             
             rollout_anim = new BitmapSequence(inDir);
+            rollout_anim->name = "rollout_anim";
             break;
             
         case ROLLOVER:
             rollover_anim = new BitmapSequence(inDir);
+            rollover_anim->name = "rollover_anim";
             break;
             
         case PRESS:
             press_anim = new BitmapSequence(inDir);
+            press_anim->name = "press_anim";      
+            press_anim->x = 20;
             break;
             
         default:
@@ -112,70 +120,102 @@ void ButtonSprite::loadAnimSequence(ButtonState thisState, string inDir)
 
 void ButtonSprite::onPress(int x, int y, int button)
 {
+    cout << "ButtonSprite::onPress\n";
     if (!BaseSprite::visible || !BaseSprite::worldMouseEnabled ) return;
     
-    if (press_anim->parentSprite == NULL){
-        // cout << " press addChild " << name << endl;
-        BaseSprite::addChild(press_anim);
-    }
-    
-    //remove all other states
-    if (default_state->parentSprite != NULL)
-        BaseSprite::removeChild(default_state);
-    if (rollover_anim->parentSprite != NULL)
-        BaseSprite::removeChild(rollover_anim);
-    if (rollout_anim->parentSprite != NULL)
-        BaseSprite::removeChild(rollout_anim);
-    
     //cout<< "ButtonSprite::onPress::\n" <<  name << endl;
-    buttonState = PRESS;
-    press_anim->gotoAndPlay(1);
+    //buttonState = PRESS;
+    setState( PRESS );
+    curState->gotoAndPlay(1);
     this->dispatchEvent(ON_PRESS, name);
 }
 
 
 void ButtonSprite::onRelease(int x, int y, int button)
 {
-    //cout<< "ButtonSprite::onRelease::\n";
-    
-    if (default_state->parentSprite == NULL){
-        // cout << " default addChild " << name << endl;
-        addChild(default_state);
-    }
-    
-    //remove all other states
-    if (press_anim->parentSprite != NULL)
-        removeChild(press_anim);
-    if (rollover_anim->parentSprite != NULL)
-        removeChild(rollover_anim);
-    if (rollout_anim->parentSprite != NULL)
-        removeChild(rollout_anim);
-
     
     if (!visible || !worldMouseEnabled ) return;
     
-    buttonState = DEFAULT;
+    setState( ROLLOVER );
+    curState->gotoAndPlay(1);
     this->dispatchEvent(ON_RELEASE, name);
 }
 
-void ButtonSprite::onReleaseOutside(int x, int y, int button)
-{
-    if (default_state->parentSprite == NULL){
-        // cout << " default addChild " << name << endl;
-        addChild(default_state);
+bool ButtonSprite::getUseAlpha(){
+    return useAlpha;
+}
+
+void ButtonSprite::setUseAlpha( bool inUseAlpha ){
+    useAlpha = inUseAlpha;    
+    for( int i = 0; i < states.size(); i++ ){
+        states[i]->hitOnAlpha = inUseAlpha;
+    }
+}
+
+void ButtonSprite::setState( ButtonState inState ){
+    switch (inState) {
+        case DEFAULT:
+            curState = default_state;
+            break;
+        case ROLLOUT:
+            curState = rollout_anim;
+            break;
+        case ROLLOVER:
+            curState = rollover_anim;
+            break;
+        case PRESS:
+            curState = press_anim;            
+            break;            
+        default:
+            break;
+    }
+    buttonState = inState;
+    
+    if (curState->parentSprite == NULL){
+        // cout << " press addChild " << name << endl;
+        addChild(curState);
     }
     
     //remove all other states
-    if (press_anim->parentSprite != NULL)
-        removeChild(press_anim);
-    if (rollover_anim->parentSprite != NULL)
-        removeChild(rollover_anim);
-    if (rollout_anim->parentSprite != NULL)
-        removeChild(rollout_anim);
-    
-    //cout<< "ButtonSprite::onRelease::\n";
+    for( int i = 0; i < states.size(); i++ ){
+        if ( states[ i ] != curState && states[i]->parentSprite == this){
+            removeChild(states[i]);
+        }
+    }
+}
+
+bool ButtonSprite::hitTest( int tx, int ty ){
+    //ofLog( OF_LOG_VERBOSE, "ButtonSprite::hitTest" );
+    //cout<< "ButtonSprite::hitTest\n";a
+    //todo actually do a hit test based off the curstate
+    if ( curState != NULL ){
+        cout <<"ButtonSprite::hitTest::curState:" << name << "::" << curState->name <<endl;
+        return curState->hitTest(tx, ty);
+    }
+    else{
+        cout <<"ButtonSprite::hitTest::curState == NULL\n";
+        return false;
+    }
+}
+
+
+void ButtonSprite::setAlphaHitThreshold( int inThreshold ){
+    alphaHitThreshold = inThreshold;
+    for( int i = 0; i < states.size(); i++ ){
+        states[i]->alphaHitThreshold = inThreshold;
+    }
+}
+
+int ButtonSprite::getAlphaHitThreshold(){
+    return( alphaHitThreshold );
+}
+
+
+void ButtonSprite::onReleaseOutside(int x, int y, int button)
+{
     if (!visible ) return;
-    buttonState = DEFAULT;
+    //buttonState = DEFAULT;
+    setState(DEFAULT);
     this->dispatchEvent(ON_RELEASE_OUTSIDE, name);
 }
 
@@ -185,21 +225,8 @@ void ButtonSprite::onRollOut()
     //cout<< "ButtonSprite::onRollOut::\n";
     if (!visible || !worldMouseEnabled ) return;
     
-    if (rollout_anim->parentSprite == NULL){
-        // cout << " rollout addChild " << name << endl;
-        addChild(rollout_anim);
-    }
-    
-    //remove all other states
-    if (default_state->parentSprite != NULL)
-        removeChild(default_state);
-    if (press_anim->parentSprite != NULL)
-        removeChild(press_anim);
-    if (rollover_anim->parentSprite != NULL)
-        removeChild(rollover_anim);
-    
-    buttonState = ROLLOUT;
-    rollout_anim->gotoAndPlay(1);
+    setState(ROLLOUT);
+    curState->gotoAndPlay(1);
     this->dispatchEvent(ON_ROLLOUT, name);
 }
 
@@ -208,22 +235,14 @@ void ButtonSprite::onRollOver(int x, int y)
     //cout<< "ButtonSprite::onRollOver::\n";
     if (!visible || !worldMouseEnabled ) return;
     
-    if (rollover_anim->parentSprite == NULL){
-        // cout << "rollover addChild" << name << endl;
-        addChild(rollover_anim);
-    }
-    
-    //remove all other states
-    if (default_state->parentSprite != NULL)
-        removeChild(default_state);
-    if (press_anim->parentSprite != NULL)
-        removeChild(press_anim);
-    if (rollout_anim->parentSprite != NULL)
-        removeChild(rollout_anim);
-    
-    buttonState = ROLLOVER;
-    rollover_anim->gotoAndPlay(1);
+    setState( ROLLOVER );
+    curState->gotoAndPlay(1);
     //traceTransformChain();
     this->dispatchEvent(ON_ROLLOVER, name);
+}
+
+void ButtonSprite::render(){
+    cout <<"ButtonSprite::render::"<< name <<endl;
+    DisplayObject::render();
 }
 

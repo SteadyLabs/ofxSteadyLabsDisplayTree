@@ -40,6 +40,11 @@ BitmapSequence::BitmapSequence( string inDir ){
 }
 
 void BitmapSequence::init(){
+    //copied from 
+    hasAlpha = true;
+    hitOnAlpha = true;
+    alphaHitThreshold = 20;//it has to be almost totally transparent to not hit
+    //
     BaseMovie::BaseMovie();//super?
     usingFrames = true;//default this to true
     fps = 30;
@@ -124,6 +129,27 @@ void BitmapSequence::gotoAndStop(int frame){
     }
     stop();
 }
+
+//copied from bitmapSprite
+bool BitmapSequence::hitTest( int tx, int ty ){
+    //cout <<"BitmapSequence::hitTest\n";
+    if ( DisplayObject::hitTest(tx, ty) ){
+        
+        if( !hitOnAlpha){
+            return true;
+        }
+        
+        ofPoint myPoint = unprojectPoint(tx, ty);
+        ofPixels myPixels;
+        //myPixels.setFromExternalPixels( image->getPixels(), image->getWidth(), image->getHeight(), image->;
+        
+        ofColor myColor = images[curFrame]->getColor(myPoint.x, myPoint.y);
+        int alpha = (unsigned int)myColor.a;
+        return (alpha >= alphaHitThreshold);
+    }
+    return false;
+}
+
 void BitmapSequence::update(){
     //cout<< "BitmapSequence::update::usingFrames:"<< usingFrames<< "repeating:" << repeating << name <<"\n";
     if ( ! (totalFrames  >= 1 ) ){

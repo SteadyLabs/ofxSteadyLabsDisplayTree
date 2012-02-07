@@ -56,21 +56,26 @@ public:
     void loadFile( string inFile );
     // void render();
     
-    BitmapSequence* rollover_anim;
-    BitmapSequence* rollout_anim;
     
-    ButtonState buttonState;
+    //ButtonState buttonState;
     
+    bool getUseAlpha();
+    void setUseAlpha( bool inUseAlpha );
+    void setAlphaHitThreshold( int inThreshold );
+    bool hitTest( int tx, int ty);
+    int getAlphaHitThreshold(); 
     
+    void render();
     
 private:
-    bool hasAlpha;
-    
-    
+    bool useAlpha;
+    int alphaHitThreshold;
+    vector<BitmapSequence*> states;
     BitmapSequence* press_anim;
     BitmapSequence* default_state;
-    
-    
+    BitmapSequence* rollover_anim;
+    BitmapSequence* rollout_anim;
+
     void init();
     void loadAnimSequence(ButtonState buttonState, string inDir);
     
@@ -81,6 +86,10 @@ protected:
     void onRollOver(int x, int y);
     void onReleaseOutside(int x, int y, int button);
 	void onRollOut();
+    
+    void setState( ButtonState inState );
+    ButtonState buttonState;
+    BitmapSequence* curState;
     
     // void update();
 

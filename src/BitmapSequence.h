@@ -55,6 +55,9 @@ public:
     bool repeating;
     bool yoyo;
     bool forward;
+    bool hitTest( int tx, int ty );  
+    bool hitOnAlpha;
+    int alphaHitThreshold;
     
     ~BitmapSequence();
 protected:

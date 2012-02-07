@@ -92,6 +92,7 @@ void MouseEnabler::_mousePressed(ofMouseEventArgs &e, bool overRideHitTest) {
 	if( overRideHitTest || _target->hitTest(x, y)) {// if mouse is over
 		if(!_mouseDown) {                           // if wasn't down previous frame
 			_target->onPress(x, y, button);			// call onPress
+            cout << "_mousePressed " << _target->name << "\n";
 			_mouseDown = true;						// update flag
 		}
 	} else {                                        // if mouse is not over

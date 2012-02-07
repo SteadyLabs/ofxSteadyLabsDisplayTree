@@ -201,7 +201,7 @@ void DisplayObject::addChild( DisplayObject* inSprite ){
         children.push_back(inSprite);
         inSprite->parentSprite = this;
         inSprite->recalcMouseState();
-        cout << "PARENT:: " << this->name << " CHILD:: " << inSprite->name << endl;
+        //cout << "PARENT:: " << this->name << " CHILD:: " << inSprite->name << endl;
     }
     
     // cout << "BaseSprite::addChild::parent:"<< name << ", child:" << inSprite->name << "\n";
@@ -264,6 +264,10 @@ void DisplayObject::removeChild( DisplayObject* inSprite ){
         children.erase( result );
         inSprite->parentSprite = NULL;
         inSprite->recalcMouseState();//might not be necessary
+    }
+    else{
+        //inSprite is not actually a child
+        ofLog( OF_LOG_ERROR,"DisplayObject::removeChild, sprite is not a child" );
     }
 }
 
