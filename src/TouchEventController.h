@@ -1,4 +1,5 @@
 /***********************************************************************
+ 
  Copyright (c) 2011,2012, Mike Manh
  ***STEADY LTD http://steadyltd.com ***
  All rights reserved.
@@ -25,37 +26,66 @@
  POSSIBILITY OF SUCH DAMAGE.
  **************************************************************************/
 
-#pragma once
-#ifndef TOUCHSPRITE_H
-#define TOUCHSPRITE_H
+#ifndef TOUCHEVENTCONTROLLER_H
+#define TOUCHEVENTCONTROLLER_H
 
+#include "ofMain.h"
+#include "ofxPQLabs.h"
 
+class TouchEnabler;
 
-#include "BaseSprite.h"
-
-class TouchSprite : public BaseSprite{
+class TouchEventController{
     
 public:
+    TouchEventController();
+    ~TouchEventController();
+    static void addEnabler( TouchEnabler* inEnabler);
+    static void removeEnabler( TouchEnabler* inEnabler);
+    static void processEvents();
+    static void init();
     
-    void enablePQEvents();
-    void disablePQEvents();
+    enum TouchEventType
+    {
+        TOUCH_DOWN,
+        TOUCH_UP,
+        TOUCH_MOVE
+    };
     
-    /*
+    struct TouchEvent{
+        TouchEventType type;
+        ofTouchEventArgs args;
+    };
+        
+private:
+    
+protected:
+    
+    std::vector<TouchEnabler*> _touchEnablers;
+    std::map< TouchEnabler*, int> _touchEnablerToIndex;
+    
+    static TouchEventController* instance;
+    
+    void _addEnabler( TouchEnabler* inEnabler);
+    void _removeEnabler( TouchEnabler* inEnabler);
+    
+    //a queue of mouse events that have been adding up since before the event phase
+    std::queue< TouchEvent* > _eventQueue;
+    
     void onSingleTouchGestureEvent(SingleTouchGestureEvent & event);
     void onSingleTouchMoveEvent(SingleTouchMoveEvent & event);
     void onGestureClearEvent(GestureClearEvent & event);
     
+    void _handleEvent( TouchEvent* inEvent );
     
-    // hand tracking
-    void onSingleHandMoveEvent(SingleHandMoveEvent & event);
-    */
-
-protected:
+    void _init();
     
-private:
+    void _sort();
+    void _processEvents();
+    
+    // TODO: do we need this for touch events?
+    // bool _mouseMovedThisFrame;
     
 };
 
 
-
-#endif //TOUCHSPRITE_H
+#endif

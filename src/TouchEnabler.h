@@ -1,4 +1,5 @@
 /***********************************************************************
+ 
  Copyright (c) 2011,2012, Mike Manh
  ***STEADY LTD http://steadyltd.com ***
  All rights reserved.
@@ -25,37 +26,51 @@
  POSSIBILITY OF SUCH DAMAGE.
  **************************************************************************/
 
-#pragma once
-#ifndef TOUCHSPRITE_H
-#define TOUCHSPRITE_H
+#ifndef TOUCHENABLER_H
+#define TOUCHENABLER_H
 
+#include "InteractionEnabler.h"
+#include "ofMain.h"
 
+class DisplayObject;
+class ofTouchEventArgs;
 
-#include "BaseSprite.h"
-
-class TouchSprite : public BaseSprite{
-    
+class TouchEnabler: public InteractionEnabler{
 public:
+    TouchEnabler( DisplayObject* inTarget = NULL ): InteractionEnabler( inTarget ){ 
+        _touchOver	= false;
+        _touchDown	= false;
+        blocking = true;//why is this here? // i changed this to false and every rollover was triggered
+    };
     
-    void enablePQEvents();
-    void disablePQEvents();
+    ~TouchEnabler();
     
-    /*
-    void onSingleTouchGestureEvent(SingleTouchGestureEvent & event);
-    void onSingleTouchMoveEvent(SingleTouchMoveEvent & event);
-    void onGestureClearEvent(GestureClearEvent & event);
+    void enableTouchEvents();
+    void disableTouchEvents();
     
     
-    // hand tracking
-    void onSingleHandMoveEvent(SingleHandMoveEvent & event);
-    */
-
+    bool _touchMoved(ofTouchEventArgs &e);
+    void _touchMovedBlocked(ofTouchEventArgs &e);
+	void _touchPressed(ofTouchEventArgs &e, bool overRideHitTest = false);
+	void _touchDragged(ofTouchEventArgs &e, bool overRideHitTest = false);
+	void _touchReleased(ofTouchEventArgs &e, bool overRideHitTest = false);
+    
+    
+    bool blocking;
+    
+    
 protected:
     
-private:
+    int _touchX, _touchY, _touchButton;
+    bool		_touchOver;
+	bool		_touchDown;
     
+    
+    
+    static void sortEnablers();
+    
+    friend class TouchEventController;
 };
 
 
-
-#endif //TOUCHSPRITE_H
+#endif

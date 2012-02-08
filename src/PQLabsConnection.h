@@ -26,8 +26,8 @@
  **************************************************************************/
 
 
-#ifndef dsgRetail_PQLabsConnection_h
-#define dsgRetail_PQLabsConnection_h
+#ifndef PQLabsConnection_h
+#define PQLabsConnection_h
 
 #include "ofxPQLabs.h"
 #include "ofMain.h"
@@ -54,4 +54,4 @@ protected:
     
 };
 
-#endif
+#endif //PQLabsConnection_h

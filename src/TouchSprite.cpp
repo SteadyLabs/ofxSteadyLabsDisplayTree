@@ -40,11 +40,13 @@
  */
 void TouchSprite::enablePQEvents(){
     
-    /*
+   /*
     ofAddListener(PQLabsConnection::instance()->connection.singleTouchGestureEventDispatcher, this, &TouchSprite::onSingleTouchGestureEvent);
     ofAddListener(PQLabsConnection::instance()->connection.singleTouchMoveGestureEventDispatcher, this, &TouchSprite::onSingleTouchMoveEvent);
     ofAddListener(PQLabsConnection::instance()->connection.gestureClearEventDispatcher, this, &TouchSprite::onGestureClearEvent);
+    */
     
+    /*
     // TODO: hand tracking added to pq events for now, move later
     ofAddListener(PQLabsConnection::instance()->handGestures->singleHandMoveGestureEventDispatcher, this, &TouchSprite::onSingleHandMoveEvent);
      */
@@ -56,66 +58,13 @@ void TouchSprite::disablePQEvents(){
     ofRemoveListener(PQLabsConnection::instance()->connection.singleTouchGestureEventDispatcher, this, &TouchSprite::onSingleTouchGestureEvent);
     ofRemoveListener(PQLabsConnection::instance()->connection.singleTouchMoveGestureEventDispatcher, this, &TouchSprite::onSingleTouchMoveEvent);
     ofRemoveListener(PQLabsConnection::instance()->connection.gestureClearEventDispatcher, this, &TouchSprite::onGestureClearEvent);
+    */
     
+    /*
     // TODO: hand tracking added to pq events for now, move later
     ofRemoveListener(PQLabsConnection::instance()->handGestures->singleHandMoveGestureEventDispatcher, this, &TouchSprite::onSingleHandMoveEvent);
      */
 }
 
-/*
-void TouchSprite::onSingleTouchGestureEvent(SingleTouchGestureEvent & event)
-{
-    
-    
-    ofPoint p = event.point;
-    ofPoint newP = PQLabsConnection::instance()->flipCoords(p);
-    
-    ofMouseEventArgs e;
-    e.x = newP.x;
-    e.y = newP.y;
-    
-    _mousePressed(e);
-   
-}
 
 
-void TouchSprite::onSingleTouchMoveEvent(SingleTouchMoveEvent & event)
-{
-    
-    ofPoint p = event.point;
-    ofPoint newP = PQLabsConnection::instance()->flipCoords(p);
-    
-    ofMouseEventArgs e;
-    e.x = newP.x;
-    e.y = newP.y;
-    
-    _mouseMoved(e);
-    
-}
-
-
-void TouchSprite::onGestureClearEvent(GestureClearEvent & event)
-{
-    
-    ofMouseEventArgs e;
-    e.x = _mouseX;
-    e.y = _mouseY;
-    
-    _mouseReleased(e);
-    
-}
-
-void TouchSprite::onSingleHandMoveEvent(SingleHandMoveEvent & event)
-{
-    
-    // cout << "TouchSprite::onSingleHandMoveEvent" << event.point << endl;
-    ofPoint p = event.point;
-    
-    ofMouseEventArgs e;
-    e.x = p.x;
-    e.y = p.y;
-    
-    _mouseMoved(e);
-    
-}
-*/
