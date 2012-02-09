@@ -48,6 +48,7 @@ void DisplayObject::init(){
     isRoot = false;
     scaleX = scaleY = 1.f;
     registrationX = registrationY = 0.f;
+    blendMode = OF_BLENDMODE_ALPHA;
 }
 
 DisplayObject::~DisplayObject(){
@@ -66,11 +67,7 @@ void DisplayObject::update(){
 }
 
 void DisplayObject::render(){
-    // cout << "DisplayObject::render" << this->name << endl;
-    if ( parentSprite == NULL ){ //ie it is root
-        // cout<< "BaseSprite::enableAlphaBlending\n";
-        ofEnableAlphaBlending();
-    }
+
 }
 
 void copyCurMatrix( ofMatrix4x4 &outMat){
@@ -96,7 +93,8 @@ int DisplayObject::draw( int inRenderOrder){
         
     }
     ofPushMatrix();
-
+    ofPushStyle();
+    ofEnableBlendMode( blendMode );
     calcTransform(); 
     //calc transform only calculates alpha transforms, since the matrices are taken care of
     
@@ -127,6 +125,8 @@ int DisplayObject::draw( int inRenderOrder){
     
     inRenderOrder = drawChildren( inRenderOrder );
     drawComplete();
+    
+    ofPopStyle();
     ofPopMatrix();
     return inRenderOrder;
 }

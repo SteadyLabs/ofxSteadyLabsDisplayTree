@@ -60,6 +60,7 @@ public:
     float alpha;
     float scaleX;
     float scaleY;
+    ofBlendMode blendMode;
     
     float registrationX;
     float registrationY;
