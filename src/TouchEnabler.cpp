@@ -33,7 +33,6 @@
 //look in the .h file for the constructor
 
 TouchEnabler::~TouchEnabler(){
-    
 }
 
 void TouchEnabler::enableTouchEvents() {
@@ -52,20 +51,22 @@ bool TouchEnabler::_touchMoved(ofTouchEventArgs &e) {
 	
 	if( _target->hitTest(x, y)) {               
         
-        //cout << "_touchMoved hitTest " << _target->name << "\n" ;
+        cout << "_touchMoved hitTest " << _target->name << "\n" ;
         
-		if(!_touchOver) {						
+		if(!_touchOver && !_touchDown) {						
 			_target->onRollOver(x, y);			
             cout << "_touchMoved rollover " << _target->name << "\n";
 			_touchOver = true;					
 		}
 		_target->onMouseMove(x, y);				
         return true;
-	} else if( _touchOver) {					
+	} else if( _touchOver || _touchDown) {					
 		_target->onRollOut();					
         cout << "_touchMoved rollout " << _target->name << "\n";
-		_touchOver = false;						
+		_touchOver = false;		
+        _touchDown = false;
 	}
+    
     return false;
 }
 
@@ -74,73 +75,83 @@ void TouchEnabler::_touchMovedBlocked(ofTouchEventArgs &e){
         _target->onRollOut();
         cout << "_touchMovedBlocked rollout " << _target->name << "\n" ;
     }							
-    _touchOver = false;	// update flag
+    _touchOver = false;	
+    _touchDown = false;
 }
 
 
 void TouchEnabler::_touchPressed(ofTouchEventArgs &e, bool overRideHitTest) {
 	int x = e.x;
 	int y = e.y;
-	// int button = e.button;
+    // TODO: need an id
     
 	_touchX = x;
 	_touchY = y;
-	// _mouseButton = button;
-	
+
 	if( overRideHitTest || _target->hitTest(x, y)) {
-		if(!_touchDown) {                          
+		if(!_touchDown) {   
+            cout << "_touchPressed _target->onPress" << _target->name << "_touchX " << x << " _touchY " << y << "\n";
 			_target->onPress(x, y, 0);			
 			_touchDown = true;						
 		}
-	} else {                                        
+	} else { 
+        cout << "_touchPressed _target->onPressOutside" << _target->name << "_touchX " << x << " _touchY " << y << "\n";
 		_target->onPressOutside(x, y, 0);
 	}
 }
 
-void TouchEnabler::_touchDragged(ofTouchEventArgs &e, bool overRideHitTest) {
-	int x = e.x;
-	int y = e.y;
-	// int button = e.button;
-    
-	_touchX = x;
-	_touchY = y;
-	// _mouseButton = button;
-    
-	if( overRideHitTest || _target->hitTest(x, y)) {    
-		if( !_touchOver ) {                             
-			//onPress(x, y);                           
-			_touchOver = true;                          
-		}
-		_target->onDragOver(x, y, 0);				
-	} else {
-		if( _touchOver ) {					
-			_target->onRollOut();			
-			_touchOver = false;				
-		}
-		if( _touchDown) {
-			_target->onDragOutside(x, y, 0);
-		}
-	}
-}
+
 
 void TouchEnabler::_touchReleased(ofTouchEventArgs  &e, bool overRideHitTest) {
 	int x = e.x;
 	int y = e.y;
-	// int button = e.button;
+	// TODO: need an id
     
 	_touchX = x;
 	_touchY = y;
-	// _mouseButton = button;
+
 	
 	if( overRideHitTest ||_target->hitTest(x, y) ) {
+        cout << "_touchReleased _target->onRelease" << _target->name << "_touchX " << x << " _touchY " << y << "\n";
 		_target->onRelease(x, y, 0);
 	} else {
 		if( _touchDown) 
+            cout << "_touchReleased _target->onReleaseOutside" << _target->name << " _touchX " << x << "_touchY " << y << "\n";
             _target->onReleaseOutside(x, y, 0);
         
 	}
 	_touchDown = false;
+    _touchOver = false;
 }
+
+
+/*
+ void TouchEnabler::_touchDragged(ofTouchEventArgs &e, bool overRideHitTest) {
+ int x = e.x;
+ int y = e.y;
+ // TODO: need an id
+ 
+ _touchX = x;
+ _touchY = y;
+ 
+ 
+ if( overRideHitTest || _target->hitTest(x, y)) {    
+ if( !_touchOver ) {                             
+ //onPress(x, y);                           
+ _touchOver = true;                          
+ }
+ _target->onDragOver(x, y, 0);				
+ } else {
+ if( _touchOver ) {					
+ _target->onRollOut();			
+ _touchOver = false;				
+ }
+ if( _touchDown) {
+ _target->onDragOutside(x, y, 0);
+ }
+ }
+ }
+ */
 
 
 

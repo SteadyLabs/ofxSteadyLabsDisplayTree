@@ -31,7 +31,7 @@
 
 #include "ofxPQLabs.h"
 #include "ofMain.h"
-#include "HandGestures.h"
+// #include "HandGestures.h"
 
 class PQLabsConnection {
 	
@@ -39,7 +39,7 @@ public:
 	
 	static PQLabsConnection* instance();
     ofxPQLabs connection;
-    HandGestures *handGestures;
+    // HandGestures *handGestures;
     ofPoint flipCoords(ofPoint p);
     
 private:

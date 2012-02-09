@@ -46,6 +46,7 @@ public:
     
     enum TouchEventType
     {
+        STILL,
         TOUCH_DOWN,
         TOUCH_UP,
         TOUCH_MOVE
@@ -68,7 +69,7 @@ protected:
     void _addEnabler( TouchEnabler* inEnabler);
     void _removeEnabler( TouchEnabler* inEnabler);
     
-    //a queue of mouse events that have been adding up since before the event phase
+    //a queue of touch events that have been adding up since before the event phase
     std::queue< TouchEvent* > _eventQueue;
     
     void onSingleTouchGestureEvent(SingleTouchGestureEvent & event);
@@ -82,8 +83,8 @@ protected:
     void _sort();
     void _processEvents();
     
-    // TODO: do we need this for touch events?
-    // bool _mouseMovedThisFrame;
+    
+    bool _touchMovedThisFrame;
     
 };
 

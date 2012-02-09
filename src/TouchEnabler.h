@@ -40,7 +40,7 @@ public:
     TouchEnabler( DisplayObject* inTarget = NULL ): InteractionEnabler( inTarget ){ 
         _touchOver	= false;
         _touchDown	= false;
-        blocking = true;//why is this here? // i changed this to false and every rollover was triggered
+        blocking = true;
     };
     
     ~TouchEnabler();
@@ -52,7 +52,7 @@ public:
     bool _touchMoved(ofTouchEventArgs &e);
     void _touchMovedBlocked(ofTouchEventArgs &e);
 	void _touchPressed(ofTouchEventArgs &e, bool overRideHitTest = false);
-	void _touchDragged(ofTouchEventArgs &e, bool overRideHitTest = false);
+	// void _touchDragged(ofTouchEventArgs &e, bool overRideHitTest = false);
 	void _touchReleased(ofTouchEventArgs &e, bool overRideHitTest = false);
     
     

@@ -49,7 +49,7 @@ PQLabsConnection* PQLabsConnection::instance()
 }
 
 void PQLabsConnection::init(){
-    handGestures = new HandGestures();
+    // handGestures = new HandGestures();
     connection.connect("127.0.0.1");
 }
 

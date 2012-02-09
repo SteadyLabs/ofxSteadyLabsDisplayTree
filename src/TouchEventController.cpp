@@ -40,7 +40,7 @@ TouchEventController* TouchEventController::instance = new TouchEventController(
 
 TouchEventController::TouchEventController(){
     // TODO: i don't know if we need this
-    // _mouseMovedThisFrame = false;
+    _touchMovedThisFrame = false;
 }
 
 void TouchEventController::init(){
@@ -90,20 +90,21 @@ void TouchEventController::_processEvents(){
         delete curEvent;
     }
     
-    //TODO: i don't know about this
-    /*
-    if( !_mouseMovedThisFrame ){
-        curEvent = new MouseEvent();
-        curEvent->args = ofMouseEventArgs();
-        curEvent->args.x = ofGetMouseX();
-        curEvent->args.y = ofGetMouseY();
+    
+    if( !_touchMovedThisFrame && _eventQueue.size() > 0){
+        curEvent = new TouchEvent();
+        curEvent->args = ofTouchEventArgs();
+        //curEvent->args.x = ofGetMouseX();
+        //curEvent->args.y = ofGetMouseY();
+        TouchEvent *lastEvent = _eventQueue.back();
+        curEvent->args.x = lastEvent->args.x;
+        curEvent->args.x = lastEvent->args.y;
         curEvent->type = STILL;
         
         _handleEvent(curEvent);
         delete curEvent;
     }
-    _mouseMovedThisFrame = false;
-     */
+    _touchMovedThisFrame = false;
 }
 
 void TouchEventController::_handleEvent( TouchEvent* inEvent){
@@ -112,8 +113,9 @@ void TouchEventController::_handleEvent( TouchEvent* inEvent){
     int touchY = inEvent->args.y;
     
     switch( inEvent->type ){
-        case TOUCH_MOVE: //todo: do something different if the mouse hasn't moved
-            //mouse move isn't blocked, apparently
+        case STILL:
+        case TOUCH_MOVE: //todo: do something different if the touch hasn't moved
+            
             for ( int i = 0; i < _touchEnablers.size(); i++ ){
                 if ( _touchEnablers[ i ]->_touchMoved(inEvent->args) ){
                     if ( _touchEnablers[ i ]->blocking ){
@@ -121,12 +123,10 @@ void TouchEventController::_handleEvent( TouchEvent* inEvent){
                             _touchEnablers[ i ]->_touchMovedBlocked(inEvent->args);
                         }
                     }
-                    
                 }
-                
             }
-            
             break;
+        
         case TOUCH_DOWN:
             
             for ( int i = 0; i < _touchEnablers.size(); i++ ){
@@ -139,6 +139,7 @@ void TouchEventController::_handleEvent( TouchEvent* inEvent){
             }
             
             break;
+            
         case TOUCH_UP:
             
             for ( int i = 0; i < _touchEnablers.size(); i++ ){
@@ -213,8 +214,14 @@ void TouchEventController::onSingleTouchGestureEvent(SingleTouchGestureEvent & e
 {
     ofPoint p = event.point;
     ofTouchEventArgs e;
-    e.x = p.x;
-    e.y = p.y;
+    e.x = p.x - ofGetWindowPositionX();
+    e.y = p.y - ofGetWindowPositionY();
+    
+    //cout << "TouchEventController::onSingleTouchGestureEvent _x: " << p.x << " _y: " << p.y << endl;
+    
+    // for some reason the first event is always 0,0, ignoring it
+    if(p.x == 0 && p.y == 0) 
+        return;
     
     TouchEvent *savedEvent = new TouchEvent();
     savedEvent->type = TOUCH_DOWN;
@@ -226,11 +233,13 @@ void TouchEventController::onSingleTouchGestureEvent(SingleTouchGestureEvent & e
 
 void TouchEventController::onSingleTouchMoveEvent(SingleTouchMoveEvent & event)
 {
-    
+   
     ofPoint p = event.point;
     ofTouchEventArgs e;
-    e.x = p.x;
-    e.y = p.y;
+    e.x = p.x- ofGetWindowPositionX();;
+    e.y = p.y- ofGetWindowPositionY();;
+    
+    //cout << "TouchEventController::onSingleTouchMoveEvent _x: " << p.x << " _y: " << p.y << endl;
     
     TouchEvent *savedEvent = new TouchEvent();
     savedEvent->type = TOUCH_MOVE;
@@ -243,11 +252,13 @@ void TouchEventController::onSingleTouchMoveEvent(SingleTouchMoveEvent & event)
 void TouchEventController::onGestureClearEvent(GestureClearEvent & event)
 {
     
-   
+    
     ofTouchEventArgs e;
     TouchEvent *lastEvent = _eventQueue.back();
     e.x = lastEvent->args.x;
     e.y = lastEvent->args.y;
+    
+    //cout << "TouchEventController::onGestureClearEvent _x: " << e.x << " _y: " << e.y << endl;
     
     TouchEvent *savedEvent = new TouchEvent();
     savedEvent->type = TOUCH_UP;
