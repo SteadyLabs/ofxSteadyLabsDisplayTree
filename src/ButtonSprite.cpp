@@ -84,6 +84,7 @@ void ButtonSprite::loadAnimSequence(ButtonState thisState, string inDir)
     switch (thisState) {
         case DEFAULT:
             default_state = new BitmapSequence(inDir);
+            default_state->name = "default";
             if (default_state->parentSprite == NULL){
                 //cout << " default addChild " << name << endl;
                 BaseSprite::addChild(default_state);
@@ -95,14 +96,17 @@ void ButtonSprite::loadAnimSequence(ButtonState thisState, string inDir)
         case ROLLOUT:
             
             rollout_anim = new BitmapSequence(inDir);
+            rollout_anim->name = "rollout";
             break;
             
         case ROLLOVER:
             rollover_anim = new BitmapSequence(inDir);
+            rollover_anim->name = "rollover";
             break;
             
         case PRESS:
             press_anim = new BitmapSequence(inDir);
+            press_anim->name = "press";
             break;
             
         default:
