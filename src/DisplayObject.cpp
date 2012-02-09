@@ -88,7 +88,6 @@ int DisplayObject::draw( int inRenderOrder){
         
     }
     //cout << "DisplayObject::draw::renderOrder:" <<inRenderOrder<<"\n";
-    ofPushMatrix();
     if (!visible ) {
         renderOrder = -1;
         //todo maybe reset the render orders of all children
@@ -96,6 +95,8 @@ int DisplayObject::draw( int inRenderOrder){
         return inRenderOrder;
         
     }
+    ofPushMatrix();
+
     calcTransform(); 
     //calc transform only calculates alpha transforms, since the matrices are taken care of
     
