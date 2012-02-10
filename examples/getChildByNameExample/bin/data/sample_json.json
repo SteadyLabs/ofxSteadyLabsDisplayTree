@@ -1,0 +1,174 @@
+{
+	"id" : "stage",
+	"type" : "base_sprite",    
+	"children" : [
+				{
+                "id" : "containerA",
+                "type" : "bitmap_sprite",
+                "asset" : "container.png",
+                "x" : 55.0,
+                "y" : 185.0,
+                "visible" : 1,
+				"children" : [ 
+							{ 
+							"id" : "redasset",
+							"type" : "bitmap_sprite",
+							"asset" : "redasset.png",
+							"x" : 10.0,
+							"y" : 10.0,
+							"visible" : 1
+							}, 
+							{ 
+							"id" : "greenasset",
+							"type" : "bitmap_sprite",
+							"asset" : "greenasset.png",
+							"x" : 55.0,
+							"y" : 10.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "blueasset",
+							"type" : "bitmap_sprite",
+							"asset" : "blueasset.png",
+							"x" : 10.0,
+							"y" : 55.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "yellowasset",
+							"type" : "bitmap_sprite",
+							"asset" : "yellowasset.png",
+							"x" : 55.0,
+							"y" : 55.0,
+							"visible" : 1
+							}
+							]
+                },
+				{
+                "id" : "containerB",
+                "type" : "bitmap_sprite",
+                "asset" : "container.png",
+                "x" : 191.0,
+                "y" : 185.0,
+                "visible" : 1,
+				"children" : [ 
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 10.0,
+							"y" : 10.0,
+							"visible" : 1
+							}, 
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 55.0,
+							"y" : 10.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 10.0,
+							"y" : 55.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "yellowasset",
+							"type" : "bitmap_sprite",
+							"asset" : "yellowasset.png",
+							"x" : 55.0,
+							"y" : 55.0,
+							"visible" : 1
+							}
+							]
+                },
+				{
+                "id" : "containerC",
+                "type" : "bitmap_sprite",
+                "asset" : "container.png",
+                "x" : 349.0,
+                "y" : 185.0,
+                "visible" : 1,
+				"children" : [ 
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 10.0,
+							"y" : 10.0,
+							"visible" : 1
+							}, 
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 55.0,
+							"y" : 10.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 10.0,
+							"y" : 55.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 55.0,
+							"y" : 55.0,
+							"visible" : 1
+							}
+							]
+                },
+				{
+                "id" : "containerD",
+                "type" : "bitmap_sprite",
+                "asset" : "container.png",
+                "x" : 482.0,
+                "y" : 185.0,
+                "visible" : 1,
+				"children" : [ 
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 10.0,
+							"y" : 10.0,
+							"visible" : 1
+							}, 
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 55.0,
+							"y" : 10.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 10.0,
+							"y" : 55.0,
+							"visible" : 1
+							},
+							{ 
+							"id" : "asset",
+							"type" : "bitmap_sprite",
+							"asset" : "asset.png",
+							"x" : 55.0,
+							"y" : 55.0,
+							"visible" : 1
+							}
+							]
+                }
+				]
+}
