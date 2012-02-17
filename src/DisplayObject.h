@@ -60,6 +60,7 @@ public:
     float alpha;
     float scaleX;
     float scaleY;
+
     ofBlendMode blendMode;
     
     float registrationX;
@@ -108,6 +109,7 @@ protected:
     //float worldX;
     //float worldY;
     float worldAlpha;
+    bool worldVisible;
     bool worldMouseEnabled;
     
     void calcTransform();

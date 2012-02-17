@@ -185,6 +185,9 @@ void MouseEventController::_addEnabler(MouseEnabler* inEnabler){
     else{
         cout << inEnabler->_target->name << " MouseEventController::addEnabler::warning, trying to add an enabler that's already here\n";
     }
+    
+    cout << "MouseEventController::_addEnabler::map.size:" << _mouseEnablerToIndex.size() <<endl;
+    cout << "MouseEventController::_addEnabler::vector.size:" << _mouseEnablers.size() <<endl;
 }
 
 void MouseEventController::_removeEnabler(MouseEnabler* inEnabler){
@@ -201,15 +204,15 @@ void MouseEventController::_removeEnabler(MouseEnabler* inEnabler){
         _mouseEnablerToIndex.erase( iter );
      
     }
-    else{
-        
-        if ( _mouseEnablers[ index ] != inEnabler ){ //index is the correct one for that enabler
+    /*else{
+    */    
+        //if ( _mouseEnablers[ index ] != inEnabler ){ //index is the correct one for that enabler
             //find the correct index
             index = 0;
             while ( index < _mouseEnablers.size() && _mouseEnablers[index] != inEnabler ){
                 index++;
             }
-        }
+        //}
         if( index < _mouseEnablers.size() ){
             //delete it from mouseEnablers
             cout << "MouseEventController::_removeEnabler " << inEnabler->_target->name << endl;
@@ -217,7 +220,10 @@ void MouseEventController::_removeEnabler(MouseEnabler* inEnabler){
            
            
         }
-    }   
+    //}   
+    
+    cout << "MouseEventController::_removeEnabler::map.size:" << _mouseEnablerToIndex.size() << endl;
+        cout << "MouseEventController::_removeEnabler::vector.size:" << _mouseEnablers.size() << endl;
 }
 
 //---------------------------------------------------------------------------------------------

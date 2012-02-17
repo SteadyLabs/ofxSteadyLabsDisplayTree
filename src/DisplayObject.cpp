@@ -113,13 +113,15 @@ int DisplayObject::draw( int inRenderOrder){
     render();
 
     renderOrder = inRenderOrder;
-
+    
+    /*
     GLint curStackDepth;
     GLint maxStackDepth;
     glGetIntegerv(GL_MODELVIEW_STACK_DEPTH, &curStackDepth);
     glGetIntegerv(GL_MAX_MODELVIEW_STACK_DEPTH, &maxStackDepth);
     
-    //cout << "DisplayObject::draw::renderOrder:" << renderOrder << ", name:" <<name << ", maxStackDepth:" << maxStackDepth << ", curStackDepth:" << curStackDepth << endl;
+    cout << "DisplayObject::draw::renderOrder:" << renderOrder << ", name:" <<name << ", maxStackDepth:" << maxStackDepth << ", curStackDepth:" << curStackDepth << endl;
+     */
      
     inRenderOrder++;
     
@@ -213,6 +215,7 @@ void DisplayObject::calcTransform(){
         //worldX = x;
         //worldY = y;
         worldAlpha = alpha;
+
 		// cout<< "root sprite's alpha is:"<<worldAlpha<< "\n";
     }
     else{
@@ -220,7 +223,7 @@ void DisplayObject::calcTransform(){
         //worldX = parentSprite-> worldX + x;
         //worldY = parentSprite-> worldY + y;
         
-        
+        worldVisible = visible && parentSprite->worldVisible;
         worldAlpha = parentSprite-> worldAlpha * alpha; //alpha is expected to be between 0 and 1
         // cout<< "parent's alpha is:"<< parentSprite->worldAlpha << ", alpha is:"<< worldAlpha<< "\n";
     }
