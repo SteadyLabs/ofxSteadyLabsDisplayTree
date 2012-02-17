@@ -39,7 +39,7 @@ void MouseEnabler::enableMouseEvents() {
 }
 
 void MouseEnabler::disableMouseEvents() {
-    cout << "MouseEnabler::disableMouseEvents()" << endl;
+    // cout << "MouseEnabler::disableMouseEvents()" << endl;
     _mouseOver	= false;
     _mouseDown	= false;
     MouseEventController::removeEnabler(this);
