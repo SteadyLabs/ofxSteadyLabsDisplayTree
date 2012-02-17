@@ -113,7 +113,10 @@ void MouseEventController::_handleEvent( MouseEvent* inEvent){
                 //}
                 if ( _mouseEnablers[ i ]->_mouseMoved(inEvent->args) ){
                     if ( _mouseEnablers[ i ]->blocking ){
+                        cout << "THIS OBJECT IS BLOCKING " << _mouseEnablers[ i ]->getTarget()->name << endl;
                         for( i = i+1; i < _mouseEnablers.size(); i++ ){
+                            
+                            cout << " therefore THIS will rollout " << _mouseEnablers[ i ]->getTarget()->name << endl;
                             _mouseEnablers[ i ]->_mouseMovedBlocked(inEvent->args);
                         }
                     }
@@ -185,16 +188,18 @@ void MouseEventController::_addEnabler(MouseEnabler* inEnabler){
 }
 
 void MouseEventController::_removeEnabler(MouseEnabler* inEnabler){
+    cout << "MouseEventController::_removeEnabler " << inEnabler->_target->name << endl;
+    
     map<MouseEnabler*, int>::iterator iter = _mouseEnablerToIndex.find(inEnabler);
     int index = 0;
     if ( iter != _mouseEnablerToIndex.end() ){
         
         //it's there
         index = _mouseEnablerToIndex[ inEnabler ];
-        
+   
         cout << "MouseEventController::_removeEnabler " << inEnabler->_target->name << endl;
         _mouseEnablerToIndex.erase( iter );
-        
+     
     }
     else{
         
@@ -209,6 +214,8 @@ void MouseEventController::_removeEnabler(MouseEnabler* inEnabler){
             //delete it from mouseEnablers
             cout << "MouseEventController::_removeEnabler " << inEnabler->_target->name << endl;
             _mouseEnablers.erase( _mouseEnablers.begin() + index );
+           
+           
         }
     }   
 }

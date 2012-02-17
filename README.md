@@ -48,10 +48,13 @@ In our projects, we have had to do a variety of inputs, keyboard, mouse, touch, 
 
 `MouseController::processEvents();`
 
-The reason to do this is two fold: first, it lets us separate code and functionality, and avoid compiling it in when its not needed. If you aren't using a touch library or a kinect gesture library, it won't be compiled into the base object. We leave mouseEnabler in there, but you could modify displayObject so it doesn't have it anymore. Second, we can have z-depth occlusion for the mouse, so rolling over a the frame will prevent it from rolling over the wheel.
+The reason to do this is two fold: first, it lets us separate code and functionality, and avoid compiling it in when its not needed. If you aren't using a touch library or a Kinect gesture library, it won't be compiled into the base object. We leave mouseEnabler in there, but you could modify displayObject so it doesn't have it anymore. Second, we can have z-depth occlusion for the mouse, so rolling over a the frame will prevent it from rolling over the wheel.
+
+##Examples
+To use the examples copy them into 'openFrameworks/apps/examples/'
 
 ##JSON Loader
-For the more complex applications, you might want to do all your loading from a json file. Our json loader will walk through it, instantiate the objects you will need, and also load the necessary files. To reference these objects in your code after they've been loaded, just use `getChildByName( childName)` .
+For the more complex applications, you might want to do all your loading from a json file. Our json loader will walk through it, instantiate the objects you will need, and also load the necessary files. To reference these objects in your code after they've been loaded, just use `getChildByName( childName )' .
 
 ##Feedback
 We've been using this library for a long time now, and wanted to bring it to the community. If you have any question or suggestions please direct them to labs@steadyltd.com

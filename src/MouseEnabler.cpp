@@ -39,6 +39,9 @@ void MouseEnabler::enableMouseEvents() {
 }
 
 void MouseEnabler::disableMouseEvents() {
+    cout << "MouseEnabler::disableMouseEvents()" << endl;
+    _mouseOver	= false;
+    _mouseDown	= false;
     MouseEventController::removeEnabler(this);
 }
 
@@ -142,6 +145,7 @@ void MouseEnabler::_mouseReleased(ofMouseEventArgs &e, bool overRideHitTest) {
         
 	}
 	_mouseDown = false;
+    
 }
 
 

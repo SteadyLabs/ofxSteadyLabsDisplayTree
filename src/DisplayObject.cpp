@@ -97,7 +97,7 @@ int DisplayObject::draw( int inRenderOrder){
     ofEnableBlendMode( blendMode );
     calcTransform(); 
     //calc transform only calculates alpha transforms, since the matrices are taken care of
-    
+  
     ofSetColor(255, 255, 255, worldAlpha * 255);
     ofTranslate( x, y );
     
@@ -202,7 +202,7 @@ void DisplayObject::addChild( DisplayObject* inSprite ){
         children.push_back(inSprite);
         inSprite->parentSprite = this;
         inSprite->recalcMouseState();
-        cout << "PARENT:: " << this->name << " CHILD:: " << inSprite->name << endl;
+        // cout << "PARENT:: " << this->name << " CHILD:: " << inSprite->name << endl;
     }
     
     // cout << "BaseSprite::addChild::parent:"<< name << ", child:" << inSprite->name << "\n";
@@ -314,11 +314,13 @@ void DisplayObject::recalcMouseState(){
 //====================end basesprite stuff====================
 
 void DisplayObject::enableMouseEvents() {
+    cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DisplayObject::enableMouseEvents\n";
     mouseEnabler->enableMouseEvents();
 
 }
 
 void DisplayObject::disableMouseEvents() {
+    cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DisplayObject::disableMouseEvents\n";
     mouseEnabler->disableMouseEvents();
 }
 

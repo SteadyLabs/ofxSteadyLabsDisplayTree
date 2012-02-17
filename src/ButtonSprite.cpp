@@ -64,7 +64,7 @@ void ButtonSprite::loadFile(string inDir){
 void ButtonSprite::init(){
     BaseSprite::BaseSprite();//super?
     //verbose = true;
-    enableMouseEvents();
+    //enableMouseEvents();
     //enablePQEvents();
     buttonState = DEFAULT;
 
@@ -209,7 +209,7 @@ void ButtonSprite::onRollOut()
 
 void ButtonSprite::onRollOver(int x, int y)
 {
-    //cout<< "ButtonSprite::onRollOver::\n";
+    cout<< "ButtonSprite::onRollOver::\n";
     if (!visible || !worldMouseEnabled ) return;
     
     if (rollover_anim->parentSprite == NULL){
