@@ -60,7 +60,8 @@ public:
     float alpha;
     float scaleX;
     float scaleY;
-
+    ofVec2f originalCoords;
+    
     ofBlendMode blendMode;
     
     float registrationX;
@@ -103,6 +104,14 @@ public:
 	virtual void onRelease(int x, int y, int button)		{}		// called when mouse releases while over object
 	virtual void onReleaseOutside(int x, int y, int button)	{}		// called when mouse releases outside of object after being pressed on object
     
+    
+    //ios touch activity, implemented in subclass
+    
+    virtual void onTouchDown( ofTouchEventArgs &touch )         {}
+	virtual void onTouchMoved( ofTouchEventArgs &touch )        {}
+	virtual void onTouchUp( ofTouchEventArgs &touch )           {}
+	virtual void onTouchDoubleTap( ofTouchEventArgs &touch )    {}
+	virtual void onTouchCancelled( ofTouchEventArgs &touch )    {}
        
 protected:
     //refactored from baseSprite

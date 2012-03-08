@@ -1,4 +1,5 @@
 /***********************************************************************
+ 
  Copyright (c) 2011,2012, Mike Manh
  ***STEADY LTD http://steadyltd.com ***
  All rights reserved.
@@ -25,24 +26,56 @@
  POSSIBILITY OF SUCH DAMAGE.
  **************************************************************************/
 
-#pragma once
-#ifndef INTERACTIONENABLER_H
-#define INTERACTIONENABLER_H
+#ifndef IOSTOUCHENABLER_H
+#define IOSTOUCHENABLER_H
+
+#include "InteractionEnabler.h"
+#include "ofMain.h"
 
 class DisplayObject;
+//class ofTouchEventArgs;
 
-class InteractionEnabler{
-    
+class IOSTouchEnabler: public InteractionEnabler{
 public:
-    InteractionEnabler( DisplayObject* inTarget ); // = NULL );
-    ~InteractionEnabler();
+    IOSTouchEnabler( DisplayObject* inTarget = NULL ): InteractionEnabler( inTarget ){ 
+        _touchOver	= false;
+        _touchDown	= false;
+        blocking = true;
+    };
     
-    void setTarget( DisplayObject* inTarget );
-    DisplayObject* getTarget();
+    ~IOSTouchEnabler();
+    
+    void enableTouchEvents();
+    void disableTouchEvents();
+    
+    
+    bool _touchMoved(ofTouchEventArgs &e);
+    void _touchMovedBlocked(ofTouchEventArgs &e);
+	void _touchPress(ofTouchEventArgs &e, bool overRideHitTest = true);
+	// void _touchDragged(ofTouchEventArgs &e, bool overRideHitTest = false);
+	void _touchUp(ofTouchEventArgs &e, bool overRideHitTest = true);
+    /*
+    void touchDown( ofTouchEventArgs &touch );
+	void touchMoved( ofTouchEventArgs &touch );
+	void touchUp( ofTouchEventArgs &touch );
+	void touchDoubleTap( ofTouchEventArgs &touch );
+	void touchCancelled( ofTouchEventArgs &touch );
+    */
+    bool blocking;
+    
+    
 protected:
-    DisplayObject* _target;
-private:
     
+    int _touchX, _touchY, _touchButton;
+    bool		_touchOver;
+	bool		_touchDown;
+    
+    
+    
+    static void sortEnablers();
+    
+    friend class IOSTouchEventController;
 };
 
-#endif //INTERACTIONENABLER_H
+
+#endif

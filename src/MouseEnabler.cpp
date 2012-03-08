@@ -61,14 +61,14 @@ bool MouseEnabler::_mouseMoved(ofMouseEventArgs &e) {
         
 		if(!_mouseOver) {						// if wasn't over previous frame
 			_target->onRollOver(x, y);			// call onRollOver
-            cout << "_mouseMoved rollover " << _target->name << "\n";
+            //cout << "_mouseMoved rollover " << _target->name << "\n";
 			_mouseOver = true;					// update flag
 		}
 		_target->onMouseMove(x, y);				// and trigger onMouseMove
         return true;
 	} else if( _mouseOver) {					// if mouse is not over the object, but the flag is true (From previous frame)
 		_target->onRollOut();					// call onRollOut
-        cout << "_mouseMoved rollout " << _target->name << "\n";
+        //cout << "_mouseMoved rollout " << _target->name << "\n";
 		_mouseOver = false;						// update flag
 	}
     return false;
@@ -77,7 +77,7 @@ bool MouseEnabler::_mouseMoved(ofMouseEventArgs &e) {
 void MouseEnabler::_mouseMovedBlocked(ofMouseEventArgs &e){
     if (_mouseOver) {
         _target->onRollOut();// call onRollOut
-        cout << "_mouseMovedBlocked rollout " << _target->name << "\n" ;
+        //cout << "_mouseMovedBlocked rollout " << _target->name << "\n" ;
     }							
     _mouseOver = false;	// update flag
 }

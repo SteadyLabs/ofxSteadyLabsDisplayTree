@@ -1,4 +1,5 @@
 /***********************************************************************
+ 
  Copyright (c) 2011,2012, Mike Manh
  ***STEADY LTD http://steadyltd.com ***
  All rights reserved.
@@ -25,24 +26,68 @@
  POSSIBILITY OF SUCH DAMAGE.
  **************************************************************************/
 
-#pragma once
-#ifndef INTERACTIONENABLER_H
-#define INTERACTIONENABLER_H
+#ifndef IOSTOUCHEVENTCONTROLLER_H
+#define IOSTOUCHEVENTCONTROLLER_H
 
-class DisplayObject;
+#include "ofMain.h"
 
-class InteractionEnabler{
+class IOSTouchEnabler;
+
+class IOSTouchEventController{
     
 public:
-    InteractionEnabler( DisplayObject* inTarget ); // = NULL );
-    ~InteractionEnabler();
+    IOSTouchEventController();
+    ~IOSTouchEventController();
+    static void addEnabler( IOSTouchEnabler* inEnabler);
+    static void removeEnabler( IOSTouchEnabler* inEnabler);
+    static void processEvents();
+    static void init();
     
-    void setTarget( DisplayObject* inTarget );
-    DisplayObject* getTarget();
-protected:
-    DisplayObject* _target;
+    enum TouchEventType
+    {
+        STILL,
+        TOUCH_DOWN,
+        TOUCH_UP,
+        TOUCH_MOVE
+    };
+    
+    struct TouchEvent{
+        TouchEventType type;
+        ofTouchEventArgs args;
+    };
+        
+    void touchDown( ofTouchEventArgs &touch );
+	void touchMoved( ofTouchEventArgs &touch );
+	void touchUp( ofTouchEventArgs &touch );
+	void touchDoubleTap( ofTouchEventArgs &touch );
+	void touchCancelled( ofTouchEventArgs &touch );
+
 private:
+    
+protected:
+    
+    std::vector<IOSTouchEnabler*> _touchEnablers;
+    std::map< IOSTouchEnabler*, int> _touchEnablerToIndex;
+    
+    static IOSTouchEventController* instance;
+    
+    void _addEnabler( IOSTouchEnabler* inEnabler);
+    void _removeEnabler( IOSTouchEnabler* inEnabler);
+    
+    //a queue of touch events that have been adding up since before the event phase
+    std::queue< TouchEvent* > _eventQueue;
+        
+    void _handleEvent( TouchEvent* inEvent );
+    
+    void _init();
+    
+    void _sort();
+    void _processEvents();
+    
+    
+    bool _touchMovedThisFrame;
     
 };
 
-#endif //INTERACTIONENABLER_H
+
+#endif

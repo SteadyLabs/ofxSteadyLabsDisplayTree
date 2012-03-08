@@ -106,6 +106,7 @@ int DisplayObject::draw( int inRenderOrder){
     ofRotate( rotation, 0, 0, 1 );
     
     //HAZARD: i have no idea why this works... Mike Manh
+    //Are you sure it works?
     ofTranslate( -registrationX, -registrationY );
     
     copyCurMatrix(transformedMatrix);
