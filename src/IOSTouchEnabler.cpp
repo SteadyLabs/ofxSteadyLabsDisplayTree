@@ -30,6 +30,7 @@
 #include "IOSTouchEnabler.h"
 #include "DisplayObject.h"
 #include "IOSTouchEventController.h"
+#include "IOSTouchSprite.h"
 //look in the .h file for the constructor
 
 IOSTouchEnabler::~IOSTouchEnabler(){
@@ -44,87 +45,117 @@ void IOSTouchEnabler::disableTouchEvents() {
 }
 
 //DO we want drag into interaction ??
-bool IOSTouchEnabler::_touchMoved(ofTouchEventArgs &e) {
-	int x = e.x;
-	int y = e.y;
-	_touchX = x;
-	_touchY = y;
-	
+void IOSTouchEnabler::_touchMoved(ofTouchEventArgs &e) {
+	//int x = e.x;
+	//int y = e.y;
+	/*
 	if( _target->hitTest(x, y)) {               
                 
-		if(!_touchOver && !_touchDown) {						
+		if(!isTouchOver && !isTouchDown) {						
 			_target->onTouchDown( e );			
-			_touchOver = true;	
-            _touchDown = true;
+			isTouchOver = true;	
+            isTouchDown = true;
 		}
 		_target->onTouchMoved( e );				
         return true;
-	}else if( _touchOver || _touchDown ) {
+	}else if( isTouchOver || isTouchDown ) {
         _target->onTouchMoved( e );				
         return true;
     }
-    
+    */
     /*else if( _touchOver || _touchDown) {					
 		_target->onTouchUp( e );					
 		_touchOver = false;		
         _touchDown = false;
 	}*/
+    if ( _target->fingerIndex != e.id ) return;
+    _target->onTouchMoved( e );
+    
+    /*
+    if( isTouchOver || isTouchDown ) {
+        _target->onTouchMoved( e );				
+        return true;
+    }
     
     return false;
+    */
 }
 
 void IOSTouchEnabler::_touchMovedBlocked(ofTouchEventArgs &e){
-    //TODO : rejigger this
     /*
-    if (_touchOver) {
+    if (isTouchOver) {
         _target->onTouchUp( e );
     }							
-    _touchOver = false;	
-    _touchDown = false;
-     */ 
+    isTouchOver = false;	
+    isTouchDown = false;
+     */
 }
 
 
-void IOSTouchEnabler::_touchPress(ofTouchEventArgs &e, bool overRideHitTest) {
-	int x = e.x;
-	int y = e.y;
+void IOSTouchEnabler::_touchDown(ofTouchEventArgs &e, bool overRideHitTest) {
+	
+    _target->fingerIndex = e.id;
     
-	_touchX = x;
-	_touchY = y;
+    //printf("IOSTouchEnabler::_touchDown : touch id == %i \n", e.id);
     
-    printf("IOSTouchEnabler::_touchPress :: touchX == %i :: touchY == %i \n", x, y);
-    
+    _target->onTouchDown( e );
+    /*
 	if( overRideHitTest || _target->hitTest(x, y)) {
-		if(!_touchDown) {   
+		if(!isTouchDown) {   
 			_target->onTouchDown( e );
-			_touchDown = true;						
+			isTouchDown = true;						
 		}
 	} else { 
 		_target->onTouchUp( e );
 	}
+     */
 }
 
 
 void IOSTouchEnabler::_touchUp(ofTouchEventArgs  &e, bool overRideHitTest) {
-	int x = e.x;
-	int y = e.y;
-    
-	_touchX = x;
-	_touchY = y;
+	//int x = e.x;
+	//int y = e.y;
 
-	printf("IOSTouchEnabler::_touchUp \n");
+	//printf("IOSTouchEnabler::_touchUp \n");
+    //printf("IOSTouchEnabler::_touchUp : touch id == %i \n", e.id);
     
+    if ( _target->fingerIndex == e.id ) _target->fingerIndex = NULL;
+    else return;
+    
+    _target->onTouchUp( e );
+    /*
 	if( overRideHitTest || _target->hitTest(x, y) ) {
         
 		_target->onTouchUp( e );
 	} else {
-		if( _touchDown || _touchOver )
+		if( isTouchDown || isTouchOver )
             
             _target->onTouchUp( e );
 	}
-	_touchDown = false;
-    _touchOver = false;
+	isTouchDown = false;
+    isTouchOver = false;
+    */
 }
 
+void IOSTouchEnabler::_touchDoubleTap(ofTouchEventArgs  &e, bool overRideHitTest) {
+	//int x = e.x;
+	//int y = e.y;
+    
+	printf("IOSTouchEnabler::_touchDoubleTap \n");
+    
+    _target->onTouchDoubleTap( e );
+    /*
+	if( overRideHitTest || _target->hitTest(x, y) ) {
+        
+		_target->onTouchUp( e );
+	}
+    */
+}
 
+/*
+bool IOSTouchEnabler::getTouchState()
+{
+    return isTouchDown;
+}
+*/
 //---enablers are stored in a vector and iterated through... there is also a hashmap that keeps track of the sorted index--//

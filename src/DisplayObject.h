@@ -31,10 +31,9 @@
 
 #include "ofMain.h"
 #include "Dispatcher.h"
-//#include "InteractionEnabler.h"
+#include "IOSTouchEnabler.h"
 
 class InteractionEnabler;
-class MouseEnabler;
 
 class DisplayObject : public ofRectangle, public Dispatcher {
 public:
@@ -44,12 +43,12 @@ public:
     virtual ~DisplayObject();
     int renderOrder;
     
-    void enableMouseEvents();
-    void disableMouseEvents();
+    void enableTouchEvents();
+    void disableTouchEvents();
     void init();
     
-    MouseEnabler* mouseEnabler;
-    
+    IOSTouchEnabler* touchenabler;
+    int fingerIndex;
     
     //refactored from baseSprite
     bool visible;
@@ -80,9 +79,10 @@ public:
     string name;
     DisplayObject* parentSprite;
     
-    void mouseEnable();
-    void mouseDisable();
-    void setMouseBlocking( bool inBlocking );
+    void touchEnable();
+    void touchDisable();
+    void setTouchBlocking( BlockingState inBlocking );
+    
     void traceTransform();
     void traceTransformChain();
     
@@ -114,9 +114,7 @@ public:
 	virtual void onTouchCancelled( ofTouchEventArgs &touch )    {}
        
 protected:
-    //refactored from baseSprite
-    //float worldX;
-    //float worldY;
+
     float worldAlpha;
     bool worldVisible;
     bool worldMouseEnabled;
@@ -124,7 +122,7 @@ protected:
     void calcTransform();
     NameObjectHash nameToChild;
     
-    bool mouseEnabled;
+    bool touchEnabled;
     //end basesprite
     
     ofMatrix4x4 transformedMatrix;

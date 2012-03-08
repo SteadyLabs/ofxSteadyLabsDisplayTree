@@ -29,7 +29,6 @@
 #include <iostream>
 
 #include "IOSTouchEventController.h"
-#include "IOSTouchEnabler.h"
 #include "DisplayObject.h"
 
 //can we just instantiate this once here?
@@ -38,7 +37,6 @@ IOSTouchEventController* IOSTouchEventController::instance = new IOSTouchEventCo
 //static strings
 
 IOSTouchEventController::IOSTouchEventController(){
-    _touchMovedThisFrame = false;
 }
 
 void IOSTouchEventController::init(){
@@ -46,6 +44,7 @@ void IOSTouchEventController::init(){
 }
 
 void IOSTouchEventController::_init(){
+    //worldBlockingState = NONE;
     ofRegisterTouchEvents(this);
 }
 
@@ -76,8 +75,10 @@ void IOSTouchEventController::_sort(){
     // cout <<endl;
 }
 
-void IOSTouchEventController::_processEvents(){
+void IOSTouchEventController::_processEvents()
+{
     TouchEvent* curEvent;
+    
     while( _eventQueue.size() > 0 ){
         curEvent = _eventQueue.front();
         _eventQueue.pop(); //seriously, you can't get the reference without handling it?        
@@ -87,64 +88,107 @@ void IOSTouchEventController::_processEvents(){
     }
     
     
-    if( !_touchMovedThisFrame && _eventQueue.size() > 0){
+    if( _eventQueue.size() > 0){
         curEvent = new TouchEvent();
         curEvent->args = ofTouchEventArgs();
-        //curEvent->args.x = ofGetMouseX();
-        //curEvent->args.y = ofGetMouseY();
+        
         TouchEvent *lastEvent = _eventQueue.back();
         curEvent->args.x = lastEvent->args.x;
         curEvent->args.x = lastEvent->args.y;
+        
         curEvent->type = STILL;
         
         _handleEvent(curEvent);
         delete curEvent;
     }
-    _touchMovedThisFrame = false;
 }
 
 void IOSTouchEventController::_handleEvent( TouchEvent* inEvent){
+    
    
     int touchX = inEvent->args.x;
     int touchY = inEvent->args.y;
+    BlockingState curBlockingState;
     
     switch( inEvent->type ){
-        case STILL:
-        case TOUCH_MOVE: //todo: do something different if the touch hasn't moved
-            
-            for ( int i = 0; i < _touchEnablers.size(); i++ ){
-                if ( _touchEnablers[ i ]->_touchMoved(inEvent->args) ){
-                    if ( _touchEnablers[ i ]->blocking ){
-                        for( i = i+1; i < _touchEnablers.size(); i++ ){
-                            _touchEnablers[ i ]->_touchMovedBlocked(inEvent->args);
-                        }
-                    }
-                }
-            }
-            break;
-        
         case TOUCH_DOWN:
             
-            for ( int i = 0; i < _touchEnablers.size(); i++ ){
+            for ( int i = 0; i < _touchEnablers.size(); i++ )
+            {
+                curBlockingState = _touchEnablers[ i ]->blockingState;
+                
                 if ( _touchEnablers[ i ]->getTarget()->hitTest(touchX, touchY) ){
-                    _touchEnablers[ i ]->_touchPress(inEvent->args, true);
-                    if ( _touchEnablers[ i ]->blocking ){
-                        break;//if it's a blocking touch event, then stop sending click events to things below
-                    }
+                    
+                    _touchEnablers[ i ]->_touchDown(inEvent->args, false);
+                    
+                    //worldBlockingState = _touchEnablers[ i ]->blockingState;
+                    
+                    break;
+                    //if ( _touchEnablers[ i ]->blockingState == BELOW ) break;
                 }
             }
             
             break;
             
+        case TOUCH_CANCELLED:
         case TOUCH_UP:
             
-            for ( int i = 0; i < _touchEnablers.size(); i++ ){
-                //if ( _touchEnablers[ i ]->getTarget()->hitTest(touchX, touchY) ){
+            //NEEDS ATTENTION - hittest is not an accurate meseaurement for touch
+            
+            for ( int i = 0; i < _touchEnablers.size(); i++ )
+            {
+                curBlockingState = _touchEnablers[ i ]->blockingState;
+                
+                if ( curBlockingState == ALL) continue;
+                
+                if ( curBlockingState == ENGAGED ) {
                     _touchEnablers[ i ]->_touchUp(inEvent->args, true);
-                    if ( _touchEnablers[ i ]->blocking ){
+                    //worldBlockingState = NONE;
+                    continue;
+                }
+                
+                _touchEnablers[ i ]->_touchUp(inEvent->args, true);
+                
+                if ( curBlockingState == BELOW ) break;
+            }
+            
+            break;
+            
+        case STILL:
+        case TOUCH_MOVE:
+            
+            for ( int i = 0; i < _touchEnablers.size(); i++ )
+            {
+                curBlockingState = _touchEnablers[ i ]->blockingState;
+                
+                //if ( curBlockingState == ALL) break;
+                
+                if ( curBlockingState == ENGAGED ) _touchEnablers[ i ]->_touchMoved(inEvent->args);
+                /*
+                 curBlockingState = _touchEnablers[ i ]->blockingState;
+                 
+                 if ( _touchEnablers[ i ]->_touchMoved(inEvent->args) ){
+                 if ( worldBlockingState == ALL) break;
+                 if ( curBlockingState == ALL || curBlockingState == ENGAGED) break;
+                 if ( curBlockingState == BELOW ){
+                 for( i = i+1; i < _touchEnablers.size(); i++ ){
+                 _touchEnablers[ i ]->_touchMovedBlocked(inEvent->args);
+                 }
+                 }
+                 }
+                 */
+            }
+            break;
+            
+        case TOUCH_DOUBLETAP:
+            //Is this a generic view based doubletap or a specific target double tap? Target for now            
+            for ( int i = 0; i < _touchEnablers.size(); i++ ){
+                if ( _touchEnablers[ i ]->getTarget()->hitTest(touchX, touchY) ){
+                    _touchEnablers[ i ]->_touchDoubleTap(inEvent->args, true);
+                    if ( _touchEnablers[ i ]->blockingState == BELOW ){
                         break;//if it's a blocking touch event, then stop sending click events to things below
                     }
-                //}
+                }
             }
             
             break;
@@ -213,7 +257,7 @@ void IOSTouchEventController::touchDown( ofTouchEventArgs &touch )
 
 void IOSTouchEventController::touchUp( ofTouchEventArgs &touch )
 {
-    printf("IOSTouchEventController::touchUp ::::::::::::::::::: \n");
+    //printf("IOSTouchEventController::touchUp ::::::::::::::::::: \n");
     
     TouchEvent *savedEvent = new TouchEvent();
     savedEvent->type = TOUCH_UP;

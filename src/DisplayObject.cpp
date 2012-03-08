@@ -28,7 +28,6 @@
 
 #include <iostream>
 #include "DisplayObject.h"
-#include "MouseEnabler.h"
 
 ofMatrix4x4 DisplayObject::baseMatrix;
 
@@ -36,12 +35,13 @@ DisplayObject::DisplayObject(){
     init();
 }
 
-void DisplayObject::init(){
-    mouseEnabler = new MouseEnabler( this );
+void DisplayObject::init()
+{
+    touchenabler = new IOSTouchEnabler( this );
     parentSprite = NULL;
     name = ""; //default to empty string
     visible = true;
-    worldMouseEnabled = mouseEnabled = true;
+    worldMouseEnabled = touchEnabled = true;
     alpha = 1.0f;
     rotation = 0.f;
     renderOrder = -1;
@@ -53,15 +53,15 @@ void DisplayObject::init(){
 
 DisplayObject::~DisplayObject(){
     //TODO: destroy
-    delete mouseEnabler;
+    delete touchenabler;
 
 }
 
 void DisplayObject::update(){
     if ( !visible ) return;
     int numChildren = children.size();
+    
     for ( int i = 0; i < numChildren; i++ ){
-        //cout << children[i]->name << " update" << endl;
         children[ i ]->update();
     }
 }
@@ -133,7 +133,7 @@ int DisplayObject::draw( int inRenderOrder){
     ofPopMatrix();
     return inRenderOrder;
 }
-
+//MMMM ... this ain't doin anything
 void DisplayObject::depthFirstTraversalWithVoid( void (DisplayObject::*pt2Func)(void) ){
     int numChildren = children.size();
     for( int i = 0; i < numChildren; i++ ){
@@ -142,7 +142,7 @@ void DisplayObject::depthFirstTraversalWithVoid( void (DisplayObject::*pt2Func)(
 
     }
 }
-
+//HEY... neither is dis
 void DisplayObject::depthFirstTraversalWithInt( int (DisplayObject::*pt2Func)( int ) ){
     int numChildren = children.size();
     for( int i = 0; i < numChildren; i++ ){
@@ -165,18 +165,10 @@ int DisplayObject::drawChildren( int inRenderOrder ){
     return inRenderOrder;
 }
 
-/*bool DisplayObject::hitTest(int tx, int ty) {
-	return ((tx > x) && (tx < x + width) && (ty > y) && (ty < y + height));
-}*/
-
 ofPoint DisplayObject::unprojectPoint(int x, int y ){
 
     ofVec3f outVec(x,y,0);
-    //cout << "outVec:"<< outVec << endl;
-    //cout << testMat.getInverse().preMult(outVec) << endl;
-    
-    
-    //todo maybe break this into a function, unprojectPoint
+
     ofMatrix4x4 unWindowedMatrix = transformedMatrix;
     unWindowedMatrix.postMult( baseMatrix.getInverse() ); //undo the window's transforms
     ofVec3f thisPoint = unWindowedMatrix.getInverse().preMult(outVec);    
@@ -186,16 +178,6 @@ ofPoint DisplayObject::unprojectPoint(int x, int y ){
 bool DisplayObject::hitTest(int tx, int ty) {
     ofVec3f thisPoint = unprojectPoint( tx, ty);
     return ( thisPoint.x >=0 && thisPoint.x <=width && thisPoint.y >=0 &&thisPoint.y <= height);
-    
-    // cout << "Sprite::hitTest::0:tx:" << tx << "\n";
-    /*bool hit = ((tx > worldX) && (tx < worldX + width) && (ty > worldY) && (ty < worldY + height));
-    if (hit)
-    {
-        // cout << "Sprite::hitTest::1:tx:" << tx << "\n";
-    }
-    
-	return ((tx > worldX) && (tx < worldX + width) && (ty > worldY) && (ty < worldY + height));
-     */
 }
 
 void DisplayObject::addChild( DisplayObject* inSprite ){
@@ -205,10 +187,7 @@ void DisplayObject::addChild( DisplayObject* inSprite ){
         children.push_back(inSprite);
         inSprite->parentSprite = this;
         inSprite->recalcMouseState();
-        // cout << "PARENT:: " << this->name << " CHILD:: " << inSprite->name << endl;
     }
-    
-    // cout << "BaseSprite::addChild::parent:"<< name << ", child:" << inSprite->name << "\n";
 }
 
 void DisplayObject::calcTransform(){
@@ -216,8 +195,6 @@ void DisplayObject::calcTransform(){
         //worldX = x;
         //worldY = y;
         worldAlpha = alpha;
-
-		// cout<< "root sprite's alpha is:"<<worldAlpha<< "\n";
     }
     else{
         
@@ -226,10 +203,9 @@ void DisplayObject::calcTransform(){
         
         worldVisible = visible && parentSprite->worldVisible;
         worldAlpha = parentSprite-> worldAlpha * alpha; //alpha is expected to be between 0 and 1
-        // cout<< "parent's alpha is:"<< parentSprite->worldAlpha << ", alpha is:"<< worldAlpha<< "\n";
     }
     
-    int alphaConverted = worldAlpha * 255;
+    //int alphaConverted = worldAlpha * 255;
     // std::cout<< "alphaConverted:" << alphaConverted << "\n";
     //ofSetColor(255, 255, 255, alphaConverted);
     
@@ -272,8 +248,8 @@ void DisplayObject::removeChild( DisplayObject* inSprite ){
     }
 }
 
-void DisplayObject::mouseEnable(){
-    mouseEnabled = true;
+void DisplayObject::touchEnable(){
+    touchEnabled = true;
     recalcMouseState();
 }
 
@@ -297,17 +273,17 @@ DisplayObject* DisplayObject::getChildByName( string inName ){
     
 }
 
-void DisplayObject::mouseDisable(){
-    mouseEnabled = false;
+void DisplayObject::touchDisable(){
+    touchEnabled = false;
     recalcMouseState();
 }
 
 void DisplayObject::recalcMouseState(){
     if ( parentSprite == NULL ){
-        worldMouseEnabled = mouseEnabled; 
+        worldMouseEnabled = touchEnabled; 
     }
     else{
-        worldMouseEnabled = parentSprite->worldMouseEnabled && mouseEnabled;
+        worldMouseEnabled = parentSprite->worldMouseEnabled && touchEnabled;
     }
     int numChildren = children.size();
     for ( int i = 0; i < numChildren; i++ ){
@@ -317,18 +293,16 @@ void DisplayObject::recalcMouseState(){
 
 //====================end basesprite stuff====================
 
-void DisplayObject::enableMouseEvents() {
-    // cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DisplayObject::enableMouseEvents\n";
-    mouseEnabler->enableMouseEvents();
+void DisplayObject::enableTouchEvents() {
+    touchenabler->enableTouchEvents();
 
 }
 
-void DisplayObject::disableMouseEvents() {
-    // cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DisplayObject::disableMouseEvents\n";
-    mouseEnabler->disableMouseEvents();
+void DisplayObject::disableTouchEvents() {
+    touchenabler->disableTouchEvents();
 }
 
-void DisplayObject::setMouseBlocking(bool inBlocking){
-    mouseEnabler->blocking = inBlocking;
+void DisplayObject::setTouchBlocking(BlockingState inBlocking){
+    touchenabler->blockingState = inBlocking;
 }
 

@@ -65,17 +65,18 @@ public:
     
     TouchState touchState;
     
+    /*
     ofEvent<ofTouchEventArgs> customTouchDown;
     ofEvent<ofTouchEventArgs> customTouchMoved;
     ofEvent<ofTouchEventArgs> customTouchUp;
     ofEvent<ofTouchEventArgs> customTouchDoubleTap;
     ofEvent<ofTouchEventArgs> customTouchCancelled;
-    
+    */
 private:
     bool hasAlpha;
-    ofPoint posOld;
-    ofPoint pos;
-    ofPoint velocity;
+    //ofPoint posOld;
+    //ofPoint pos;
+    //ofPoint velocity;
     
     BitmapSequence* press_anim;
     BitmapSequence* default_state;

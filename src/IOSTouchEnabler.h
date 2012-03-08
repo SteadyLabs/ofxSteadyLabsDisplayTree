@@ -32,15 +32,24 @@
 #include "InteractionEnabler.h"
 #include "ofMain.h"
 
+typedef enum{
+    ALL,
+    BELOW,
+    ABOVE,
+    NONE,
+    ENGAGED
+}BlockingState;
+
 class DisplayObject;
-//class ofTouchEventArgs;
+
 
 class IOSTouchEnabler: public InteractionEnabler{
 public:
     IOSTouchEnabler( DisplayObject* inTarget = NULL ): InteractionEnabler( inTarget ){ 
-        _touchOver	= false;
-        _touchDown	= false;
-        blocking = true;
+        //isTouchOver	= false;
+        //isTouchDown	= false;
+        
+        blockingState = BELOW;
     };
     
     ~IOSTouchEnabler();
@@ -48,29 +57,22 @@ public:
     void enableTouchEvents();
     void disableTouchEvents();
     
-    
-    bool _touchMoved(ofTouchEventArgs &e);
+    void _touchDown(ofTouchEventArgs &e, bool overRideHitTest = false);
+    void _touchMoved(ofTouchEventArgs &e);
     void _touchMovedBlocked(ofTouchEventArgs &e);
-	void _touchPress(ofTouchEventArgs &e, bool overRideHitTest = true);
-	// void _touchDragged(ofTouchEventArgs &e, bool overRideHitTest = false);
-	void _touchUp(ofTouchEventArgs &e, bool overRideHitTest = true);
-    /*
-    void touchDown( ofTouchEventArgs &touch );
-	void touchMoved( ofTouchEventArgs &touch );
-	void touchUp( ofTouchEventArgs &touch );
-	void touchDoubleTap( ofTouchEventArgs &touch );
-	void touchCancelled( ofTouchEventArgs &touch );
-    */
-    bool blocking;
+	void _touchUp(ofTouchEventArgs &e, bool overRideHitTest = false);
+    void _touchDoubleTap(ofTouchEventArgs &e, bool overRideHitTest = false);
+    void _touchCancelled(ofTouchEventArgs &e, bool overRideHitTest = false);
     
+    //bool getTouchState();
+    //bool blocking;
+    
+    BlockingState blockingState;
     
 protected:
     
-    int _touchX, _touchY, _touchButton;
-    bool		_touchOver;
-	bool		_touchDown;
-    
-    
+    //bool isTouchOver;
+	//bool isTouchDown;
     
     static void sortEnablers();
     

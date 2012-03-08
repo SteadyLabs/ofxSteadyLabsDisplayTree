@@ -30,14 +30,14 @@
 #define IOSTOUCHEVENTCONTROLLER_H
 
 #include "ofMain.h"
-
-class IOSTouchEnabler;
+#include "IOSTouchEnabler.h"
 
 class IOSTouchEventController{
     
 public:
     IOSTouchEventController();
     ~IOSTouchEventController();
+    
     static void addEnabler( IOSTouchEnabler* inEnabler);
     static void removeEnabler( IOSTouchEnabler* inEnabler);
     static void processEvents();
@@ -48,7 +48,9 @@ public:
         STILL,
         TOUCH_DOWN,
         TOUCH_UP,
-        TOUCH_MOVE
+        TOUCH_MOVE,
+        TOUCH_DOUBLETAP,
+        TOUCH_CANCELLED
     };
     
     struct TouchEvent{
@@ -63,6 +65,8 @@ public:
 	void touchCancelled( ofTouchEventArgs &touch );
 
 private:
+    
+    //BlockingState worldBlockingState;
     
 protected:
     
@@ -84,8 +88,6 @@ protected:
     void _sort();
     void _processEvents();
     
-    
-    bool _touchMovedThisFrame;
     
 };
 

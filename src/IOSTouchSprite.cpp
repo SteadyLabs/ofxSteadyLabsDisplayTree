@@ -59,7 +59,8 @@ void IOSTouchSprite::loadFile(string inDir){
 }
 
 void IOSTouchSprite::init(){
-    BaseSprite::BaseSprite();//super?
+    BaseSprite::BaseSprite();//super? //Is this nessecary?
+    
     //verbose = true;
     //enableMouseEvents();
     //enablePQEvents();
@@ -71,6 +72,7 @@ void IOSTouchSprite::init(){
     
     default_state = NULL;
     
+    fingerIndex = NULL;
     //ofRegisterTouchEvents(this);
     // cout<< "ButtonSprite::constructor::rollover_anim:"<< rollover_anim<< "rollout_anim:" << rollout_anim <<"\n";
 }
@@ -131,13 +133,15 @@ void IOSTouchSprite::onTouchDown( ofTouchEventArgs &touch )
     touchState = PRESS_TOUCH;
     press_anim->gotoAndPlay(1);
     
-    ofNotifyEvent(customTouchDown, touch, this);
+    //ofNotifyEvent(customTouchDown, touch, this);
     //this->dispatchEvent(ON_TOUCHDOWN, name);
 }
 
 
 void IOSTouchSprite::onTouchUp( ofTouchEventArgs &touch )
 {    
+    //printf("IOSTouchSprite::onTouchUp \n");
+    
     if (default_state->parentSprite == NULL){
         addChild(default_state);
     }
@@ -158,14 +162,14 @@ void IOSTouchSprite::onTouchUp( ofTouchEventArgs &touch )
     //touch.xspeed = velocity.x;
     //touch.yspeed = velocity.y;
     
-    ofNotifyEvent(customTouchUp, touch, this);
+    //ofNotifyEvent(customTouchUp, touch, this);
     //this->dispatchEvent(ON_TOUCHUP, name);
 }
 
 
 void IOSTouchSprite::onTouchCancelled( ofTouchEventArgs &touch )
 {
-    ofNotifyEvent(customTouchCancelled, touch, this);
+    //ofNotifyEvent(customTouchCancelled, touch, this);
 }
 
 void IOSTouchSprite::onTouchMoved( ofTouchEventArgs &touch )
@@ -188,12 +192,12 @@ void IOSTouchSprite::onTouchMoved( ofTouchEventArgs &touch )
     //touch.xspeed = velocity.x;
     //touch.yspeed = velocity.y;
     
-    ofNotifyEvent(customTouchMoved, touch, this);
+    //ofNotifyEvent(customTouchMoved, touch, this);
 }
 
 void IOSTouchSprite::onTouchDoubleTap( ofTouchEventArgs &touch )
 {
-    ofNotifyEvent(customTouchDoubleTap, touch, this);
+    //ofNotifyEvent(customTouchDoubleTap, touch, this);
 }
 
 // ofTouchEventArgs has speed and accel properties. Why do they always return zero?
