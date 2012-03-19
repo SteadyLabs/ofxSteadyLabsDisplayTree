@@ -38,10 +38,11 @@
 //#include "TouchSprite.h"
 
 typedef enum{
-    ROLLOVER_TOUCH,
-    ROLLOUT_TOUCH,
-    PRESS_TOUCH,
-    DEFAULT_TOUCH
+    DEFAULT_TOUCH,
+    DOWN_TOUCH,
+    MOVED_TOUCH,
+    UP_TOUCH,
+    DOUBLETAP_TOUCH
 }TouchState;
 
 
@@ -60,9 +61,6 @@ public:
     //void update();
     //void render();
     
-    BitmapSequence* rollover_anim;
-    BitmapSequence* rollout_anim;
-    
     TouchState touchState;
     
     /*
@@ -78,11 +76,11 @@ private:
     //ofPoint pos;
     //ofPoint velocity;
     
-    BitmapSequence* press_anim;
-    BitmapSequence* default_state;
+    vector<BitmapSequence* > touchAnimationStates;
     
     void init();
     void loadAnimSequence(TouchState touchState, string inDir);
+    BitmapSequence* handleAnimationStates( string inShowState );
     
 protected:
     

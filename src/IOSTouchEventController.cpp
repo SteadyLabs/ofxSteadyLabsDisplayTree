@@ -132,9 +132,7 @@ void IOSTouchEventController::_handleEvent( TouchEvent* inEvent){
             
         case TOUCH_CANCELLED:
         case TOUCH_UP:
-            
-            //NEEDS ATTENTION - hittest is not an accurate meseaurement for touch
-            
+
             for ( int i = 0; i < _touchEnablers.size(); i++ )
             {
                 curBlockingState = _touchEnablers[ i ]->blockingState;
@@ -283,76 +281,8 @@ void IOSTouchEventController::touchCancelled( ofTouchEventArgs &touch )
 
 void IOSTouchEventController::touchDoubleTap( ofTouchEventArgs &touch )
 {
-}
-
-
-
-
-
-
-
-
-
-
-
-//---------------------------------------------------------------------------------------------
-// TODO: which events are going here
-/*
-void IOSTouchEventController::onSingleTouchGestureEvent(SingleTouchGestureEvent & event)
-{
-    ofPoint p = event.point;
-    ofTouchEventArgs e;
-    e.x = p.x - ofGetWindowPositionX();
-    e.y = p.y - ofGetWindowPositionY();
-    
-    //cout << "TouchEventController::onSingleTouchGestureEvent _x: " << p.x << " _y: " << p.y << endl;
-    
-    // for some reason the first event is always 0,0, ignoring it
-    if(p.x == 0 && p.y == 0) 
-        return;
-    
     TouchEvent *savedEvent = new TouchEvent();
-    savedEvent->type = TOUCH_DOWN;
-    savedEvent->args = e;
+    savedEvent->type = TOUCH_DOUBLETAP;
+    savedEvent->args = touch;
     _eventQueue.push(savedEvent);
- 
 }
-
-
-void IOSTouchEventController::onSingleTouchMoveEvent(SingleTouchMoveEvent & event)
-{
-   
-    ofPoint p = event.point;
-    ofTouchEventArgs e;
-    e.x = p.x- ofGetWindowPositionX();;
-    e.y = p.y- ofGetWindowPositionY();;
-    
-    //cout << "TouchEventController::onSingleTouchMoveEvent _x: " << p.x << " _y: " << p.y << endl;
-    
-    TouchEvent *savedEvent = new TouchEvent();
-    savedEvent->type = TOUCH_MOVE;
-    savedEvent->args = e;
-    _eventQueue.push(savedEvent);
-   
-}
-
-
-void IOSTouchEventController::onGestureClearEvent(GestureClearEvent & event)
-{
-    
-    
-    ofTouchEventArgs e;
-    TouchEvent *lastEvent = _eventQueue.back();
-    e.x = lastEvent->args.x;
-    e.y = lastEvent->args.y;
-    
-    //cout << "TouchEventController::onGestureClearEvent _x: " << e.x << " _y: " << e.y << endl;
-    
-    TouchEvent *savedEvent = new TouchEvent();
-    savedEvent->type = TOUCH_UP;
-    savedEvent->args = e;
-    _eventQueue.push(savedEvent);
-
-}
-*/
-

@@ -68,6 +68,7 @@ void BitmapSequence::loadDir(string inDir){
                  loaded = curImage->loadImage( curFile );
             } catch ( std::exception& e ) {
                 cout << "BitmapSequence::loadDir::Error trying to load image from:" << inDir<< "\n";
+                printf("BitmapSequence::loadDir::Error trying to load image \n");
             }
 
             if ( loaded ){
@@ -79,6 +80,7 @@ void BitmapSequence::loadDir(string inDir){
         }
         totalFrames = images.size();
         //cout <<"BitmapSequence::loadDir::filesLoaded:" << totalFrames << "\n";
+        printf("BitmapSequence::loadDir::filesLoaded: %i \n", totalFrames);
     }
     setDimensions();
 }
@@ -88,6 +90,7 @@ void BitmapSequence::play(){
 }
 
 void BitmapSequence::stop(){
+    
     playing = false;
 }
 
@@ -109,6 +112,7 @@ void BitmapSequence::setDimensions(){
 }
 
 void BitmapSequence::gotoAndPlay(int frame){
+    printf("BitmapSequence::gotoAndPlay \n");
     //make sure they're asking for a frame in bounds    
     if ( frame >= 0 && frame < totalFrames ){
         curFrame = frame;
