@@ -34,7 +34,7 @@ class DisplayObject;
 class InteractionEnabler{
     
 public:
-    InteractionEnabler( DisplayObject* inTarget = NULL );
+    InteractionEnabler( DisplayObject* inTarget );
     ~InteractionEnabler();
     
     void setTarget( DisplayObject* inTarget );

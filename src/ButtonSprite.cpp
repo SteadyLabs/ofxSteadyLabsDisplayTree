@@ -64,7 +64,7 @@ void ButtonSprite::loadFile(string inDir){
 void ButtonSprite::init(){
     BaseSprite::BaseSprite();//super?
     //verbose = true;
-    //enableMouseEvents();
+    enableMouseEvents();
     //enablePQEvents();
     buttonState = DEFAULT;
 
@@ -131,7 +131,7 @@ void ButtonSprite::onPress(int x, int y, int button)
     if (rollout_anim->parentSprite != NULL)
         BaseSprite::removeChild(rollout_anim);
     
-    //cout<< "ButtonSprite::onPress::\n" <<  name << endl;
+    // cout<< "ButtonSprite::onPress::\n" <<  name << endl;
     buttonState = PRESS;
     press_anim->gotoAndPlay(1);
     this->dispatchEvent(ON_PRESS, name);
@@ -209,7 +209,7 @@ void ButtonSprite::onRollOut()
 
 void ButtonSprite::onRollOver(int x, int y)
 {
-    cout<< "ButtonSprite::onRollOver::\n";
+    // cout<< "ButtonSprite::onRollOver::\n";
     if (!visible || !worldMouseEnabled ) return;
     
     if (rollover_anim->parentSprite == NULL){

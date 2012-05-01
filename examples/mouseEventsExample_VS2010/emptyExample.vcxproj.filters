@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\testApp.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BaseMovie.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BaseSprite.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BitmapSequence.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BitmapSprite.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\ButtonSprite.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\CaptureSprite.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\Dispatcher.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\DisplayObject.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\InteractionEnabler.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\MouseEnabler.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\MouseEventController.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\VideoSprite.cpp">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BaseMovie.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BaseSprite.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BitmapSequence.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\BitmapSprite.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\ButtonSprite.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\CaptureSprite.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\Dispatcher.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\DisplayObject.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\InteractionEnabler.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\MouseEnabler.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\MouseEventController.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxSteadyLabsDisplayTree\src\VideoSprite.h">
+      <Filter>addons\ofxSteadyLabsDisplayTree\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="addons">
+      <UniqueIdentifier>{df62c998-7b02-43f9-928d-2a3dd538840e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSteadyLabsDisplayTree">
+      <UniqueIdentifier>{2f303d06-9ec5-48d7-a079-f2fb9822b600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxSteadyLabsDisplayTree\src">
+      <UniqueIdentifier>{49829bf3-bd7b-495e-a868-ca70308834a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

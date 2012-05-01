@@ -75,7 +75,7 @@ void VideoSprite::setFrame(int frame)
 
 int VideoSprite::getCurrentVideoFrame() 
 {
-    video->getCurrentFrame();
+    return video->getCurrentFrame();
 }
 
 int VideoSprite::getTotalVideoFrames() 
@@ -101,14 +101,14 @@ void VideoSprite::close() {
 
 float VideoSprite::getWidth()
 {
-    video->getWidth();
+    return video->getWidth();
 
 }
 
 float VideoSprite::getHeight()
 {
 
-    video->getHeight();
+    return video->getHeight();
 }
 
 bool VideoSprite::isLoaded()
