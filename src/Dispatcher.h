@@ -28,7 +28,11 @@
 #pragma once
 //#include "DisplayObject.h"
 #include <string>
+#include <map>
 #include "ofEvents.h"
+
+using namespace std;
+
 
 class Dispatcher{
 
