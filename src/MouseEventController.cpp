@@ -28,6 +28,7 @@
 #include "MouseEventController.h"
 #include "MouseEnabler.h"
 #include "DisplayObject.h"
+#include "ofEvents.h"
 
 //can we just instantiate this once here?
 MouseEventController* MouseEventController::instance = new MouseEventController();
@@ -44,10 +45,10 @@ void MouseEventController::init(){
 
 void MouseEventController::_init(){
     
-    ofAddListener(ofEvents.mousePressed, this, &MouseEventController::_mousePressed);
-    ofAddListener(ofEvents.mouseMoved, this, &MouseEventController::_mouseMoved);
-    ofAddListener(ofEvents.mouseDragged, this, &MouseEventController::_mouseDragged);
-    ofAddListener(ofEvents.mouseReleased, this, &MouseEventController::_mouseReleased);    
+    ofAddListener(ofEvents().mousePressed, this, &MouseEventController::_mousePressed);
+    ofAddListener(ofEvents().mouseMoved, this, &MouseEventController::_mouseMoved);
+    ofAddListener(ofEvents().mouseDragged, this, &MouseEventController::_mouseDragged);
+    ofAddListener(ofEvents().mouseReleased, this, &MouseEventController::_mouseReleased);    
 }
 
 
