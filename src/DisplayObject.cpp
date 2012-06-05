@@ -49,6 +49,9 @@ void DisplayObject::init(){
     scaleX = scaleY = 1.f;
     registrationX = registrationY = 0.f;
     blendMode = OF_BLENDMODE_ALPHA;
+    clipToBounds=false;
+    opaque=false;
+    backgroundColor=ofColor(255,255,255,255);
 }
 
 DisplayObject::~DisplayObject(){
@@ -92,6 +95,11 @@ int DisplayObject::draw( int inRenderOrder){
         return inRenderOrder;
         
     }
+    
+    if (clipToBounds)
+        if (!startClip())
+            return inRenderOrder;
+    
     ofPushMatrix();
     ofPushStyle();
     ofEnableBlendMode( blendMode );
@@ -122,6 +130,12 @@ int DisplayObject::draw( int inRenderOrder){
     
     cout << "DisplayObject::draw::renderOrder:" << renderOrder << ", name:" <<name << ", maxStackDepth:" << maxStackDepth << ", curStackDepth:" << curStackDepth << endl;
      */
+    
+    if (opaque)
+    {
+        ofSetColor(backgroundColor);
+        glRectd(0, 0, width, height);
+    }
      
     inRenderOrder++;
     
@@ -130,6 +144,10 @@ int DisplayObject::draw( int inRenderOrder){
     
     ofPopStyle();
     ofPopMatrix();
+    
+    if (clipToBounds)
+        endClip();
+    
     return inRenderOrder;
 }
 
@@ -312,6 +330,62 @@ void DisplayObject::recalcMouseState(){
     for ( int i = 0; i < numChildren; i++ ){
         children[ i ]->recalcMouseState();
     }
+}
+
+bool DisplayObject::startClip()
+{
+    if ((width==0) || (height==0))
+        return false;
+    
+    float w=width;
+    float h=height;
+    if (x<0)
+        w+=x;
+    if (y<0)
+        h+=y;
+    
+    if ((w<0) || (h<0))
+        return false;
+    
+    glViewport(x, ofGetHeight()-y-height, w, h);  
+    
+    // all the matrix setup is copied from the ofGraphics.cpp::void ofSetupScreen() method.  
+    float halfFov, theTan, screenFov, aspect;  
+    screenFov       = 60.0f;  
+    float eyeX      = (float)w / 2.0;  
+    float eyeY      = (float)h / 2.0;  
+    halfFov         = PI * screenFov / 360.0;  
+    theTan          = tanf(halfFov);  
+    float dist      = eyeY / theTan;  
+    float nearDist  = dist / 10.0;  // near / far clip plane  
+    float farDist   = dist * 10.0;  
+    aspect          = (float)w/(float)h;  
+    
+    glMatrixMode(GL_PROJECTION);  
+    glLoadIdentity();  
+    gluPerspective(screenFov, aspect, nearDist, farDist);  
+    
+    glMatrixMode(GL_MODELVIEW);  
+    glLoadIdentity();  
+    gluLookAt(eyeX, eyeY, dist, eyeX, eyeY, 0.0, 0.0, 1.0, 0.0);  
+    
+    glClear(GL_DEPTH_BUFFER_BIT);  
+    
+    glScalef(1, -1, 1);           // invert Y axis so increasing Y goes down.  
+    glTranslatef(-x, -y-height, 0);       // shift origin up to upper-left corner.  
+    
+    return true;
+}
+
+void DisplayObject::endClip()
+{
+    if ((width==0) || (height==0))
+        return;
+    
+    // reset viewport back to main screen  
+    glFlush();  
+    glViewport(0, 0, ofGetWidth(), ofGetHeight());  
+    ofSetupScreen();  
 }
 
 //====================end basesprite stuff====================

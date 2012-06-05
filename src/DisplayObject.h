@@ -53,8 +53,13 @@ public:
     
     //refactored from baseSprite
     bool visible;
+    
+    bool opaque;
+    bool clipToBounds;
+    ofColor backgroundColor;
+    
     virtual void update();
-    int draw( int inRenderOrder = -1);
+    virtual int draw( int inRenderOrder = -1);
     virtual void render();
     int drawChildren( int inRenderOrder );
     float alpha;
@@ -108,6 +113,8 @@ protected:
     //refactored from baseSprite
     //float worldX;
     //float worldY;
+    std::vector< DisplayObject* > children;
+    
     float worldAlpha;
     bool worldVisible;
     bool worldMouseEnabled;
@@ -123,9 +130,11 @@ protected:
     void depthFirstTraversalWithVoid( void (DisplayObject::*pt2Func)(void) );
     void depthFirstTraversalWithInt( int (DisplayObject::*pt2Func)( int ) );
     
+    bool startClip();
+    void endClip();
+    
 private:
     //refactored from basesprite
-    std::vector< DisplayObject* > children;
     bool _visible;
     void drawComplete();
     void recalcMouseState();
