@@ -35,17 +35,20 @@ public:
     virtual void init();
 
     /// Loads and constructs display tree from filename
-    virtual DisplayObject *load(string filename);
+    DisplayObject *loadFile(string filename);
+    
+    /// Loads and constructs display tree from a JSON string
+    DisplayObject *loadString(string jsonStr);
     
     /// Adds a map for custom BaseSprite classes to parse from file
-    void addMapper(string tag, DisplayObjectMapper *mapper);
+    void registerMapper(string tag, DisplayObjectMapper *mapper);
 protected:
     /// Map tags to mappers
     namedObjectMap objectMap;
 
-    /// Maps the attributes of the json node to a new instance
-    /// via a DisplayObjectMapper and adds to parent object.
-    virtual void mapValue(Json::Value value, DisplayObject *parent);
+    /// Creates a new DisplayObject, and any children, and maps the attributes 
+    /// of the json node to the new instance via a DisplayObjectMapper
+    virtual DisplayObject *build(Json::Value value);
 };
 
 

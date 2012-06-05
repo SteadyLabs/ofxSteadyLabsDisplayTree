@@ -29,7 +29,7 @@ void DisplayObjectLoader::init()
     objectMap["button"]=new ButtonSpriteMapper();
 }
 
-void DisplayObjectLoader::mapValue(Json::Value value, DisplayObject *parent)
+DisplayObject *DisplayObjectLoader::build(Json::Value value)
 {
     string type=value["type"].asString();
     
@@ -39,23 +39,41 @@ void DisplayObjectLoader::mapValue(Json::Value value, DisplayObject *parent)
         // Do the mapping JSON -> properties
         DisplayObject *obj=objectMap[type]->build(value);
         
-        if (obj)
-            parent->addChild(obj);
-        
         // Do any child elements
         if (!value["children"].isNull())
             for(int i=0; i<value["children"].size(); i++)
-                mapValue(value["children"][i],obj);
+            {
+                DisplayObject *child=build(value["children"][i]);
+                if (child)
+                    obj->addChild(child);
+            }
+        
+        return obj;
     }
     
+    return NULL;
 }
 
-void DisplayObjectLoader::addMapper(string tag, DisplayObjectMapper *mapper)
+void DisplayObjectLoader::registerMapper(string tag, DisplayObjectMapper *mapper)
 {
     objectMap[tag]=mapper;
 }
 
-DisplayObject *DisplayObjectLoader::load(string filename)
+DisplayObject *DisplayObjectLoader::loadString(string jsonStr)
+{
+	Json::Value jsonObj;
+    Json::Reader reader;
+	
+	if (!reader.parse(jsonStr, jsonObj)) 
+    {
+		std::cout  << "Failed to parse JSON\n" << reader.getFormatedErrorMessages();
+		throw;
+	}
+    
+    return build(jsonObj);
+}
+
+DisplayObject *DisplayObjectLoader::loadFile(string filename)
 {
     // read from string
     string str,jsonStr;
@@ -68,21 +86,5 @@ DisplayObject *DisplayObjectLoader::load(string filename)
 	}
 	in.close();
     
-    // parse into a json object
-	Json::Value jsonObj;
-    Json::Reader reader;
-	
-	bool parsingSuccessful = reader.parse(jsonStr, jsonObj);
-	if ( !parsingSuccessful ) {
-		std::cout  << "Failed to parse JSON\n" << reader.getFormatedErrorMessages();
-		throw;
-	}
-    
-    // build the graph
-    BaseSprite *root=new BaseSprite();
-    
-    for (int i=0; i<jsonObj.size(); i++)
-        mapValue(jsonObj[i],root);
-    
-    return root;
+    return loadString(jsonStr);
 }

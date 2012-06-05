@@ -16,8 +16,6 @@
 #include "ButtonSprite.h"
 #include "VideoSprite.h"
 
-#define getFloatFromUint(num) ofToFloat(ofToString(num))
-
 /**
  * Abstract base class that maps value from json node to any base sprite.
  * For custom BaseSprite classes, you'll have to write your own subclass
