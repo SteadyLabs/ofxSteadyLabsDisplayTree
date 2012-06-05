@@ -71,8 +71,10 @@ bool BitmapSprite::hitTest( int tx, int ty ){
 void BitmapSprite::loadFile(string inFile){
     image->loadImage( inFile.c_str() );
     //image->setImageType( OF_IMAGE_GRAYSCALE );
-    width = image->width;
-    height = image->height;
+    if (width==0)
+        width = image->width;
+    if (height==0)
+        height = image->height;
 }
 
 void BitmapSprite::render(){
