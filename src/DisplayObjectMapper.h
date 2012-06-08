@@ -32,6 +32,14 @@ public:
 };
 
 /**
+ * BaseSprite mapper
+ */
+class BaseSpriteMapper: public DisplayObjectMapper {
+    DisplayObject *build(Json::Value value);
+    void map(DisplayObject *object, Json::Value value);
+};
+
+/**
  * BitmapSprite mapper
  */
 class BitmapSpriteMapper: public DisplayObjectMapper {

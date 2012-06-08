@@ -57,23 +57,50 @@ void DisplayObjectMapper::map(DisplayObject *object, Json::Value value)
     if (!value["alpha"].isNull())
         object->alpha = value["alpha"].asDouble();
     
-    if (!value["scaleX"].isNull())
-        object->scaleX = value["scaleX"].asDouble();
-    
-    if (!value["scaleY"].isNull())
-        object->scaleY = value["scaleY"].asDouble();
-    
-    if (!value["registrationX"].isNull())
-        object->registrationX = value["registrationX"].asDouble();
+    if (!value["frame"].isNull())
+    {
+        Json::Value frame=value["frame"];
+        object->x=frame[0U].asDouble();
+        object->y=frame[1].asDouble();
+        object->width=frame[2].asDouble();
+        object->height=frame[3].asDouble();
+    }
 
-    if (!value["registrationY"].isNull())
-        object->registrationY = value["registrationY"].asDouble();
+    if (!value["scale"].isNull())
+    {
+        Json::Value scale=value["scale"];
+        object->scaleX=scale[0U].asDouble();
+        object->scaleY=scale[1].asDouble();
+    }
+
+    if (!value["registration"].isNull())
+    {
+        Json::Value registration=value["registration"];
+        object->registrationX=registration[0U].asDouble();
+        object->registrationY=registration[1].asDouble();
+    }
     
     if (!value["rotation"].isNull())
         object->rotation = value["rotation"].asDouble();
     
     // TODO: Blend Mode
     //object->blendMode;
+}
+
+
+#pragma mark - BaseSpriteMapper
+
+void BaseSpriteMapper::map(DisplayObject *object, Json::Value value)
+{
+    DisplayObjectMapper::map(object,value);
+}
+
+DisplayObject *BaseSpriteMapper::build(Json::Value value) 
+{
+    BaseSprite *sprite=new BaseSprite();
+    map(sprite,value);
+    
+    return sprite;
 }
 
 #pragma mark - BitmapSpriteMapper

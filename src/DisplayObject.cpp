@@ -320,6 +320,42 @@ DisplayObject* DisplayObject::getChildByName( string inName ){
     
 }
 
+DisplayObject *DisplayObject::rootSprite()
+{
+    if (parentSprite==NULL)
+        return NULL;
+    
+    DisplayObject *p=parentSprite;
+    while(true)
+    {
+        if (p->parentSprite==NULL)
+            return p;
+        
+        p=p->parentSprite;
+    }
+}
+
+DisplayObject *DisplayObject::spriteNamed(std::string spriteName, bool descend)
+{
+    DisplayObject *result=getChildByName(spriteName);
+    
+    if (result)
+        return result;
+    
+    if (descend)
+    {
+        int count=children.size();
+        for(int i=0; i<count; i++)
+        {
+            result=children[i]->spriteNamed(spriteName,true);
+            if (result)
+                return result;
+        }
+    }
+    
+    return NULL;
+}
+
 void DisplayObject::mouseDisable(){
     mouseEnabled = false;
     recalcMouseState();

@@ -36,53 +36,80 @@
 class InteractionEnabler;
 class MouseEnabler;
 
+/**
+ * Base class for display object hierarchy.
+ */
 class DisplayObject : public ofRectangle, public Dispatcher {
 public:
     typedef map< string, DisplayObject*> NameObjectHash;
     
+    std::vector< DisplayObject* > children;
+    
+    // Name of the node
+    string name;
+    
+    // Reference to parent
+    DisplayObject* parentSprite;
+    
+    // This is weird.  z-index?
+    int renderOrder;
+    
+    // Visibility
+    bool visible;
+    
+    // Controls if the display object renders a filled background
+    bool opaque;
+    // Background color to use if opaque
+    ofColor backgroundColor;
+    
+    // Clips the drawing of sub nodes to the bounds of this sprite
+    bool clipToBounds;
+    
+    // Alpha
+    float alpha;
+    
+    // Rotation of the display object
+    float rotation;
+    
+    // Scaling
+    float scaleX;
+    float scaleY;
+    
+    // Blending mode
+    ofBlendMode blendMode;
+    
+    // Anchor point
+    float registrationX;
+    float registrationY;
+    
+    // Determines if this isRoot, though should probably be (parentSprite==NULL)
+    bool isRoot;
+    
+    // Enables the mouse stuff
+    MouseEnabler* mouseEnabler;
+    
     DisplayObject();
     virtual ~DisplayObject();
-    int renderOrder;
+    
+    void init();
     
     void enableMouseEvents();
     void disableMouseEvents();
-    void init();
-    
-    MouseEnabler* mouseEnabler;
-    
-    
-    //refactored from baseSprite
-    bool visible;
-    
-    bool opaque;
-    bool clipToBounds;
-    ofColor backgroundColor;
     
     virtual void update();
     virtual int draw( int inRenderOrder = -1);
     virtual void render();
     int drawChildren( int inRenderOrder );
-    float alpha;
-    float scaleX;
-    float scaleY;
-
-    ofBlendMode blendMode;
-    
-    float registrationX;
-    float registrationY;
-    
-    bool isRoot;
     
     void addChild( DisplayObject* inSprite );
     void removeChild( DisplayObject* inSprite );
     int getIndexOfChild( DisplayObject* inSprite );
+    DisplayObject *rootSprite();
+    DisplayObject *spriteNamed(std::string spriteName, bool descend=true);
     
     virtual bool hitTest( int tx, int ty );  
     
     DisplayObject* getChildByName( string inName );
-    
-    string name;
-    DisplayObject* parentSprite;
     
     void mouseEnable();
     void mouseDisable();
@@ -90,7 +117,6 @@ public:
     void traceTransform();
     void traceTransformChain();
     
-    float rotation;
     
     ofPoint unprojectPoint( int x, int y ); 
     //end basesprite
@@ -113,7 +139,6 @@ protected:
     //refactored from baseSprite
     //float worldX;
     //float worldY;
-    std::vector< DisplayObject* > children;
     
     float worldAlpha;
     bool worldVisible;

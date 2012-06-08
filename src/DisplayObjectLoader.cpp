@@ -27,6 +27,7 @@ void DisplayObjectLoader::init()
     objectMap["video"]=new VideoSpriteMapper();
     objectMap["sequence"]=new BitmapSequenceMapper();
     objectMap["button"]=new ButtonSpriteMapper();
+    objectMap["node"]=new BaseSpriteMapper();
 }
 
 DisplayObject *DisplayObjectLoader::build(Json::Value value)
