@@ -30,6 +30,7 @@
 #include "DisplayObject.h"
 #include "MouseEnabler.h"
 
+
 ofMatrix4x4 DisplayObject::baseMatrix;
 
 DisplayObject::DisplayObject(){
@@ -56,8 +57,13 @@ void DisplayObject::init(){
 
 DisplayObject::~DisplayObject(){
     //TODO: destroy
+    disableMouseEvents();
+    
+    int numChildren = children.size();
+    for (int i = 0; i < numChildren; i++)
+        delete children[i];
+    
     delete mouseEnabler;
-
 }
 
 void DisplayObject::update(){
