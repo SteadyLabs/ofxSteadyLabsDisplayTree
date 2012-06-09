@@ -30,6 +30,11 @@ void DisplayObjectLoader::init()
     objectMap["node"]=new BaseSpriteMapper();
 }
 
+DisplayObject *DisplayObjectLoader::instance(DisplayObjectMapper *mapper, Json::Value value)
+{
+    return mapper->build(value);
+}
+
 DisplayObject *DisplayObjectLoader::build(Json::Value value)
 {
     string type=value["type"].asString();
@@ -38,7 +43,7 @@ DisplayObject *DisplayObjectLoader::build(Json::Value value)
     if (objectMap.find(type)!=objectMap.end())
     {
         // Do the mapping JSON -> properties
-        DisplayObject *obj=objectMap[type]->build(value);
+        DisplayObject *obj=instance(objectMap[type], value);
         
         // Do any child elements
         if (!value["children"].isNull())
@@ -76,6 +81,7 @@ DisplayObject *DisplayObjectLoader::loadString(string jsonStr)
 
 DisplayObject *DisplayObjectLoader::loadFile(string filename)
 {
+    cout << ofToDataPath(filename) << endl;
     // read from string
     string str,jsonStr;
 	ifstream in;
