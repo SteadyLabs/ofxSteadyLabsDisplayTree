@@ -39,6 +39,9 @@ DisplayObject *DisplayObjectLoader::build(Json::Value value)
 {
     string type=value["type"].asString();
     
+    if (type=="include")
+        return loadFile(value["source"].asString());
+    
     // make sure a mapper has been defined.
     if (objectMap.find(type)!=objectMap.end())
     {
