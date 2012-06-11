@@ -381,10 +381,10 @@ bool DisplayObject::startClip()
     
     float w=width;
     float h=height;
-    if (x<0)
-        w+=x;
-    if (y<0)
-        h+=y;
+//    if (x<0)
+//        w+=x;
+//    if (y<0)
+//        h+=y;
     
     if ((w<0) || (h<0))
         return false;
