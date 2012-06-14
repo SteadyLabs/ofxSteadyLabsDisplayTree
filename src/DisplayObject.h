@@ -164,8 +164,6 @@ private:
     void drawComplete();
     void recalcMouseState();
     //end basesprite
-
-    
 };
 
 

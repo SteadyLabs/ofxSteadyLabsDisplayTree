@@ -233,7 +233,14 @@ namespace Json {
       UInt asUInt() const;
       double asDouble() const;
       bool asBool() const;
-
+       
+      Int getIntValue(std::string name, Int defaultValue) const;
+      UInt getUIntValue(std::string name, UInt defaultValue) const;
+      double getDoubleValue(std::string name, double defaultValue) const;
+      bool getBoolValue(std::string name, bool defaultValue) const;
+      std::string getStringValue(std::string name, std::string defaultValue) const; 
+       
+      bool exists() const;
       bool isNull() const;
       bool isBool() const;
       bool isInt() const;

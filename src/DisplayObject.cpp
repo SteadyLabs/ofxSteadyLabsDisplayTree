@@ -381,14 +381,17 @@ bool DisplayObject::startClip()
     
     float w=width;
     float h=height;
-//    if (x<0)
-//        w+=x;
-//    if (y<0)
-//        h+=y;
+    
+    // so this blows, depending on video card
+    if (x<0)
+        w+=x;
+    if (y<0)
+        h+=y;
     
     if ((w<0) || (h<0))
         return false;
-    
+
+    glPushMatrix();
     glViewport(x, ofGetHeight()-y-height, w, h);  
     
     // all the matrix setup is copied from the ofGraphics.cpp::void ofSetupScreen() method.  
@@ -428,6 +431,7 @@ void DisplayObject::endClip()
     glFlush();  
     glViewport(0, 0, ofGetWidth(), ofGetHeight());  
     ofSetupScreen();  
+    glPopMatrix();
 }
 
 //====================end basesprite stuff====================

@@ -815,6 +815,41 @@ Value::asBool() const
    }
    return false; // unreachable;
 }
+    
+Int 
+Value::getIntValue(std::string name, Int defaultValue) const
+{
+    Value v=(*this)[ name.c_str() ];
+    return (v.exists()) ? v.asInt() : defaultValue;
+}
+
+UInt 
+Value::getUIntValue(std::string name, UInt defaultValue) const
+{
+    Value v=(*this)[ name.c_str() ];
+    return (v.exists()) ? v.asUInt() : defaultValue;
+}
+
+double 
+Value::getDoubleValue(std::string name, double defaultValue) const
+{
+    Value v=(*this)[ name.c_str() ];
+    return (v.exists()) ? v.asDouble() : defaultValue;
+}
+
+bool 
+Value::getBoolValue(std::string name, bool defaultValue) const
+{
+    Value v=(*this)[ name.c_str() ];
+    return (v.exists()) ? v.asBool() : defaultValue;
+}
+
+std::string 
+Value::getStringValue(std::string name, std::string defaultValue) const
+{
+    Value v=(*this)[ name.c_str() ];
+    return (v.exists()) ? v.asString() : defaultValue;
+}
 
 
 bool 
@@ -1249,6 +1284,13 @@ Value::getMemberNames() const
 //}
 //
 //# endif
+
+
+bool
+Value::exists() const
+{
+    return type_ != nullValue;
+}
 
 
 bool
