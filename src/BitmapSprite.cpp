@@ -69,7 +69,12 @@ bool BitmapSprite::hitTest( int tx, int ty ){
 }
 
 void BitmapSprite::loadFile(string inFile){
-    image->loadImage( inFile.c_str() );
+    if (!image->loadImage( inFile.c_str() ))
+    {
+        cout << "Could not load image from file '" << inFile << "'." << endl;
+        throw ;
+    }
+    
     //image->setImageType( OF_IMAGE_GRAYSCALE );
     if (width==0)
         width = image->width;
