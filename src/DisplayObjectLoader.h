@@ -49,7 +49,12 @@ protected:
     /// Creates a new DisplayObject, and any children, and maps the attributes 
     /// of the json node to the new instance via a DisplayObjectMapper
     virtual DisplayObject *build(Json::Value value);
+    
+    // Creates the new instance
     virtual DisplayObject *instance(DisplayObjectMapper *mapper, Json::Value value);
+    
+    // Loads an include
+    virtual DisplayObject *include(Json::Value value);
 };
 
 

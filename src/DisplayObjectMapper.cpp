@@ -50,9 +50,12 @@ void DisplayObjectMapper::map(DisplayObject *object, Json::Value value)
     
     if (!value["h"].isNull())
         object->height = value["h"].asDouble();
-
+    
     if (!value["clipToBounds"].isNull())
         object->clipToBounds = value["clipToBounds"].asBool();
+    
+    if (!value["clipMargins"].isNull())
+        object->clipMargins = ofVec2f(value["clipMargins"][0U].asDouble(),value["clipMargins"][1].asDouble());
 
     if (!value["alpha"].isNull())
         object->alpha = value["alpha"].asDouble();

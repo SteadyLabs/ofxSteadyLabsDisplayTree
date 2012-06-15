@@ -35,13 +35,22 @@ DisplayObject *DisplayObjectLoader::instance(DisplayObjectMapper *mapper, Json::
     return mapper->build(value);
 }
 
+
+DisplayObject *DisplayObjectLoader::include(Json::Value value)
+{
+    DisplayObject *obj=loadFile(value["source"].asString());
+    DisplayObjectMapper mapper;
+    mapper.map(obj, value);
+    return obj;
+}
+
 DisplayObject *DisplayObjectLoader::build(Json::Value value)
 {
     string type=value["type"].asString();
     
     if (type=="include")
     {
-        return loadFile(value["source"].asString());
+        return include(value);
     }
     
     // make sure a mapper has been defined.
