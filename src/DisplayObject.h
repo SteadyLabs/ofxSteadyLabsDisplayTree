@@ -75,6 +75,8 @@ public:
     float scaleX;
     float scaleY;
     
+    ofVec2f clipMargins;
+    
     // Blending mode
     ofBlendMode blendMode;
     
@@ -154,10 +156,6 @@ protected:
     static ofMatrix4x4 baseMatrix;
     void depthFirstTraversalWithVoid( void (DisplayObject::*pt2Func)(void) );
     void depthFirstTraversalWithInt( int (DisplayObject::*pt2Func)( int ) );
-    
-    bool startClip();
-    void endClip();
-    
 private:
     //refactored from basesprite
     bool _visible;

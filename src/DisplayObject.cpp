@@ -53,6 +53,8 @@ void DisplayObject::init(){
     clipToBounds=false;
     opaque=false;
     backgroundColor=ofColor(255,255,255,255);
+    clipMargins.x=0;
+    clipMargins.y=0;
 }
 
 DisplayObject::~DisplayObject(){
@@ -102,9 +104,6 @@ int DisplayObject::draw( int inRenderOrder){
         
     }
     
-    if (clipToBounds)
-        if (!startClip())
-            return inRenderOrder;
     
     ofPushMatrix();
     ofPushStyle();
@@ -124,6 +123,34 @@ int DisplayObject::draw( int inRenderOrder){
     
     copyCurMatrix(transformedMatrix);
     
+    if ((clipToBounds) && (width>0) && (height>0))
+    {
+        float psX=scaleX;
+        float psY=scaleY;
+        
+        float dx=x;
+        float dy=y;
+        
+        float ph=0;
+        float pw=0;
+        
+        DisplayObject *p=parentSprite;
+        while(p)
+        {
+            ph=(p->height>ph) ? p->height : ph;
+            pw=(p->width>pw) ? p->width : pw;
+            
+            psX*=p->scaleX;
+            psY*=p->scaleY;
+            dx+=p->x;
+            dy+=p->y;
+            p=p->parentSprite;
+        }
+        
+        glEnable(GL_SCISSOR_TEST);
+        glScissor((dx-clipMargins.x)*psX, (ph-((dy-clipMargins.y)+height))*psY, (width+(clipMargins.x*2))*psX, (height+(clipMargins.y*2)));
+    }
+
     render();
 
     renderOrder = inRenderOrder;
@@ -148,12 +175,18 @@ int DisplayObject::draw( int inRenderOrder){
     inRenderOrder = drawChildren( inRenderOrder );
     drawComplete();
     
+    if ((clipToBounds) && (width>0) && (height>0))
+    {
+        glDisable(GL_SCISSOR_TEST);
+    }
+
+    
     ofPopStyle();
     ofPopMatrix();
     
-    if (clipToBounds)
-        endClip();
-    
+//    if (clipToBounds)
+//        endClip();
+//    
     return inRenderOrder;
 }
 
@@ -372,66 +405,6 @@ void DisplayObject::recalcMouseState(){
     for ( int i = 0; i < numChildren; i++ ){
         children[ i ]->recalcMouseState();
     }
-}
-
-bool DisplayObject::startClip()
-{
-    if ((width==0) || (height==0))
-        return false;
-    
-    float w=width;
-    float h=height;
-    
-    // so this blows, depending on video card
-    if (x<0)
-        w+=x;
-    if (y<0)
-        h+=y;
-    
-    if ((w<0) || (h<0))
-        return false;
-
-    glPushMatrix();
-    glViewport(x, ofGetHeight()-y-height, w, h);  
-    
-    // all the matrix setup is copied from the ofGraphics.cpp::void ofSetupScreen() method.  
-    float halfFov, theTan, screenFov, aspect;  
-    screenFov       = 60.0f;  
-    float eyeX      = (float)w / 2.0;  
-    float eyeY      = (float)h / 2.0;  
-    halfFov         = PI * screenFov / 360.0;  
-    theTan          = tanf(halfFov);  
-    float dist      = eyeY / theTan;  
-    float nearDist  = dist / 10.0;  // near / far clip plane  
-    float farDist   = dist * 10.0;  
-    aspect          = (float)w/(float)h;  
-    
-    glMatrixMode(GL_PROJECTION);  
-    glLoadIdentity();  
-    gluPerspective(screenFov, aspect, nearDist, farDist);  
-    
-    glMatrixMode(GL_MODELVIEW);  
-    glLoadIdentity();  
-    gluLookAt(eyeX, eyeY, dist, eyeX, eyeY, 0.0, 0.0, 1.0, 0.0);  
-    
-    glClear(GL_DEPTH_BUFFER_BIT);  
-    
-    glScalef(1, -1, 1);           // invert Y axis so increasing Y goes down.  
-    glTranslatef(-x, -y-height, 0);       // shift origin up to upper-left corner.  
-    
-    return true;
-}
-
-void DisplayObject::endClip()
-{
-    if ((width==0) || (height==0))
-        return;
-    
-    // reset viewport back to main screen  
-    glFlush();  
-    glViewport(0, 0, ofGetWidth(), ofGetHeight());  
-    ofSetupScreen();  
-    glPopMatrix();
 }
 
 //====================end basesprite stuff====================
