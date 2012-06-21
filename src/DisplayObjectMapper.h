@@ -25,26 +25,28 @@
 class DisplayObjectMapper {
 public:
     // Constructs the display object and calls map() to assign properties.
-    virtual DisplayObject *build(Json::Value value) { return nil; };
+    virtual DisplayObject *build(DisplayObject *parentObj, Json::Value value);
     
     // Does the actual mapping of JSON -> properties.
-    virtual void map(DisplayObject *object, Json::Value value);
+    virtual void map(DisplayObject *parentObj, DisplayObject *object, Json::Value value);
+    
+    // returns an instance of whatever object this is mapping.
+    virtual DisplayObject *newInstance() { return NULL; }
 };
 
 /**
  * BaseSprite mapper
  */
 class BaseSpriteMapper: public DisplayObjectMapper {
-    DisplayObject *build(Json::Value value);
-    void map(DisplayObject *object, Json::Value value);
+    DisplayObject *newInstance();
 };
 
 /**
  * BitmapSprite mapper
  */
 class BitmapSpriteMapper: public DisplayObjectMapper {
-    DisplayObject *build(Json::Value value);
-    void map(DisplayObject *object, Json::Value value);
+    void map(DisplayObject *parentObj, DisplayObject *object, Json::Value value);
+    DisplayObject *newInstance();
 };
 
 
@@ -52,8 +54,8 @@ class BitmapSpriteMapper: public DisplayObjectMapper {
  * BitmapSequence mapper
  */
 class BitmapSequenceMapper: public DisplayObjectMapper {
-    DisplayObject *build(Json::Value value);
-    void map(DisplayObject *object, Json::Value value);
+    void map(DisplayObject *parentObj, DisplayObject *object, Json::Value value);
+    DisplayObject *newInstance();
 };
 
 
@@ -61,8 +63,8 @@ class BitmapSequenceMapper: public DisplayObjectMapper {
  * ButtonSprite mapper
  */
 class ButtonSpriteMapper: public DisplayObjectMapper {
-    DisplayObject *build(Json::Value value);
-    void map(DisplayObject *object, Json::Value value);
+    void map(DisplayObject *parentObj, DisplayObject *object, Json::Value value);
+    DisplayObject *newInstance();
 };
 
 
@@ -70,8 +72,8 @@ class ButtonSpriteMapper: public DisplayObjectMapper {
  * VideoSprite mapper
  */
 class VideoSpriteMapper: public DisplayObjectMapper {
-    DisplayObject *build(Json::Value value);
-    void map(DisplayObject *object, Json::Value value);
+    void map(DisplayObject *parentObj, DisplayObject *object, Json::Value value);
+    DisplayObject *newInstance();
 };
 
 #endif

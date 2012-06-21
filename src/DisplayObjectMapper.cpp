@@ -11,8 +11,11 @@
 
 #pragma mark - DisplayObjectMapper
 
-void DisplayObjectMapper::map(DisplayObject *object, Json::Value value)
+void DisplayObjectMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
+    if (parentObj)
+        parentObj->addChild(object);
+    
     // Required properties
     if (!value["id"].isNull())
         object->name = value["id"].asString();
@@ -91,81 +94,75 @@ void DisplayObjectMapper::map(DisplayObject *object, Json::Value value)
 }
 
 
-#pragma mark - BaseSpriteMapper
-
-void BaseSpriteMapper::map(DisplayObject *object, Json::Value value)
+DisplayObject *DisplayObjectMapper::build(DisplayObject *parentObj, Json::Value value) 
 {
-    DisplayObjectMapper::map(object,value);
-}
-
-DisplayObject *BaseSpriteMapper::build(Json::Value value) 
-{
-    BaseSprite *sprite=new BaseSprite();
-    map(sprite,value);
+    DisplayObject *sprite=newInstance();
+    
+    if (sprite)
+        map(parentObj,sprite,value);
     
     return sprite;
+}
+
+#pragma mark - BaseSpriteMapper
+
+DisplayObject *BaseSpriteMapper::newInstance()
+{
+    return new BaseSprite();
 }
 
 #pragma mark - BitmapSpriteMapper
 
-void BitmapSpriteMapper::map(DisplayObject *object, Json::Value value)
+void BitmapSpriteMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
-    DisplayObjectMapper::map(object,value);
+    DisplayObjectMapper::map(parentObj, object,value);
     ((BitmapSprite *)object)->loadFile(value["asset"].asString());
 }
 
-DisplayObject *BitmapSpriteMapper::build(Json::Value value) 
+DisplayObject *BitmapSpriteMapper::newInstance()
 {
-    BitmapSprite *sprite=new BitmapSprite();
-    map(sprite,value);
-    
-    return sprite;
+    return new BitmapSprite();
 }
+
 
 #pragma mark - BitmapSequenceMapper
 
-void BitmapSequenceMapper::map(DisplayObject *object, Json::Value value)
+void BitmapSequenceMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
-    DisplayObjectMapper::map(object,value);
+    DisplayObjectMapper::map(parentObj, object,value);
     ((BitmapSequence *)object)->loadDir(value["asset"].asString());
 }
 
-DisplayObject *BitmapSequenceMapper::build(Json::Value value) 
+DisplayObject *BitmapSequenceMapper::newInstance()
 {
-    BitmapSequence *sprite=new BitmapSequence();
-    map(sprite,value);
-    
-    return sprite;
+    return new BitmapSequence();
 }
+
 
 #pragma mark - ButtonSpriteMapper
 
-void ButtonSpriteMapper::map(DisplayObject *object, Json::Value value)
+void ButtonSpriteMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
-    DisplayObjectMapper::map(object,value);
+    DisplayObjectMapper::map(parentObj, object,value);
     ((ButtonSprite *)object)->loadFile(value["asset"].asString());
 }
 
-DisplayObject *ButtonSpriteMapper::build(Json::Value value) 
+DisplayObject *ButtonSpriteMapper::newInstance()
 {
-    ButtonSprite *sprite=new ButtonSprite();
-    map(sprite,value);
-    
-    return sprite;
+    return new ButtonSprite();
 }
+
 
 #pragma mark - VideoSpriteMapper
 
-void VideoSpriteMapper::map(DisplayObject *object, Json::Value value)
+void VideoSpriteMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
-    DisplayObjectMapper::map(object,value);
+    DisplayObjectMapper::map(parentObj, object,value);
     ((VideoSprite *)object)->loadFile(value["asset"].asString());
 }
 
-DisplayObject *VideoSpriteMapper::build(Json::Value value) 
+DisplayObject *VideoSpriteMapper::newInstance()
 {
-    VideoSprite *sprite=new VideoSprite();
-    map(sprite,value);
-    
-    return sprite;
+    return new VideoSprite();
 }
+

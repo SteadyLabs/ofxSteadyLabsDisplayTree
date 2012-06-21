@@ -30,43 +30,39 @@ void DisplayObjectLoader::init()
     objectMap["node"]=new BaseSpriteMapper();
 }
 
-DisplayObject *DisplayObjectLoader::instance(DisplayObjectMapper *mapper, Json::Value value)
+DisplayObject *DisplayObjectLoader::instance(DisplayObject *parentObj, DisplayObjectMapper *mapper, Json::Value value)
 {
-    return mapper->build(value);
+    return mapper->build(parentObj, value);
 }
 
 
-DisplayObject *DisplayObjectLoader::include(Json::Value value)
+DisplayObject *DisplayObjectLoader::include(DisplayObject *parentObj, Json::Value value)
 {
-    DisplayObject *obj=loadFile(value["source"].asString());
+    DisplayObject *obj=loadFile(parentObj,value["source"].asString());
     DisplayObjectMapper mapper;
-    mapper.map(obj, value);
+    mapper.map(parentObj, obj, value);
     return obj;
 }
 
-DisplayObject *DisplayObjectLoader::build(Json::Value value)
+DisplayObject *DisplayObjectLoader::build(DisplayObject *parentObj, Json::Value value)
 {
     string type=value["type"].asString();
     
     if (type=="include")
     {
-        return include(value);
+        return include(parentObj, value);
     }
     
     // make sure a mapper has been defined.
     if (objectMap.find(type)!=objectMap.end())
     {
         // Do the mapping JSON -> properties
-        DisplayObject *obj=instance(objectMap[type], value);
+        DisplayObject *obj=instance(parentObj, objectMap[type], value);
         
         // Do any child elements
         if (!value["children"].isNull())
             for(int i=0; i<value["children"].size(); i++)
-            {
-                DisplayObject *child=build(value["children"][i]);
-                if (child)
-                    obj->addChild(child);
-            }
+                build(obj,value["children"][i]);
         
         return obj;
     }
@@ -79,7 +75,7 @@ void DisplayObjectLoader::registerMapper(string tag, DisplayObjectMapper *mapper
     objectMap[tag]=mapper;
 }
 
-DisplayObject *DisplayObjectLoader::loadString(string jsonStr)
+DisplayObject *DisplayObjectLoader::loadString(DisplayObject *parent, string jsonStr)
 {
 	Json::Value jsonObj;
     Json::Reader reader;
@@ -90,10 +86,10 @@ DisplayObject *DisplayObjectLoader::loadString(string jsonStr)
 		throw;
 	}
     
-    return build(jsonObj);
+    return build(parent,jsonObj);
 }
 
-DisplayObject *DisplayObjectLoader::loadFile(string filename)
+DisplayObject *DisplayObjectLoader::loadFile(DisplayObject *parent, string filename)
 {
     cout << ofToDataPath(filename) << endl;
     // read from string
@@ -107,5 +103,5 @@ DisplayObject *DisplayObjectLoader::loadFile(string filename)
 	}
 	in.close();
     
-    return loadString(jsonStr);
+    return loadString(parent, jsonStr);
 }
