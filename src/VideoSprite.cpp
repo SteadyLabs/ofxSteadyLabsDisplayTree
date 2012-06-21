@@ -56,6 +56,7 @@ void  VideoSprite::loadFile( string inFile, bool inIsLooped ){
 
     video = new ofVideoPlayer();
     video->loadMovie( inFile.c_str() );
+    video->setUseTexture(false);
     if( !_isLooped ) video->setLoopState(OF_LOOP_NONE);
 
 }
@@ -90,10 +91,13 @@ void  VideoSprite::render(){
 
 }
 
+void VideoSprite::stop()
+{
+    video->stop();
+}
 
 void VideoSprite::close() {
     
-
     video->closeMovie();
 
 	

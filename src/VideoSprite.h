@@ -42,7 +42,7 @@ public:
     
 	void loadFile( string inFile, bool inIsLooped = true );
     void play();
-//	void stop();
+	void stop();
 	void close();
     void render();
 	void setFrame(int frame);
