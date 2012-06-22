@@ -29,103 +29,110 @@
 #include "VideoSprite.h"
 
 VideoSprite::VideoSprite(){
-
+    cout << "VideoSprite::Constructor:\n";
+    video = new ofVideoPlayer();
 }
 
 VideoSprite::VideoSprite( string inFile ){
-    
+    cout << "VideoSprite::ConstructorWithFile:\n";    
     loadFile(inFile);
 }
 
 VideoSprite::VideoSprite( string inFile, bool inIsLooped ){
-    
+    cout << "VideoSprite::Constructor::WithFileAndLoop\n";
     loadFile(inFile, inIsLooped);
     
 }
 
 void VideoSprite::update(){
-
+    //cout << "VideoSprite::update:\n";
     video->update();
-    BaseSprite::update();//aka super.update();
+    //BaseSprite::update();//aka super.update();
 }
 
 
 
 void  VideoSprite::loadFile( string inFile, bool inIsLooped ){
-	_isLooped = inIsLooped;
-
-    video = new ofVideoPlayer();
+    cout << "VideoSprite::loadFile:\n";
     video->loadMovie( inFile.c_str() );
-    video->setUseTexture(false);
+    _isLooped = inIsLooped;
+    //video->setUseTexture(false);
     if( !_isLooped ) video->setLoopState(OF_LOOP_NONE);
-
+    
 }
 
 void VideoSprite::setPosition(float per)
 {
-
+    //cout << "VideoSprite::setPosition:\n";
     video->setPosition(per);
 }
 
 void VideoSprite::setFrame(int frame)
 {
-    
+    //cout << "VideoSprite::setFrame:\n";
     video->setFrame(frame);
-     
+    
 }
 
 int VideoSprite::getCurrentVideoFrame() 
 {
+    //cout << "VideoSprite::getCurrentVideoFrame:\n";
     return video->getCurrentFrame();
 }
 
 int VideoSprite::getTotalVideoFrames() 
 {
+    //cout << "VideoSprite::getTotalVideoFrames:\n";
     return video->getTotalNumFrames();
 }
 
 void  VideoSprite::render(){
-   
+    //cout << "VideoSprite::render:\n";
     video->draw( 0, 0 );
-
-
+    
+    
 }
 
 void VideoSprite::stop()
 {
+    //cout << "VideoSprite::stop:\n";
     video->stop();
 }
 
 void VideoSprite::close() {
-    
+    //cout << "VideoSprite::close:\n";
     video->closeMovie();
-
+    
 	
 }
 
 float VideoSprite::getWidth()
 {
+    //cout << "VideoSprite::getWidth:\n";
     return video->getWidth();
-
+    
 }
 
 float VideoSprite::getHeight()
 {
-
+    //cout << "VideoSprite::getHeight:\n";
     return video->getHeight();
 }
 
 bool VideoSprite::isLoaded()
 {
+    //cout << "VideoSprite::isLoaded:\n";
     return video->isLoaded();
 }
 
 
 void  VideoSprite::play(){
+    cout << "VideoSprite::play:\n";
     video->play();
-
+    
 }
 
 VideoSprite::~ VideoSprite(){
+    //cout << "VideoSprite::Destructor:\n";
     delete video;
 }
