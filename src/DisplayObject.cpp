@@ -38,6 +38,7 @@ DisplayObject::DisplayObject(){
 }
 
 void DisplayObject::init(){
+    animator=new DisplayObjectAnimator(this);
     mouseEnabler = new MouseEnabler( this );
     parentSprite = NULL;
     name = ""; //default to empty string
@@ -61,6 +62,8 @@ DisplayObject::~DisplayObject(){
     //TODO: destroy
     disableMouseEvents();
     
+    delete animator;
+    
     int numChildren = children.size();
     for (int i = 0; i < numChildren; i++)
         delete children[i];
@@ -69,6 +72,8 @@ DisplayObject::~DisplayObject(){
 }
 
 void DisplayObject::update(){
+    animator->update();
+    
     if ( !visible ) return;
     int numChildren = children.size();
     for ( int i = 0; i < numChildren; i++ ){

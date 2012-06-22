@@ -31,6 +31,8 @@
 
 #include "ofMain.h"
 #include "Dispatcher.h"
+#include "DisplayObjectAnimator.h"
+
 //#include "InteractionEnabler.h"
 
 class InteractionEnabler;
@@ -41,6 +43,8 @@ class MouseEnabler;
  */
 class DisplayObject : public ofRectangle, public Dispatcher {
 public:
+    DisplayObjectAnimator *animator;
+    
     typedef map< string, DisplayObject*> NameObjectHash;
     
     std::vector< DisplayObject* > children;
