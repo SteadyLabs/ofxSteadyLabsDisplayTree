@@ -44,8 +44,7 @@ void DisplayObjectAnimator::addAnimation(BaseAnimation *anim)
 
     for(int i=0; i<deleteQueue.size(); i++)
         delete deleteQueue[i];
-    
-    deleteQueue.clear();
+     deleteQueue.clear();
     
     chaining=false;
 }
@@ -80,11 +79,22 @@ void DisplayObjectAnimator::update()
     current.assign(animations.begin(),animations.end());
     
     for(int i=0; i<current.size(); i++)
-        current[i]->update();
+    {
+        if (!current[i]->update())
+        {
+            if (current[i]->next)
+                addAnimation(current[i]->next);
+            
+            current[i]->next=NULL;
+            removeAnimation(current[i]);
+        }
+    }
 }
 
 DisplayObjectAnimator *DisplayObjectAnimator::stop()
 {
+    chaining=false;
+    
     while(animations.size())
         removeAnimation(animations[0]);
     
@@ -93,32 +103,32 @@ DisplayObjectAnimator *DisplayObjectAnimator::stop()
 
 DisplayObjectAnimator *DisplayObjectAnimator::fadeTo(float alpha, int duration, AnimatorTransition transition, AnimatorEquation equation)
 {
-    addAnimation(new FadeAnimation(this, target, alpha, duration, transition, equation));
+    addAnimation(new FadeAnimation( target, alpha, duration, transition, equation));
     return this;
 }
 
 DisplayObjectAnimator *DisplayObjectAnimator::move(int x, int y, int duration, AnimatorTransition transition, AnimatorEquation equation)
 {
-    addAnimation(new MoveAnimation(this, target, x, y, duration, transition, equation));
+    addAnimation(new MoveAnimation( target, x, y, duration, transition, equation));
     return this;
 }
     
 DisplayObjectAnimator *DisplayObjectAnimator::scale(float scaleX, float scaleY, int w, int h, int duration, AnimatorTransition transition, AnimatorEquation equation)
 {
-    addAnimation(new ScaleAnimation(this, target, scaleX, scaleY, duration, transition, equation));
+    addAnimation(new ScaleAnimation( target, scaleX, scaleY, duration, transition, equation));
     return this;
 }
 
 
 DisplayObjectAnimator *DisplayObjectAnimator::rotate(float rotation, int duration, AnimatorTransition transition, AnimatorEquation equation)
 {
-    addAnimation(new RotateAnimation(this, target, rotation, duration, transition, equation));
+    addAnimation(new RotateAnimation( target, rotation, duration, transition, equation));
     return this;
 }
 
 DisplayObjectAnimator *DisplayObjectAnimator::property(float *propertyValue, float finalValue, int duration, AnimatorTransition transition, AnimatorEquation equation)
 {
-    addAnimation(new PropertyAnimation(this, target, propertyValue, finalValue, duration, transition, equation));
+    addAnimation(new PropertyAnimation( target, propertyValue, finalValue, duration, transition, equation));
     return this;
 }
     

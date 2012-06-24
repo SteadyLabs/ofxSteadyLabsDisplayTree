@@ -13,85 +13,59 @@
 
 #pragma mark - BaseAnimation
 
-BaseAnimation::BaseAnimation(DisplayObjectAnimator *theAnimator, DisplayObject *theTarget, int duration, AnimatorTransition transition, AnimatorEquation equation)
+BaseAnimation::BaseAnimation(DisplayObject *theTarget, int duration, AnimatorTransition transition, AnimatorEquation equation)
 {
     next=NULL;
-    animator=theAnimator;
-    tweener=new tween::Tweener();
-    param=NULL;
+    tweener=new Between(duration,transition,equation);
 }
     
 BaseAnimation::~BaseAnimation()
 {
     delete tweener;
-    
-    if (param)
-        delete param;
 }
 
-void BaseAnimation::update()
+bool BaseAnimation::update()
 {
-    tweener->step(ofGetElapsedTimeMillis());
-    
-    if (tweener->finished)
-    {
-        if (this->next)
-            animator->addAnimation(this->next);
-        
-        this->next=NULL;
-        animator->removeAnimation(this);
-    }
+    return tweener->update();
 }
 
 
 #pragma mark - FadeAnimation
 
-FadeAnimation::FadeAnimation(DisplayObjectAnimator *theAnimator, DisplayObject *theTarget, float alpha, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theAnimator, theTarget, duration, transition, equation)
+FadeAnimation::FadeAnimation(DisplayObject *theTarget, float alpha, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theTarget, duration, transition, equation)
 {
-    param=new tween::TweenerParam(duration,transition,equation);
-    param->addProperty(&theTarget->alpha, alpha);
-    tweener->addTween(*param);
+    tweener->addParam(&theTarget->alpha, alpha);
 }
 
 
 #pragma mark - MoveAnimation
 
-MoveAnimation::MoveAnimation(DisplayObjectAnimator *theAnimator, DisplayObject *theTarget, int x, int y, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theAnimator,theTarget,duration,transition,equation)
+MoveAnimation::MoveAnimation(DisplayObject *theTarget, int x, int y, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theTarget,duration,transition,equation)
 {
-    param=new tween::TweenerParam(duration,transition,equation);
-    param->addProperty(&theTarget->x, x);
-    param->addProperty(&theTarget->y, y);
-    tweener->addTween(*param);
+    tweener->addParam(&theTarget->x, x);
+    tweener->addParam(&theTarget->y, y);
 }
 
 
 #pragma mark - ResizeAnimation
 
-ScaleAnimation::ScaleAnimation(DisplayObjectAnimator *theAnimator, DisplayObject *theTarget, float scaleX, float scaleY, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theAnimator,theTarget,duration,transition,equation)
+ScaleAnimation::ScaleAnimation(DisplayObject *theTarget, float scaleX, float scaleY, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theTarget,duration,transition,equation)
 {
-    param=new tween::TweenerParam(duration,transition,equation);
-    param->addProperty(&theTarget->scaleX, scaleX);
-    param->addProperty(&theTarget->scaleY, scaleY);
-    tweener->addTween(*param);
+    tweener->addParam(&theTarget->scaleX, scaleX);
+    tweener->addParam(&theTarget->scaleY, scaleY);
 }
 
 
 #pragma mark - ZoomAnimation
 
-RotateAnimation::RotateAnimation(DisplayObjectAnimator *theAnimator, DisplayObject *theTarget, float rotation, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theAnimator,theTarget,duration,transition,equation)
+RotateAnimation::RotateAnimation(DisplayObject *theTarget, float rotation, int duration, AnimatorTransition transition, AnimatorEquation equation) : BaseAnimation(theTarget,duration,transition,equation)
 {
-    param=new tween::TweenerParam(duration,transition,equation);
-    param->addProperty(&theTarget->rotation, rotation);
-    tweener->addTween(*param);
-
+    tweener->addParam(&theTarget->rotation, rotation);
 }
 
 #pragma mark - PropertyAnimation
 
-PropertyAnimation::PropertyAnimation(DisplayObjectAnimator *theAnimator, DisplayObject *theTarget, float *propertyValue, float finalValue, int duration, AnimatorTransition transition, AnimatorEquation equation): BaseAnimation(theAnimator,theTarget,duration,transition,equation)
+PropertyAnimation::PropertyAnimation(DisplayObject *theTarget, float *propertyValue, float finalValue, int duration, AnimatorTransition transition, AnimatorEquation equation): BaseAnimation(theTarget,duration,transition,equation)
 {
-    param=new tween::TweenerParam(duration,transition,equation);
-    param->addProperty(propertyValue, finalValue);
-    tweener->addTween(*param);
-    
+    tweener->addParam(propertyValue, finalValue);
 }
