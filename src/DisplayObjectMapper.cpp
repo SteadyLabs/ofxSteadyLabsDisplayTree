@@ -116,7 +116,9 @@ DisplayObject *BaseSpriteMapper::newInstance()
 void BitmapSpriteMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
     DisplayObjectMapper::map(parentObj, object,value);
-    ((BitmapSprite *)object)->loadFile(value["asset"].asString());
+    
+    if (value["asset"].exists())
+        ((BitmapSprite *)object)->loadFile(value["asset"].asString());
 }
 
 DisplayObject *BitmapSpriteMapper::newInstance()
@@ -130,7 +132,9 @@ DisplayObject *BitmapSpriteMapper::newInstance()
 void BitmapSequenceMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
     DisplayObjectMapper::map(parentObj, object,value);
-    ((BitmapSequence *)object)->loadDir(value["asset"].asString());
+    
+    if (value["asset"].exists())
+        ((BitmapSequence *)object)->loadDir(value["asset"].asString());
 }
 
 DisplayObject *BitmapSequenceMapper::newInstance()
@@ -144,7 +148,9 @@ DisplayObject *BitmapSequenceMapper::newInstance()
 void ButtonSpriteMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
     DisplayObjectMapper::map(parentObj, object,value);
-    ((ButtonSprite *)object)->loadFile(value["asset"].asString());
+    
+    if (value["asset"].exists())
+        ((ButtonSprite *)object)->loadFile(value["asset"].asString());
 }
 
 DisplayObject *ButtonSpriteMapper::newInstance()
@@ -158,7 +164,9 @@ DisplayObject *ButtonSpriteMapper::newInstance()
 void VideoSpriteMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
 {
     DisplayObjectMapper::map(parentObj, object,value);
-    ((VideoSprite *)object)->loadFile(value["asset"].asString());
+    
+    if (value["asset"].exists())
+        ((VideoSprite *)object)->loadFile(value["asset"].asString());
 }
 
 DisplayObject *VideoSpriteMapper::newInstance()
