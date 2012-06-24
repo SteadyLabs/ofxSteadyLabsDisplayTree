@@ -79,6 +79,10 @@ public:
     float scaleX;
     float scaleY;
     
+    // Initial position
+    float initialX;
+    float initialY;
+    
     ofVec2f clipMargins;
     
     // Blending mode
@@ -90,6 +94,9 @@ public:
     
     // Determines if this isRoot, though should probably be (parentSprite==NULL)
     bool isRoot;
+    
+    // Arbitrary user data
+    int tag;
     
     // Enables the mouse stuff
     MouseEnabler* mouseEnabler;

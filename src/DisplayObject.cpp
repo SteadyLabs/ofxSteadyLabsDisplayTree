@@ -56,6 +56,9 @@ void DisplayObject::init(){
     backgroundColor=ofColor(255,255,255,255);
     clipMargins.x=0;
     clipMargins.y=0;
+    
+    initialX=0;
+    initialY=0;
 }
 
 DisplayObject::~DisplayObject(){
@@ -246,6 +249,9 @@ ofPoint DisplayObject::unprojectPoint(int x, int y ){
 
 bool DisplayObject::hitTest(int tx, int ty) {
     ofVec3f thisPoint = unprojectPoint( tx, ty);
+    //cout << tx << " " << ty << " " << thisPoint.x << " " << thisPoint.y << " " <<  endl;
+    
+    return ( thisPoint.x >=0 && thisPoint.x <=width && thisPoint.y >=0 &&thisPoint.y <= height);
     return ( thisPoint.x >=0 && thisPoint.x <=width && thisPoint.y >=0 &&thisPoint.y <= height);
     
     // cout << "Sprite::hitTest::0:tx:" << tx << "\n";
@@ -375,6 +381,7 @@ DisplayObject *DisplayObject::rootSprite()
 
 DisplayObject *DisplayObject::spriteNamed(std::string spriteName, bool descend)
 {
+    cout << "search for " << spriteName << endl;
     DisplayObject *result=getChildByName(spriteName);
     
     if (result)
