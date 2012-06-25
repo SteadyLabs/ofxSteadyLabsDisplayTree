@@ -23,9 +23,6 @@ DisplayObjectAnimator::~DisplayObjectAnimator()
 {
     stop();
     
-    while(animations.size())
-        removeAnimation(animations[0]);
-    
     for(int i=0; i<deleteQueue.size(); i++)
         delete deleteQueue[i];
 }
@@ -60,6 +57,8 @@ void DisplayObjectAnimator::removeAnimation(BaseAnimation *anim)
         {
             animations.erase(animations.begin()+i);
             deleteQueue.push_back(anim);
+            
+            cout << target->name << " REMOVED alpha: " << animations.size() << endl;
             
             if (anim->next)
             {
@@ -113,7 +112,7 @@ DisplayObjectAnimator *DisplayObjectAnimator::move(int x, int y, int duration, A
     return this;
 }
     
-DisplayObjectAnimator *DisplayObjectAnimator::scale(float scaleX, float scaleY, int w, int h, int duration, AnimatorTransition transition, AnimatorEquation equation)
+DisplayObjectAnimator *DisplayObjectAnimator::scale(float scaleX, float scaleY, int duration, AnimatorTransition transition, AnimatorEquation equation)
 {
     addAnimation(new ScaleAnimation( target, scaleX, scaleY, duration, transition, equation));
     return this;

@@ -48,7 +48,6 @@ public:
     bool hitTest( int tx, int ty );  
     bool hitOnAlpha;
     int alphaHitThreshold;
-
 private:
     bool hasAlpha;
     

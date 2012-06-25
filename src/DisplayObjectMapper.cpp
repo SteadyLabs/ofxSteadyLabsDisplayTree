@@ -54,12 +54,31 @@ void DisplayObjectMapper::map(DisplayObject *parentObj, DisplayObject *object, J
     if (!value["h"].isNull())
         object->height = value["h"].asDouble();
     
+    if (value["anchor"].exists())
+    {
+        object->registrationX=value["anchor"][0U].asInt();
+        object->registrationY=value["anchor"][1].asInt();
+    }
+    
     if (!value["clipToBounds"].isNull())
         object->clipToBounds = value["clipToBounds"].asBool();
     
     if (!value["clipMargins"].isNull())
-        object->clipMargins = ofVec2f(value["clipMargins"][0U].asDouble(),value["clipMargins"][1].asDouble());
-
+    {
+        float x,y,z,w;
+        
+        x=z=value["clipMargins"][0U].asDouble();
+        y=w=value["clipMargins"][1].asDouble();
+        
+        if (value["clipMargins"].size()==4)
+        {
+            z=value["clipMargins"][2].asDouble();
+            w=value["clipMargins"][3].asDouble();  
+        }
+        
+        object->clipMargins=ofVec4f(x,y,z,w);
+    }
+    
     if (!value["alpha"].isNull())
         object->alpha = value["alpha"].asDouble();
     

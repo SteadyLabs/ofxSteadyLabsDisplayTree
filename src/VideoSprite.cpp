@@ -126,6 +126,11 @@ bool VideoSprite::isLoaded()
 }
 
 
+bool VideoSprite::isPlaying()
+{
+    return video->isPlaying();
+}
+
 void  VideoSprite::play(){
     cout << "VideoSprite::play:\n";
     video->play();

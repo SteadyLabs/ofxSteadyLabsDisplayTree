@@ -48,6 +48,7 @@ public:
 	void setFrame(int frame);
 	void setPosition(float per);
 	bool isLoaded();
+    bool isPlaying();
 	float getWidth();
 	float getHeight();
     ~VideoSprite();

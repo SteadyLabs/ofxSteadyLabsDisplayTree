@@ -43,6 +43,12 @@ class MouseEnabler;
  */
 class DisplayObject : public ofRectangle, public Dispatcher {
 public:
+    static string ON_PRESS;
+    static string ON_RELEASE;
+    static string ON_RELEASE_OUTSIDE;
+    static string ON_ROLLOVER;
+    static string ON_ROLLOUT;
+
     DisplayObjectAnimator *animator;
     
     typedef map< string, DisplayObject*> NameObjectHash;
@@ -83,7 +89,7 @@ public:
     float initialX;
     float initialY;
     
-    ofVec2f clipMargins;
+    ofVec4f clipMargins;
     
     // Blending mode
     ofBlendMode blendMode;
@@ -137,15 +143,15 @@ public:
     
     //mouse activity, meant to be implemented in subclasses
     
-    virtual void onRollOver(int x, int y)					{}		// called when mouse enters object x, y, width, height
-	virtual void onRollOut()								{}		// called when mouse leaves object x, y, width, height
-	virtual void onMouseMove(int x, int y)					{}		// called when mouse moves while over object x, y, width, height
-	virtual void onDragOver(int x, int y, int button)		{}		// called when mouse moves while over object and button is down
-	virtual void onDragOutside(int x, int y, int button)	{}		// called when mouse moves while outside the object after being clicked on it
-	virtual void onPress(int x, int y, int button)			{}		// called when mouse presses while over object
-	virtual void onPressOutside(int x, int y, int button)	{}		// called when mouse presses while outside object
-	virtual void onRelease(int x, int y, int button)		{}		// called when mouse releases while over object
-	virtual void onReleaseOutside(int x, int y, int button)	{}		// called when mouse releases outside of object after being pressed on object
+    virtual void onRollOver(int x, int y);							// called when mouse enters object x, y, width, height
+	virtual void onRollOut();										// called when mouse leaves object x, y, width, height
+	virtual void onMouseMove(int x, int y) {}						// called when mouse moves while over object x, y, width, height
+	virtual void onDragOver(int x, int y, int button) {}			// called when mouse moves while over object and button is down
+	virtual void onDragOutside(int x, int y, int button) {}			// called when mouse moves while outside the object after being clicked on it
+	virtual void onPress(int x, int y, int button);					// called when mouse presses while over object
+	virtual void onPressOutside(int x, int y, int button) {}		// called when mouse presses while outside object
+	virtual void onRelease(int x, int y, int button);				// called when mouse releases while over object
+	virtual void onReleaseOutside(int x, int y, int button);		// called when mouse releases outside of object after being pressed on object
     
        
 protected:

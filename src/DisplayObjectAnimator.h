@@ -57,7 +57,7 @@ public:
     
     DisplayObjectAnimator *move(int x, int y, int duration=DOA_DEFAULT_DURATION, AnimatorTransition transition=DOA_DEFAULT_TRANSITION, AnimatorEquation equation=DOA_DEFAULT_EQUATION);
     
-    DisplayObjectAnimator *scale(float scaleX, float scaleY, int w, int h, int duration=DOA_DEFAULT_DURATION, AnimatorTransition transition=DOA_DEFAULT_TRANSITION, AnimatorEquation equation=DOA_DEFAULT_EQUATION);
+    DisplayObjectAnimator *scale(float scaleX, float scaleY, int duration=DOA_DEFAULT_DURATION, AnimatorTransition transition=DOA_DEFAULT_TRANSITION, AnimatorEquation equation=DOA_DEFAULT_EQUATION);
     
     DisplayObjectAnimator *rotate(float rotation, int duration=DOA_DEFAULT_DURATION, AnimatorTransition transition=DOA_DEFAULT_TRANSITION, AnimatorEquation equation=DOA_DEFAULT_EQUATION);
     

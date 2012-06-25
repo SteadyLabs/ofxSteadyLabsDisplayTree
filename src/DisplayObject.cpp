@@ -30,6 +30,12 @@
 #include "DisplayObject.h"
 #include "MouseEnabler.h"
 
+string DisplayObject::ON_PRESS = "onPress";
+string DisplayObject::ON_RELEASE = "onRelease";
+string DisplayObject::ON_RELEASE_OUTSIDE = "onReleaseOutside";
+string DisplayObject::ON_ROLLOVER = "onRollover";
+string DisplayObject::ON_ROLLOUT = "onRollout";
+
 
 ofMatrix4x4 DisplayObject::baseMatrix;
 
@@ -56,6 +62,8 @@ void DisplayObject::init(){
     backgroundColor=ofColor(255,255,255,255);
     clipMargins.x=0;
     clipMargins.y=0;
+    clipMargins.z=0;
+    clipMargins.w=0;
     
     initialX=0;
     initialY=0;
@@ -65,7 +73,7 @@ DisplayObject::~DisplayObject(){
     //TODO: destroy
     disableMouseEvents();
     
-    delete animator;
+    //rdelete animator;
     
     int numChildren = children.size();
     for (int i = 0; i < numChildren; i++)
@@ -156,7 +164,7 @@ int DisplayObject::draw( int inRenderOrder){
         }
         
         glEnable(GL_SCISSOR_TEST);
-        glScissor((dx-clipMargins.x)*psX, (ph-((dy-clipMargins.y)+height))*psY, (width+(clipMargins.x*2))*psX, (height+(clipMargins.y*2)));
+        glScissor((dx-clipMargins.x)*psX, (ph-((dy-clipMargins.y)+height))*psY, (width+(clipMargins.x+clipMargins.z))*psX, (height+(clipMargins.y+clipMargins.w)));
     }
 
     render();
@@ -174,7 +182,7 @@ int DisplayObject::draw( int inRenderOrder){
     
     if (opaque)
     {
-        ofSetColor(backgroundColor);
+        ofSetColor(ofColor(backgroundColor.r,backgroundColor.g,backgroundColor.b,floor((float)backgroundColor.a*alpha)));
         glRectd(0, 0, width, height);
     }
      
@@ -434,5 +442,33 @@ void DisplayObject::disableMouseEvents() {
 
 void DisplayObject::setMouseBlocking(bool inBlocking){
     mouseEnabler->blocking = inBlocking;
+}
+
+
+void DisplayObject::onPress(int x, int y, int button)
+{
+    this->dispatchEvent(ON_PRESS, name);
+}
+
+
+void DisplayObject::onRelease(int x, int y, int button)
+{
+    this->dispatchEvent(ON_RELEASE, name);
+}
+
+void DisplayObject::onReleaseOutside(int x, int y, int button)
+{
+    this->dispatchEvent(ON_RELEASE_OUTSIDE, name);
+}
+
+//TODO: CK, implement rollover and rollout states
+void DisplayObject::onRollOut()
+{
+    this->dispatchEvent(ON_ROLLOUT, name);
+}
+
+void DisplayObject::onRollOver(int x, int y)
+{
+    this->dispatchEvent(ON_ROLLOVER, name);
 }
 

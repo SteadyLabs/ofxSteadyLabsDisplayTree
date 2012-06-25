@@ -40,44 +40,7 @@ class BaseSprite : public DisplayObject{
     
         BaseSprite();
         ~BaseSprite();
-        
-        /*
-        bool visible;
-        void update();
-        virtual void draw();
-        virtual void render();
-        void drawChildren();
-        float alpha;
-        
-        void addChild( BaseSprite* inSprite );
-        void removeChild( BaseSprite* inSprite );
-        int getIndexOfChild( BaseSprite* inSprite );
-        bool hitTest( int tx, int ty );  
-        
-        BaseSprite* getChildByName( string inName );
-    
-        string name;
-        BaseSprite* parentSprite;
-    
-    void mouseEnable();
-    void mouseDisable();
-    */
-    
-        
     protected:
-    /*
-        float worldX;
-        float worldY;
-        float worldAlpha;
-        bool worldMouseEnabled;
-    
-        void calcTransform();
-        NameSpriteHash nameToChild;
-    
-        bool mouseEnabled;
-     */
-        
-        
     private:
         
     };

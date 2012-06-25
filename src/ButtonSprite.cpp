@@ -28,12 +28,6 @@
 #include <iostream>
 #include "ButtonSprite.h"
 
-string ButtonSprite::ON_PRESS = "onPress";
-string ButtonSprite::ON_RELEASE = "onRelease";
-string ButtonSprite::ON_RELEASE_OUTSIDE = "onReleaseOutside";
-string ButtonSprite::ON_ROLLOVER = "onRollover";
-string ButtonSprite::ON_ROLLOUT = "onRollout";
-
 ButtonSprite::ButtonSprite(){
     // image = new ofImage();
     

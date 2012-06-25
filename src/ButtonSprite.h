@@ -42,15 +42,9 @@ typedef enum{
 }ButtonState;
 
 
-class ButtonSprite : public BaseSprite{
+class ButtonSprite : public BaseSprite {
     
 public:
-    static string ON_PRESS;
-    static string ON_RELEASE;
-    static string ON_RELEASE_OUTSIDE;
-    static string ON_ROLLOVER;
-    static string ON_ROLLOUT;
-    
     ButtonSprite();
     ButtonSprite( string inDir);
     void loadFile( string inFile );
