@@ -125,6 +125,11 @@ bool VideoSprite::isLoaded()
     return video->isLoaded();
 }
 
+void VideoSprite::idle()
+{
+    video->update();
+}
+
 
 bool VideoSprite::isPlaying()
 {

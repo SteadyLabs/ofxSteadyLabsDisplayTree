@@ -45,6 +45,7 @@ public:
 	void stop();
 	void close();
     void render();
+    void idle();
 	void setFrame(int frame);
 	void setPosition(float per);
 	bool isLoaded();
@@ -56,8 +57,8 @@ public:
 	int getTotalVideoFrames();
 	int getCurrentVideoFrame();
     
-private:
     ofVideoPlayer* video;
+private:
 //    ofxQTKitVideoPlayer* alphaVideo;
 	bool _isLooped;
 //    bool hasAlpha;
