@@ -28,6 +28,7 @@ void DisplayObjectLoader::init()
     objectMap["sequence"]=new BitmapSequenceMapper();
     objectMap["button"]=new ButtonSpriteMapper();
     objectMap["node"]=new BaseSpriteMapper();
+    objectMap["flipbook"]=new FlipBookSpriteMapper();
 }
 
 DisplayObject *DisplayObjectLoader::instance(DisplayObject *parentObj, DisplayObjectMapper *mapper, Json::Value value)

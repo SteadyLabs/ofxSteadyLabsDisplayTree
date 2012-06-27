@@ -193,3 +193,21 @@ DisplayObject *VideoSpriteMapper::newInstance()
     return new VideoSprite();
 }
 
+
+#pragma mark - FlipBookSpriteMapper
+
+void FlipBookSpriteMapper::map(DisplayObject *parentObj, DisplayObject *object, Json::Value value)
+{
+    DisplayObjectMapper::map(parentObj, object,value);
+    
+    if (value["asset"].exists())
+        ((FlipBookSprite *)object)->loadFile(value["asset"].asString());
+}
+
+DisplayObject *FlipBookSpriteMapper::newInstance()
+{
+    return new FlipBookSprite();
+}
+
+
+

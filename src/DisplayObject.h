@@ -136,6 +136,7 @@ public:
     void traceTransform();
     void traceTransformChain();
     
+    bool mouseEnabled;
     
     ofPoint unprojectPoint( int x, int y ); 
     //end basesprite
@@ -166,7 +167,6 @@ protected:
     void calcTransform();
     NameObjectHash nameToChild;
     
-    bool mouseEnabled;
     //end basesprite
     
     ofMatrix4x4 transformedMatrix;

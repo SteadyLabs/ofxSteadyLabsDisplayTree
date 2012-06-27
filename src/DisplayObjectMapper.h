@@ -15,6 +15,7 @@
 #include "BitmapSequence.h"
 #include "ButtonSprite.h"
 #include "VideoSprite.h"
+#include "FlipBookSprite.h"
 
 /**
  * Abstract base class that maps value from json node to any base sprite.
@@ -75,5 +76,16 @@ class VideoSpriteMapper: public DisplayObjectMapper {
     void map(DisplayObject *parentObj, DisplayObject *object, Json::Value value);
     DisplayObject *newInstance();
 };
+
+
+
+/**
+ * VideoSprite mapper
+ */
+class FlipBookSpriteMapper: public DisplayObjectMapper {
+    void map(DisplayObject *parentObj, DisplayObject *object, Json::Value value);
+    DisplayObject *newInstance();
+};
+
 
 #endif

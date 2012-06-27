@@ -430,6 +430,7 @@ void DisplayObject::recalcMouseState(){
 //====================end basesprite stuff====================
 
 void DisplayObject::enableMouseEvents() {
+    mouseEnabled=true;
     // cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DisplayObject::enableMouseEvents\n";
     mouseEnabler->enableMouseEvents();
 
@@ -437,6 +438,7 @@ void DisplayObject::enableMouseEvents() {
 
 void DisplayObject::disableMouseEvents() {
     // cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< DisplayObject::disableMouseEvents\n";
+    mouseEnabled=false;
     mouseEnabler->disableMouseEvents();
 }
 

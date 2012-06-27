@@ -50,6 +50,7 @@ public:
 class FlipBookSprite : public BaseSprite 
 {
 public:
+    int totalFrames;
     
     FlipBookSprite();
     ~FlipBookSprite();
@@ -72,7 +73,6 @@ protected:
     FlipBookThread thread;
     
     long currentPos;
-    int totalFrames;
     
     ofTexture tex;
     ofPixels pixels;
