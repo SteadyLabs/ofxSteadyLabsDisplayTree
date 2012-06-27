@@ -82,7 +82,7 @@ DisplayObject *DisplayObjectLoader::loadString(DisplayObject *parent, string jso
 	
 	if (!reader.parse(jsonStr, jsonObj)) 
     {
-		std::cout  << "Failed to parse JSON\n" << reader.getFormatedErrorMessages();
+		std::cout  << "Failed to parse JSON\n" << reader.getFormatedErrorMessages() << endl << "JSON: " << jsonStr << endl;
 		throw;
 	}
     

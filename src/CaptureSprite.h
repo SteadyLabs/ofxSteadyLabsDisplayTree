@@ -44,4 +44,4 @@ private:
 };
 
 
-#endif CAPTURESPRITE_H
+#endif
