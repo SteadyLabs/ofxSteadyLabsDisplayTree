@@ -18,11 +18,14 @@ void FlipBookThread::threadedFunction()
 {
     while(isThreadRunning())
     {
-        while(newPos!=currentPos)
+        if(newPos!=currentPos)
         {
+            currentPos=newPos;
             SetMovieTimeValue(flipBook->moviePtr, newPos);
             MoviesTask(flipBook->moviePtr,0);
         }
+        else
+            sleep(2);
     }
 }
 
