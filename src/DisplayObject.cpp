@@ -89,7 +89,8 @@ void DisplayObject::update(){
     int numChildren = children.size();
     for ( int i = 0; i < numChildren; i++ ){
         //cout << children[i]->name << " update" << endl;
-        children[ i ]->update();
+		if (i<children.size())
+			children[ i ]->update();
     }
 }
 
@@ -256,6 +257,10 @@ ofPoint DisplayObject::unprojectPoint(int x, int y ){
 }
 
 bool DisplayObject::hitTest(int tx, int ty) {
+	
+	if ((!visible) || (alpha==0))
+		return false;
+
     ofVec3f thisPoint = unprojectPoint( tx, ty);
     //cout << tx << " " << ty << " " << thisPoint.x << " " << thisPoint.y << " " <<  endl;
     

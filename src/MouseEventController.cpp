@@ -138,6 +138,8 @@ void MouseEventController::_handleEvent( MouseEvent* inEvent){
 			cout << "MouseEventController::_handleEvent PRESSED " << _mouseEnablers.size() << endl;
 			
             for ( int i = 0; i < _mouseEnablers.size(); i++ ){
+				if (i>_mouseEnablers.size()-1)
+					break;
                 if ( _mouseEnablers[ i ]->getTarget()->hitTest(mouseX, mouseY) ){
                     _mouseEnablers[ i ]->_mousePressed(inEvent->args, true);
                     if ( _mouseEnablers[ i ]->blocking ){
