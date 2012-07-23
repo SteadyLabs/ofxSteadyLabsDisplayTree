@@ -43,11 +43,10 @@ void MouseEventController::init(){
 }
 
 void MouseEventController::_init(){
-    
-    ofAddListener(ofEvents.mousePressed, this, &MouseEventController::_mousePressed);
-    ofAddListener(ofEvents.mouseMoved, this, &MouseEventController::_mouseMoved);
-    ofAddListener(ofEvents.mouseDragged, this, &MouseEventController::_mouseDragged);
-    ofAddListener(ofEvents.mouseReleased, this, &MouseEventController::_mouseReleased);    
+    ofAddListener(ofEvents().mousePressed, this, &MouseEventController::_mousePressed);
+    ofAddListener(ofEvents().mouseMoved, this, &MouseEventController::_mouseMoved);
+    ofAddListener(ofEvents().mouseDragged, this, &MouseEventController::_mouseDragged);
+    ofAddListener(ofEvents().mouseReleased, this, &MouseEventController::_mouseReleased);    
 }
 
 

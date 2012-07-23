@@ -29,6 +29,7 @@
 //#include "DisplayObject.h"
 #include <string>
 #include "ofEvents.h"
+#include <map>
 
 class Dispatcher{
 
