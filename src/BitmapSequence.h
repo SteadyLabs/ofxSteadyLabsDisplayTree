@@ -42,7 +42,7 @@ public:
     BitmapSequence( string inDir );
     void loadDir( string inDir );
     
-    void play();
+    virtual void play();
     void stop();
     void gotoAndPlay( int frame );
     void gotoAndStop( int frame );    
@@ -64,7 +64,6 @@ protected:
     void onRelease(int x, int y, int button);
     
     
-private:
     bool usingFrames; //vs trying to use time
     bool playing;
     float fps;
@@ -72,6 +71,9 @@ private:
     float curTime; //in case we ever use time
     int curFrame;
     int totalFrames;
+    
+private:
+    
 
 };
 
