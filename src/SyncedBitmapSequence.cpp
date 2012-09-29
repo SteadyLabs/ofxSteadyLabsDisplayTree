@@ -15,11 +15,27 @@ void SyncedBitmapSequence::setClient(mpeClientTCP *inClient){
     globalClient = inClient;
 }
 
+SyncedBitmapSequence::SyncedBitmapSequence( string inDir ):BitmapSequence(inDir){
+    //BitmapSequence( inDir );
+    
+    modVal = 15;//sync start them after 15 seconds
+    waitTime = .2;//wait at least 1/5th a second to start a sequence... still might not solve the problem
+}
+
+void SyncedBitmapSequence::play(){
+    
+    //todo wait until the right conditions to start playing
+    syncStartFrame = globalClient->getFrameCount();
+    BitmapSequence::play();
+}
+
 void SyncedBitmapSequence::update(){
     BitmapSequence::update();
     int frameCount = globalClient->getFrameCount();
-    int calcedFrame = frameCount - syncStartFrame;
     
+    cout << "SyncedBitmapSequence::update::frameCount::" << frameCount << endl;
+    int calcedFrame = frameCount - syncStartFrame;
+    //curFrame = calcedFrame;
         //cout<< "BitmapSequence::update::usingFrames:"<< usingFrames<< "repeating:" << repeating << name <<"\n";
     if ( ! (totalFrames  >= 1 ) ){
         cout<< "BitmapSequence::update::no frames exist:\n";
@@ -35,7 +51,7 @@ void SyncedBitmapSequence::update(){
             if( yoyo ){
                 //it's going forward
                 if (forward ){
-                    curFrame++;
+                    curFrame = calcedFrame;
                     if (curFrame >= totalFrames ){
                         forward = false;
                         curFrame = totalFrames-2;//go back
@@ -50,12 +66,15 @@ void SyncedBitmapSequence::update(){
                     }
                 }
             }
+            
+            //not yoyoing, then it's looping?
             else{
-                curFrame = (curFrame + 1 )%totalFrames;
+                curFrame = calcedFrame % totalFrames;
             }
         }
+        //if it's not looping, then...
         else{
-            curFrame++;
+            curFrame = calcedFrame;
             if ( curFrame >= totalFrames ){
                 curFrame = totalFrames -1;
                 stop();
