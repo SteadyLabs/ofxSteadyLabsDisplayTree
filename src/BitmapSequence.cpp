@@ -190,6 +190,10 @@ void BitmapSequence::onRelease(int x, int y, int button)
     this->dispatchEvent("onRelease", name);
 }
 
+int BitmapSequence::getNumFrames(){
+    return totalFrames;
+}
+
 BitmapSequence::~BitmapSequence(){
     for ( int i = 0; i < totalFrames; i++ ){
         delete images[ i ];

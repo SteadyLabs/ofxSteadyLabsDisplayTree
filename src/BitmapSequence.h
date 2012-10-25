@@ -56,6 +56,8 @@ public:
     bool yoyo;
     bool forward;
     
+    int getNumFrames();
+    
     ~BitmapSequence();
 protected:
     vector< ofImage* > images;
