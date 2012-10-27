@@ -103,6 +103,8 @@ public:
 	virtual void onRelease(int x, int y, int button)		{}		// called when mouse releases while over object
 	virtual void onReleaseOutside(int x, int y, int button)	{}		// called when mouse releases outside of object after being pressed on object
     
+    bool isInRenderTree();
+    
        
 protected:
     //refactored from baseSprite
@@ -122,6 +124,7 @@ protected:
     static ofMatrix4x4 baseMatrix;
     void depthFirstTraversalWithVoid( void (DisplayObject::*pt2Func)(void) );
     void depthFirstTraversalWithInt( int (DisplayObject::*pt2Func)( int ) );
+
     
 private:
     //refactored from basesprite

@@ -31,7 +31,7 @@
 //look in the .h file for the constructor
 
 MouseEnabler::~MouseEnabler(){
-    
+
 }
 
 void MouseEnabler::enableMouseEvents() {

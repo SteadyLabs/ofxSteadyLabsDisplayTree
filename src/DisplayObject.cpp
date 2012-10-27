@@ -331,3 +331,15 @@ void DisplayObject::setMouseBlocking(bool inBlocking){
     mouseEnabler->blocking = inBlocking;
 }
 
+
+bool DisplayObject::isInRenderTree(){
+    DisplayObject* curParent = parentSprite;
+    while(curParent != NULL ){
+        if ( curParent->isRoot ){
+            return true;
+        }
+        curParent = curParent->parentSprite;
+    }
+    return false;
+}
+

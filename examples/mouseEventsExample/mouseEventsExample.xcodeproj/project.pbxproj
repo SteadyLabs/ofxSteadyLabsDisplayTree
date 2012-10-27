@@ -7,18 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57FF35F014D787D0004B8A4B /* BaseMovie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35D114D787D0004B8A4B /* BaseMovie.cpp */; };
-		57FF35F114D787D0004B8A4B /* BaseSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35D314D787D0004B8A4B /* BaseSprite.cpp */; };
-		57FF35F214D787D0004B8A4B /* BitmapSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35D514D787D0004B8A4B /* BitmapSequence.cpp */; };
-		57FF35F314D787D0004B8A4B /* BitmapSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35D714D787D0004B8A4B /* BitmapSprite.cpp */; };
-		57FF35F414D787D0004B8A4B /* ButtonSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35D914D787D0004B8A4B /* ButtonSprite.cpp */; };
-		57FF35F514D787D0004B8A4B /* CaptureSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35DB14D787D0004B8A4B /* CaptureSprite.cpp */; };
-		57FF35F614D787D0004B8A4B /* Dispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35DD14D787D0004B8A4B /* Dispatcher.cpp */; };
-		57FF35F714D787D0004B8A4B /* DisplayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35DF14D787D0004B8A4B /* DisplayObject.cpp */; };
-		57FF35F914D787D0004B8A4B /* InteractionEnabler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35E414D787D0004B8A4B /* InteractionEnabler.cpp */; };
-		57FF35FA14D787D0004B8A4B /* MouseEnabler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35E614D787D0004B8A4B /* MouseEnabler.cpp */; };
-		57FF35FB14D787D0004B8A4B /* MouseEventController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35E814D787D0004B8A4B /* MouseEventController.cpp */; };
-		57FF35FE14D787D1004B8A4B /* VideoSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FF35EE14D787D0004B8A4B /* VideoSprite.cpp */; };
+		57C930921639ACD200233411 /* BaseButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930471639ACD200233411 /* BaseButton.cpp */; };
+		57C930931639ACD200233411 /* BaseMovie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930491639ACD200233411 /* BaseMovie.cpp */; };
+		57C930941639ACD200233411 /* BaseSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C9304B1639ACD200233411 /* BaseSprite.cpp */; };
+		57C930951639ACD200233411 /* BitmapSequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C9304D1639ACD200233411 /* BitmapSequence.cpp */; };
+		57C930961639ACD200233411 /* BitmapSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C9304F1639ACD200233411 /* BitmapSprite.cpp */; };
+		57C930971639ACD200233411 /* ButtonSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930511639ACD200233411 /* ButtonSprite.cpp */; };
+		57C930981639ACD200233411 /* CaptureSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930531639ACD200233411 /* CaptureSprite.cpp */; };
+		57C930991639ACD200233411 /* Dispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930551639ACD200233411 /* Dispatcher.cpp */; };
+		57C9309A1639ACD200233411 /* DisplayObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930571639ACD200233411 /* DisplayObject.cpp */; };
+		57C9309B1639ACD200233411 /* InteractionEnabler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930591639ACD200233411 /* InteractionEnabler.cpp */; };
+		57C9309C1639ACD200233411 /* MouseEnabler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C9305B1639ACD200233411 /* MouseEnabler.cpp */; };
+		57C9309D1639ACD200233411 /* MouseEventController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C9305D1639ACD200233411 /* MouseEventController.cpp */; };
+		57C9309E1639ACD200233411 /* SimpleButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C9305F1639ACD200233411 /* SimpleButton.cpp */; };
+		57C9309F1639ACD200233411 /* VideoSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57C930611639ACD200233411 /* VideoSprite.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -69,30 +71,34 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		57FF35D114D787D0004B8A4B /* BaseMovie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMovie.cpp; sourceTree = "<group>"; };
-		57FF35D214D787D0004B8A4B /* BaseMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMovie.h; sourceTree = "<group>"; };
-		57FF35D314D787D0004B8A4B /* BaseSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseSprite.cpp; sourceTree = "<group>"; };
-		57FF35D414D787D0004B8A4B /* BaseSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSprite.h; sourceTree = "<group>"; };
-		57FF35D514D787D0004B8A4B /* BitmapSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitmapSequence.cpp; sourceTree = "<group>"; };
-		57FF35D614D787D0004B8A4B /* BitmapSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapSequence.h; sourceTree = "<group>"; };
-		57FF35D714D787D0004B8A4B /* BitmapSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitmapSprite.cpp; sourceTree = "<group>"; };
-		57FF35D814D787D0004B8A4B /* BitmapSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapSprite.h; sourceTree = "<group>"; };
-		57FF35D914D787D0004B8A4B /* ButtonSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonSprite.cpp; sourceTree = "<group>"; };
-		57FF35DA14D787D0004B8A4B /* ButtonSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonSprite.h; sourceTree = "<group>"; };
-		57FF35DB14D787D0004B8A4B /* CaptureSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaptureSprite.cpp; sourceTree = "<group>"; };
-		57FF35DC14D787D0004B8A4B /* CaptureSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSprite.h; sourceTree = "<group>"; };
-		57FF35DD14D787D0004B8A4B /* Dispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dispatcher.cpp; sourceTree = "<group>"; };
-		57FF35DE14D787D0004B8A4B /* Dispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dispatcher.h; sourceTree = "<group>"; };
-		57FF35DF14D787D0004B8A4B /* DisplayObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayObject.cpp; sourceTree = "<group>"; };
-		57FF35E014D787D0004B8A4B /* DisplayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayObject.h; sourceTree = "<group>"; };
-		57FF35E414D787D0004B8A4B /* InteractionEnabler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteractionEnabler.cpp; sourceTree = "<group>"; };
-		57FF35E514D787D0004B8A4B /* InteractionEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionEnabler.h; sourceTree = "<group>"; };
-		57FF35E614D787D0004B8A4B /* MouseEnabler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseEnabler.cpp; sourceTree = "<group>"; };
-		57FF35E714D787D0004B8A4B /* MouseEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEnabler.h; sourceTree = "<group>"; };
-		57FF35E814D787D0004B8A4B /* MouseEventController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseEventController.cpp; sourceTree = "<group>"; };
-		57FF35E914D787D0004B8A4B /* MouseEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEventController.h; sourceTree = "<group>"; };
-		57FF35EE14D787D0004B8A4B /* VideoSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoSprite.cpp; sourceTree = "<group>"; };
-		57FF35EF14D787D0004B8A4B /* VideoSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSprite.h; sourceTree = "<group>"; };
+		57C930471639ACD200233411 /* BaseButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseButton.cpp; sourceTree = "<group>"; };
+		57C930481639ACD200233411 /* BaseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseButton.h; sourceTree = "<group>"; };
+		57C930491639ACD200233411 /* BaseMovie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseMovie.cpp; sourceTree = "<group>"; };
+		57C9304A1639ACD200233411 /* BaseMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMovie.h; sourceTree = "<group>"; };
+		57C9304B1639ACD200233411 /* BaseSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseSprite.cpp; sourceTree = "<group>"; };
+		57C9304C1639ACD200233411 /* BaseSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSprite.h; sourceTree = "<group>"; };
+		57C9304D1639ACD200233411 /* BitmapSequence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitmapSequence.cpp; sourceTree = "<group>"; };
+		57C9304E1639ACD200233411 /* BitmapSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapSequence.h; sourceTree = "<group>"; };
+		57C9304F1639ACD200233411 /* BitmapSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BitmapSprite.cpp; sourceTree = "<group>"; };
+		57C930501639ACD200233411 /* BitmapSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapSprite.h; sourceTree = "<group>"; };
+		57C930511639ACD200233411 /* ButtonSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonSprite.cpp; sourceTree = "<group>"; };
+		57C930521639ACD200233411 /* ButtonSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonSprite.h; sourceTree = "<group>"; };
+		57C930531639ACD200233411 /* CaptureSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CaptureSprite.cpp; sourceTree = "<group>"; };
+		57C930541639ACD200233411 /* CaptureSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSprite.h; sourceTree = "<group>"; };
+		57C930551639ACD200233411 /* Dispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dispatcher.cpp; sourceTree = "<group>"; };
+		57C930561639ACD200233411 /* Dispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dispatcher.h; sourceTree = "<group>"; };
+		57C930571639ACD200233411 /* DisplayObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayObject.cpp; sourceTree = "<group>"; };
+		57C930581639ACD200233411 /* DisplayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayObject.h; sourceTree = "<group>"; };
+		57C930591639ACD200233411 /* InteractionEnabler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteractionEnabler.cpp; sourceTree = "<group>"; };
+		57C9305A1639ACD200233411 /* InteractionEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionEnabler.h; sourceTree = "<group>"; };
+		57C9305B1639ACD200233411 /* MouseEnabler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseEnabler.cpp; sourceTree = "<group>"; };
+		57C9305C1639ACD200233411 /* MouseEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEnabler.h; sourceTree = "<group>"; };
+		57C9305D1639ACD200233411 /* MouseEventController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseEventController.cpp; sourceTree = "<group>"; };
+		57C9305E1639ACD200233411 /* MouseEventController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEventController.h; sourceTree = "<group>"; };
+		57C9305F1639ACD200233411 /* SimpleButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleButton.cpp; sourceTree = "<group>"; };
+		57C930601639ACD200233411 /* SimpleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleButton.h; sourceTree = "<group>"; };
+		57C930611639ACD200233411 /* VideoSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoSprite.cpp; sourceTree = "<group>"; };
+		57C930621639ACD200233411 /* VideoSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSprite.h; sourceTree = "<group>"; };
 		689EB5CC14D760B500F13991 /* emptySteadyLabsExample-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "emptySteadyLabsExample-info.plist"; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -141,42 +147,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		57FF35CD14D787D0004B8A4B /* ofxSteadyLabsDisplayTree */ = {
+		57C92FB61639ACD200233411 /* ofxSteadyLabsDisplayTree */ = {
 			isa = PBXGroup;
 			children = (
-				57FF35D014D787D0004B8A4B /* src */,
+				57C930461639ACD200233411 /* src */,
 			);
 			name = ofxSteadyLabsDisplayTree;
-			path = ../../../addons/ofxSteadyLabsDisplayTree;
+			path = ../..;
 			sourceTree = "<group>";
 		};
-		57FF35D014D787D0004B8A4B /* src */ = {
+		57C930461639ACD200233411 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				57FF35D114D787D0004B8A4B /* BaseMovie.cpp */,
-				57FF35D214D787D0004B8A4B /* BaseMovie.h */,
-				57FF35D314D787D0004B8A4B /* BaseSprite.cpp */,
-				57FF35D414D787D0004B8A4B /* BaseSprite.h */,
-				57FF35D514D787D0004B8A4B /* BitmapSequence.cpp */,
-				57FF35D614D787D0004B8A4B /* BitmapSequence.h */,
-				57FF35D714D787D0004B8A4B /* BitmapSprite.cpp */,
-				57FF35D814D787D0004B8A4B /* BitmapSprite.h */,
-				57FF35D914D787D0004B8A4B /* ButtonSprite.cpp */,
-				57FF35DA14D787D0004B8A4B /* ButtonSprite.h */,
-				57FF35DB14D787D0004B8A4B /* CaptureSprite.cpp */,
-				57FF35DC14D787D0004B8A4B /* CaptureSprite.h */,
-				57FF35DD14D787D0004B8A4B /* Dispatcher.cpp */,
-				57FF35DE14D787D0004B8A4B /* Dispatcher.h */,
-				57FF35DF14D787D0004B8A4B /* DisplayObject.cpp */,
-				57FF35E014D787D0004B8A4B /* DisplayObject.h */,
-				57FF35E414D787D0004B8A4B /* InteractionEnabler.cpp */,
-				57FF35E514D787D0004B8A4B /* InteractionEnabler.h */,
-				57FF35E614D787D0004B8A4B /* MouseEnabler.cpp */,
-				57FF35E714D787D0004B8A4B /* MouseEnabler.h */,
-				57FF35E814D787D0004B8A4B /* MouseEventController.cpp */,
-				57FF35E914D787D0004B8A4B /* MouseEventController.h */,
-				57FF35EE14D787D0004B8A4B /* VideoSprite.cpp */,
-				57FF35EF14D787D0004B8A4B /* VideoSprite.h */,
+				57C930471639ACD200233411 /* BaseButton.cpp */,
+				57C930481639ACD200233411 /* BaseButton.h */,
+				57C930491639ACD200233411 /* BaseMovie.cpp */,
+				57C9304A1639ACD200233411 /* BaseMovie.h */,
+				57C9304B1639ACD200233411 /* BaseSprite.cpp */,
+				57C9304C1639ACD200233411 /* BaseSprite.h */,
+				57C9304D1639ACD200233411 /* BitmapSequence.cpp */,
+				57C9304E1639ACD200233411 /* BitmapSequence.h */,
+				57C9304F1639ACD200233411 /* BitmapSprite.cpp */,
+				57C930501639ACD200233411 /* BitmapSprite.h */,
+				57C930511639ACD200233411 /* ButtonSprite.cpp */,
+				57C930521639ACD200233411 /* ButtonSprite.h */,
+				57C930531639ACD200233411 /* CaptureSprite.cpp */,
+				57C930541639ACD200233411 /* CaptureSprite.h */,
+				57C930551639ACD200233411 /* Dispatcher.cpp */,
+				57C930561639ACD200233411 /* Dispatcher.h */,
+				57C930571639ACD200233411 /* DisplayObject.cpp */,
+				57C930581639ACD200233411 /* DisplayObject.h */,
+				57C930591639ACD200233411 /* InteractionEnabler.cpp */,
+				57C9305A1639ACD200233411 /* InteractionEnabler.h */,
+				57C9305B1639ACD200233411 /* MouseEnabler.cpp */,
+				57C9305C1639ACD200233411 /* MouseEnabler.h */,
+				57C9305D1639ACD200233411 /* MouseEventController.cpp */,
+				57C9305E1639ACD200233411 /* MouseEventController.h */,
+				57C9305F1639ACD200233411 /* SimpleButton.cpp */,
+				57C930601639ACD200233411 /* SimpleButton.h */,
+				57C930611639ACD200233411 /* VideoSprite.cpp */,
+				57C930621639ACD200233411 /* VideoSprite.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -184,7 +194,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				57FF35CD14D787D0004B8A4B /* ofxSteadyLabsDisplayTree */,
+				57C92FB61639ACD200233411 /* ofxSteadyLabsDisplayTree */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -351,18 +361,20 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				57FF35F014D787D0004B8A4B /* BaseMovie.cpp in Sources */,
-				57FF35F114D787D0004B8A4B /* BaseSprite.cpp in Sources */,
-				57FF35F214D787D0004B8A4B /* BitmapSequence.cpp in Sources */,
-				57FF35F314D787D0004B8A4B /* BitmapSprite.cpp in Sources */,
-				57FF35F414D787D0004B8A4B /* ButtonSprite.cpp in Sources */,
-				57FF35F514D787D0004B8A4B /* CaptureSprite.cpp in Sources */,
-				57FF35F614D787D0004B8A4B /* Dispatcher.cpp in Sources */,
-				57FF35F714D787D0004B8A4B /* DisplayObject.cpp in Sources */,
-				57FF35F914D787D0004B8A4B /* InteractionEnabler.cpp in Sources */,
-				57FF35FA14D787D0004B8A4B /* MouseEnabler.cpp in Sources */,
-				57FF35FB14D787D0004B8A4B /* MouseEventController.cpp in Sources */,
-				57FF35FE14D787D1004B8A4B /* VideoSprite.cpp in Sources */,
+				57C930921639ACD200233411 /* BaseButton.cpp in Sources */,
+				57C930931639ACD200233411 /* BaseMovie.cpp in Sources */,
+				57C930941639ACD200233411 /* BaseSprite.cpp in Sources */,
+				57C930951639ACD200233411 /* BitmapSequence.cpp in Sources */,
+				57C930961639ACD200233411 /* BitmapSprite.cpp in Sources */,
+				57C930971639ACD200233411 /* ButtonSprite.cpp in Sources */,
+				57C930981639ACD200233411 /* CaptureSprite.cpp in Sources */,
+				57C930991639ACD200233411 /* Dispatcher.cpp in Sources */,
+				57C9309A1639ACD200233411 /* DisplayObject.cpp in Sources */,
+				57C9309B1639ACD200233411 /* InteractionEnabler.cpp in Sources */,
+				57C9309C1639ACD200233411 /* MouseEnabler.cpp in Sources */,
+				57C9309D1639ACD200233411 /* MouseEventController.cpp in Sources */,
+				57C9309E1639ACD200233411 /* SimpleButton.cpp in Sources */,
+				57C9309F1639ACD200233411 /* VideoSprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,7 +391,6 @@
 /* Begin XCBuildConfiguration section */
 		E4B69B4E0A3A1720003C02F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";
@@ -406,7 +417,6 @@
 		};
 		E4B69B4F0A3A1720003C02F2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4EB6923138AFD0F00A09F29 /* Project.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH)";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/bin/";

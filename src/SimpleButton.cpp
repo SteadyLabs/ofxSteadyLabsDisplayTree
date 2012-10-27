@@ -14,7 +14,8 @@ string SimpleButton::ON_PRESS = "onPress";
 string SimpleButton::ON_RELEASE = "onRelease";
 string SimpleButton::ON_RELEASE_OUTSIDE = "onReleaseOutside";
 
-SimpleButton::SimpleButton( string inPath){
+
+SimpleButton::SimpleButton(){
 
     cout<< "SimpleButton::constructor\n";
     
@@ -22,9 +23,22 @@ SimpleButton::SimpleButton( string inPath){
     cout<< "SimpleButton::constructor::2\n";
     //mouseEnabler = NULL;
     image = NULL;
-    loadFile( inPath );
+
     enableMouseEvents();
     
+}
+
+
+SimpleButton::SimpleButton(string inPath){
+    
+    
+    BaseSprite::BaseSprite();
+    cout<< "SimpleButton::constructor::2\n";
+    //mouseEnabler = NULL;
+    image = NULL;
+    
+    enableMouseEvents();
+    loadFile( inPath );
 }
 
 void SimpleButton::loadFile(string inPath){
@@ -35,12 +49,15 @@ void SimpleButton::loadFile(string inPath){
     
     
     image = new BitmapSprite( inPath );
+    width = image->width;
+    height = image->height;
     addChild( image );
 }
 
 void SimpleButton::onPress(int x, int y, int button){
     cout << "SimpleButton::onPress\n";
-    this->dispatchEvent(ON_PRESS, name);
+    if (isInRenderTree())
+        this->dispatchEvent(ON_PRESS, name);
 }
 
 void SimpleButton::onRelease(int x, int y, int button){

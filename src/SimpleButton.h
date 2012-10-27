@@ -18,6 +18,7 @@ public:
     static string ON_RELEASE;
     static string ON_RELEASE_OUTSIDE;
     
+    SimpleButton();
     SimpleButton(string inPath);
     void loadFile( string inPath );
     
@@ -27,6 +28,7 @@ protected:
     void onPress(int x, int y, int button);
     void onRelease(int x, int y, int button);
     void onReleaseOutside(int x, int y, int button);
+   
 
     
 private:

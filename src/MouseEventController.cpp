@@ -69,11 +69,11 @@ struct more_than_renderOrder
 void MouseEventController::_sort(){
     std::sort( _mouseEnablers.begin(), _mouseEnablers.end(), more_than_renderOrder() );
     
-    // cout << "_sort::order::" <<endl;
+    /* cout << "_sort::order::" <<endl;
     for( int i = 0; i < _mouseEnablers.size(); i++ ){
-        // cout << _mouseEnablers[ i ]->getTarget()->renderOrder << " " << _mouseEnablers[ i ]->getTarget()->name <<",";
+        cout << _mouseEnablers[ i ]->getTarget()->renderOrder << " " << _mouseEnablers[ i ]->getTarget()->name <<",";
     }
-    // cout <<endl;
+     cout <<endl;*/
 }
 
 void MouseEventController::_processEvents(){
@@ -129,8 +129,12 @@ void MouseEventController::_handleEvent( MouseEvent* inEvent){
             
             for ( int i = 0; i < _mouseEnablers.size(); i++ ){
                 if ( _mouseEnablers[ i ]->getTarget()->hitTest(mouseX, mouseY) ){
+                    if( _mouseEnablers[ i ]->getTarget()->renderOrder < 0 )
+                        break;//it never got rendered
+                    //cout << "MouseEventController::_handleEvent::PRESSED::renderOrder:" << _mouseEnablers[ i ]->getTarget()->renderOrder <<endl;
                     _mouseEnablers[ i ]->_mousePressed(inEvent->args, true);
-                    if ( _mouseEnablers[ i ]->blocking ){
+                    
+                    if ( _mouseEnablers[ i ]->blocking && _mouseEnablers[ i ]->getTarget()->isInRenderTree()){
                         break;//if it's a blocking mouse event, then stop sending click events to things below
                     }
                 }

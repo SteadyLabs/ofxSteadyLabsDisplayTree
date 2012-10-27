@@ -39,7 +39,7 @@ public:
     MouseEnabler( DisplayObject* inTarget = NULL ): InteractionEnabler( inTarget ){ 
         _mouseOver	= false;
         _mouseDown	= false;
-        blocking = true;//why is this here? // i changed this to false and every rollover was triggered
+        blocking = false;//why is this here? // i changed this to false and every rollover was triggered
     };
     
     ~MouseEnabler();
