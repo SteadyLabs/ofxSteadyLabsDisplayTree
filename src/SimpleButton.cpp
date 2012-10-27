@@ -62,10 +62,12 @@ void SimpleButton::onPress(int x, int y, int button){
 
 void SimpleButton::onRelease(int x, int y, int button){
     cout << "SimpleButton::onRelease\n";
-    this->dispatchEvent(ON_RELEASE, name);
+    if (isInRenderTree())
+        this->dispatchEvent(ON_RELEASE, name);
 }
 
 void SimpleButton::onReleaseOutside(int x, int y, int button){
     cout << "SimpleButton::onReleaseOutside\n";
+    if (isInRenderTree())
     this->dispatchEvent(ON_RELEASE_OUTSIDE, name);
 }
