@@ -116,7 +116,7 @@ void ButtonSprite::loadAnimSequence(ButtonState thisState, string inDir)
 
 void ButtonSprite::onPress(int x, int y, int button)
 {
-    if (!BaseSprite::visible || !BaseSprite::worldMouseEnabled ) return;
+    if (!BaseSprite::visible || !BaseSprite::worldMouseEnabled || !isInRenderTree()) return;
     
     if (press_anim->parentSprite == NULL){
         // cout << " press addChild " << name << endl;
@@ -141,6 +141,7 @@ void ButtonSprite::onPress(int x, int y, int button)
 void ButtonSprite::onRelease(int x, int y, int button)
 {
     //cout<< "ButtonSprite::onRelease::\n";
+    if (!BaseSprite::visible || !BaseSprite::worldMouseEnabled || !isInRenderTree()) return;
     
     if (default_state->parentSprite == NULL){
         // cout << " default addChild " << name << endl;
@@ -164,6 +165,8 @@ void ButtonSprite::onRelease(int x, int y, int button)
 
 void ButtonSprite::onReleaseOutside(int x, int y, int button)
 {
+    if (!BaseSprite::visible || !BaseSprite::worldMouseEnabled || !isInRenderTree()) return;
+    
     if (default_state->parentSprite == NULL){
         // cout << " default addChild " << name << endl;
         addChild(default_state);
