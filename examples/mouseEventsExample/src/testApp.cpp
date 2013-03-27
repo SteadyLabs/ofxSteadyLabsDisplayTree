@@ -3,7 +3,6 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    
     //objects with mouse events require the mousecontroller to be initialized before instantiating the objects
     MouseEventController::init();
     
@@ -19,7 +18,7 @@ void testApp::setup(){
     button1->registrationX = button1->width/2;
     button1->registrationY = button1->height/2;
     
-    //set the registration point to the center, so it draws and scales from the center    
+    //set the registration point to the center, so it draws and scales from the center
     button2->registrationX = button2->width/2;
     button2->registrationY = button2->height/2;
     
@@ -31,7 +30,7 @@ void testApp::setup(){
     
     //add it to root
     root->addChild( button1 );
-    root->addChild( button2 ); 
+    root->addChild( button2 );
     
     //button 1 gets bigger every time you roll over it, but when you click it, it returns to normal size
     button1->addListener(ButtonSprite::ON_PRESS, this, &testApp::onButton1Pressed);
@@ -41,10 +40,9 @@ void testApp::setup(){
     //button 2 gets smaller every time you click it, but when you roll out, it returns to normal size
     button2->addListener(ButtonSprite::ON_PRESS, this, &testApp::onButton2Pressed);
     button2->addListener(ButtonSprite::ON_ROLLOUT, this, &testApp::onButton2RolledOut);
-    
-    
 }
 
+//--------------------------------------------------------------
 void testApp::onButton1Pressed( ofMessage &e ){
     button1->scaleX = button1->scaleY = 1;
 }
@@ -59,7 +57,7 @@ void testApp::onButton1RolledOver( ofMessage &e ){
 void testApp::onButton2Pressed( ofMessage &e ){
     button2->scaleX *=.95;
     button2->scaleY = button2->scaleX;
-
+    
 }
 
 void testApp::onButton2RolledOut( ofMessage &e ){

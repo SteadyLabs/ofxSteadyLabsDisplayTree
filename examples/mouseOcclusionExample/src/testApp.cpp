@@ -3,7 +3,6 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    
     //objects with mouse events require the mousecontroller to be initialized before instantiating the objects
     MouseEventController::init();
     
@@ -27,8 +26,8 @@ void testApp::setup(){
     button3->x = 500;
     button4->x = button3->x + button3->width - 30;
     
-    //but this time, make button 4 a non-blocking button
-    button4->setMouseBlocking(false);
+    //but this time, make button 4 a blocking button
+    button4->setMouseBlocking(true);
     
     //give them a 100 pixel margin from the top
     button1->y = button2->y = button3->y = button4->y = 100;
@@ -40,11 +39,9 @@ void testApp::setup(){
     
     //add it to root
     root->addChild( button1 );
-    root->addChild( button2 ); 
-    root->addChild( button3 ); 
-    root->addChild( button4 ); 
-
-    
+    root->addChild( button2 );
+    root->addChild( button3 );
+    root->addChild( button4 );
 }
 
 //--------------------------------------------------------------
