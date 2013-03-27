@@ -6,7 +6,7 @@ void testApp::setup(){
     MouseEventController::init();
     root = new BaseSprite();
     root->isRoot = true;
-    root->name = "root";  
+    root->name = "root";
 }
 
 //--------------------------------------------------------------

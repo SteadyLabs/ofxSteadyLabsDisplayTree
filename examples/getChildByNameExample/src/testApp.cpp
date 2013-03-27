@@ -1,7 +1,6 @@
 #include "testApp.h"
 #include "MouseEventController.h"
 
-
 //--------------------------------------------------------------
 void testApp::setup(){
     // Init the MouseEventController
@@ -21,12 +20,12 @@ void testApp::setup(){
     stageImg->name = "stage";
     
     // Scraping children assets from JSON
-    // This steps through all children elements in the demo json 
+    // This steps through all children elements in the demo json
     // and loads them into sprites for the display tree.
     Json::Value siteJSON = jsonParser.parse("sample_json.json");
     BaseSprite* newSprite = new BaseSprite();
     jsonParser.loadSpritesFromJSON(siteJSON["children"], newSprite);
-   
+    
     
     // cout << siteJSON["children"].size() << endl;
     
@@ -42,13 +41,10 @@ void testApp::setup(){
     blueAsset->registrationY = blueAsset->height*.5;
     blueAsset->x += blueAsset->width*.5;
     blueAsset->y += blueAsset->height*.5;
-    
-    
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
     // rotate the blue asset
     blueAsset->rotation += .1;
     
@@ -60,12 +56,10 @@ void testApp::update(){
     
     // Update our display tree
     root->update();
-    
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    
     // Draw the root to the display tree
     root->draw();
 }

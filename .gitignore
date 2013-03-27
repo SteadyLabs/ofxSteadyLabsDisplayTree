@@ -10,15 +10,28 @@ build/
 *.pbxuser
 *.perspective
 *.perspectivev3
-*.mode1v3
-*.mode2v3
+*.mode*
 
 project.xcworkspace/
 xcuserdata/
+xcshareddata/
 
 .sln
 .vcproj
 .vcproj.user
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
 
 
 
