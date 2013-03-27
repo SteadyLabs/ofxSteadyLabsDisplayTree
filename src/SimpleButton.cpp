@@ -16,29 +16,20 @@ string SimpleButton::ON_RELEASE_OUTSIDE = "onReleaseOutside";
 
 
 SimpleButton::SimpleButton(){
-
-    cout<< "SimpleButton::constructor\n";
-    
-    BaseSprite::BaseSprite();
-    cout<< "SimpleButton::constructor::2\n";
-    //mouseEnabler = NULL;
-    image = NULL;
-
-    enableMouseEvents();
-    
+    init();
 }
 
 
 SimpleButton::SimpleButton(string inPath){
-    
-    
-    BaseSprite::BaseSprite();
-    cout<< "SimpleButton::constructor::2\n";
-    //mouseEnabler = NULL;
-    image = NULL;
-    
-    enableMouseEvents();
+    init();
     loadFile( inPath );
+}
+
+void SimpleButton::init() {
+    BaseSprite::BaseSprite();
+    image = NULL;
+    enableMouseEvents();
+    
 }
 
 void SimpleButton::loadFile(string inPath){

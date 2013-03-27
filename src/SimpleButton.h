@@ -22,6 +22,8 @@ public:
     SimpleButton(string inPath);
     void loadFile( string inPath );
     
+    void init();
+    
 protected:
     BitmapSprite* image;
 
