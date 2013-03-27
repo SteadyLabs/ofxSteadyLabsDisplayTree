@@ -159,6 +159,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15F97ED21703B41100A256C9 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				15F97ECF1703B25900A256C9 /* SimpleToggle.cpp */,
+				15F97ED01703B25900A256C9 /* SimpleToggle.h */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
 		65b0f971bbb4e6c38fde9a92e64bebb2 /* ofxSteadyLabsDisplayTree */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,8 +247,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				15F97ECF1703B25900A256C9 /* SimpleToggle.cpp */,
-				15F97ED01703B25900A256C9 /* SimpleToggle.h */,
+				15F97ED21703B41100A256C9 /* ui */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,

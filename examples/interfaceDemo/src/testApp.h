@@ -21,10 +21,12 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-
-
-    BaseSprite *root;
     
+    
+    void onToggle(ofMessage &e);
+    
+    
+    BaseSprite *root;
     SimpleToggle *toggle1;
 		
 };

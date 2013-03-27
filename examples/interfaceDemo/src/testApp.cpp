@@ -14,10 +14,9 @@ void testApp::setup(){
     toggle1 = new SimpleToggle(buttonPath);
     toggle1->x = 150;
     toggle1->y = 150;
-    
+    toggle1->addListener(SimpleToggle::ON_PRESS, this, &testApp::onToggle);
     
     root->addChild(toggle1);
-    
     
 }
 
@@ -31,6 +30,12 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     root->draw();
+}
+
+//--------------------------------------------------------------
+void testApp::onToggle(ofMessage &e){
+
+    cout << " show panel " << endl;
 }
 
 //--------------------------------------------------------------
