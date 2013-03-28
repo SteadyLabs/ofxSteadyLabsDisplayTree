@@ -27,9 +27,13 @@ public:
     
     
     void flipToggle();
+    void renderFont(); // bk: fix
     bool isOn;
     
     ToggleState toggleState;
+    
+    string buttonTxt;
+    ofTrueTypeFont avenir;
 
     
 protected:

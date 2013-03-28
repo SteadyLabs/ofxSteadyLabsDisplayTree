@@ -29,6 +29,9 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    
+    toggle1->renderFont();
+    
     root->draw();
 }
 

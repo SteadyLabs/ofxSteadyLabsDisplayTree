@@ -24,20 +24,32 @@ SimpleToggle::SimpleToggle(string inPath){
 
 void SimpleToggle::init() {
     
+    // font
+    avenir.loadFont("fonts/avenir.ttf", 10);
+    avenir.setLineHeight(10);
+    
     image_off = NULL;
     image_on = NULL;
     isOn = false;
     toggleState = OFF_STATE; // default to off
+    buttonTxt = "default";
     
     SimpleButton::SimpleButton(); // get that simple button
+    
+}
+
+void SimpleToggle::renderFont() {
+    
+    ofSetColor(0, 0, 0);
+    avenir.drawString("toggle1", BaseSprite::x + BaseSprite::width + 8, BaseSprite::y + 12);
     
 }
 
 void SimpleToggle::loadDir(string inDir) {
 
     loadImage(DEFAULT, "toggle/default/default.png");
-    loadImage(ON_STATE, "toggle/off/offstate.png");
-    loadImage(OFF_STATE, "toggle/on/onstate.png");
+    loadImage(ON_STATE, "toggle/on/onstate.png");
+    loadImage(OFF_STATE, "toggle/off/offstate.png");
     
     /* bk: fix this to load the images in the directory recursively
      
