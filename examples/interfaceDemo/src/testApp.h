@@ -4,9 +4,6 @@
 #include "BaseSprite.h"
 #include "SimpleToggle.h"
 #include "ofxTimeline.h"
-#include "ofxTLEmptyTrack.h"
-#include "ofxTLEmptyKeyframes.h"
-
 
 class testApp : public ofBaseApp{
 
@@ -27,16 +24,18 @@ public:
     
     
     void onToggle(ofMessage &e);
+    void onToggle2(ofMessage &e);
     void setupTimeline();
     
     BaseSprite *root;
     //BaseSprite *timelineSprite;
     SimpleToggle *toggle1;
+    SimpleToggle *toggle2;
 
     
-    ofxTimeline timeline;
-	ofxTLEmptyTrack* emptyTrack;
-	ofxTLEmptyKeyframes* emptyKeyframes;
+	ofLight light;
+	
+	ofxTimeline timeline;
     
     
 };

@@ -1,14 +1,20 @@
 <positions>
-    <element name="My Custom Keyframes">
+    <element name="Colors">
         <x>0.000000000</x>
-        <y>134.000000000</y>
+        <y>267.000000000</y>
         <width>1024.000000000</width>
-        <height>36.000000000</height>
+        <height>20.000000000</height>
     </element>
-    <element name="My Custom Track">
+    <element name="Rotate X">
         <x>0.000000000</x>
         <y>52.000000000</y>
         <width>1024.000000000</width>
-        <height>58.000000000</height>
+        <height>86.000000000</height>
+    </element>
+    <element name="Rotate Y">
+        <x>0.000000000</x>
+        <y>162.000000000</y>
+        <width>1024.000000000</width>
+        <height>81.000000000</height>
     </element>
 </positions>

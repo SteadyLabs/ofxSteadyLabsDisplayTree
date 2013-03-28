@@ -40,7 +40,7 @@ void SimpleToggle::init() {
 
 void SimpleToggle::renderFont() {
     
-    ofSetColor(0, 0, 0);
+    ofSetColor(240, 240, 240);
     avenir.drawString("toggle1", BaseSprite::x + BaseSprite::width + 8, BaseSprite::y + 12);
     
 }

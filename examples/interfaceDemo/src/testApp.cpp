@@ -3,8 +3,15 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    MouseEventController::init();
+    ofSetFrameRate(60);
+	ofSetVerticalSync(true);
+    ofEnableSmoothing();
+
     
+    setupTimeline();
+
+    MouseEventController::init();
+
     root = new BaseSprite();
     root->isRoot = true;
     root->name = "root";
@@ -12,16 +19,22 @@ void testApp::setup(){
     
     string buttonPath = "toggle";
     toggle1 = new SimpleToggle(buttonPath);
-    toggle1->x = 300;
-    toggle1->y = 300;
+    toggle1->x = 25;
+    toggle1->y = 500;
     toggle1->addListener(SimpleToggle::ON_PRESS, this, &testApp::onToggle);
+
+    
+    toggle2 = new SimpleToggle(buttonPath);
+    toggle2->x = 25;
+    toggle2->y = 530;
+    toggle2->addListener(SimpleToggle::ON_PRESS, this, &testApp::onToggle2);
+    
     
     root->addChild(toggle1);
-    
+    root->addChild(toggle2);
     
     //timelineSprite = new BaseSprite();
     //root->addChild(timelineSpr)
-    setupTimeline();
     
 }
 
@@ -35,40 +48,82 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    ofBackground(30, 30, 30);
     
-    toggle1->renderFont();
+  	ofBackground(.15*255);
+    glEnable(GL_DEPTH_TEST);
+	ofPushMatrix();
+	
+	ofPushStyle();
+    //set the color to whatever the last color we encountered was
+	ofSetColor(timeline.getColor("Colors"));
+	
+    //translate to the center of the screen
+	ofTranslate(ofGetWidth()*.5, ofGetHeight()*.66, 40);
+    
+    //Read the values out of the timeline and use them to change the viewport rotation
+	ofRotate(timeline.getValue("Rotate X"), 1, 0, 0);
+	ofRotate(timeline.getValue("Rotate Y"), 0, 1, 0);
+	
+	ofBox(0,0,0, 200);
+	
+	ofPopMatrix();
+    
+	ofPopStyle();
+	
+	timeline.draw();
+    glDisable(GL_DEPTH_TEST);
+
+    
     
     root->draw();
     
-    // make a timeline sprite
-    float curtime = timeline.getCurrentTime();
-	timeline.draw();
+    
+    toggle1->renderFont();
+    toggle2->renderFont();
+
 }
 
 //--------------------------------------------------------------
 void testApp::setupTimeline(){
 
-    //lets you use COMMAND+C and COMMAND+V actions on mac
-    ofxTimeline::removeCocoaMenusFromGlut("Empty Templates");
-
-    timeline.setup();
-    timeline.setLoopType(OF_LOOP_NORMAL);
-    timeline.setDurationInSeconds(30);
-
-    //this is the simplest example and is really flexible
-    emptyTrack = new ofxTLEmptyTrack();
-    timeline.addTrack("My Custom Track", emptyTrack);
-
-    //a very simple color keyframe
-    emptyKeyframes = new ofxTLEmptyKeyframes();
-    emptyKeyframes->setXMLFileName("MyEmptyKeyframes.xml");
-    timeline.addTrack("My Custom Keyframes", emptyKeyframes);
+	glEnable(GL_DEPTH_TEST);
+	ofEnableLighting();
+	
+	light.setPosition(ofGetWidth()*.5, ofGetHeight()*.25, 0);
+	light.enable();
+    
+    //Timeline setup and playback details
+    ofxTimeline::removeCocoaMenusFromGlut("interfaceDemo");
+    
+	timeline.setup();
+    timeline.setFrameRate(30);
+	timeline.setDurationInFrames(90);
+	timeline.setLoopType(OF_LOOP_NORMAL);
+    
+	//each call to "add keyframes" add's another track to the timeline
+	timeline.addCurves("Rotate X", ofRange(0, 360));
+	timeline.addCurves("Rotate Y", ofRange(0, 360));
+    
+	//Flags are little markers that you can attach text to
+    //They are only useful when listening to bangFired() events
+    //so that you know when one has passed
+	timeline.addColors("Colors");
+    
+    //setting framebased to true results in the timeline never skipping frames
+    //and also speeding up with the
+    //try setting this to true and see the difference
+    glDisable(GL_DEPTH_TEST);
+    
 }
 
 //--------------------------------------------------------------
 void testApp::onToggle(ofMessage &e){
 
+    cout << " show panel " << endl;
+}
+
+void testApp::onToggle2(ofMessage &e){
+    
     cout << " show panel " << endl;
 }
 
