@@ -8,8 +8,8 @@
     <key>
         <sampleX>0.500000000</sampleX>
         <sampleY>0.500000000</sampleY>
-        <time>00:00:00:313</time>
-        <value>0.949999988</value>
+        <time>00:00:00:413</time>
+        <value>0.750000000</value>
     </key>
     <key>
         <sampleX>0.500000000</sampleX>
@@ -18,16 +18,22 @@
         <value>0.350000024</value>
     </key>
     <key>
+        <sampleX>0.500000000</sampleX>
+        <sampleY>0.500000000</sampleY>
+        <time>00:00:00:731</time>
+        <value>0.500000000</value>
+    </key>
+    <key>
         <sampleX>0.330960006</sampleX>
         <sampleY>0.239999995</sampleY>
-        <time>00:00:01:368</time>
-        <value>0.474999994</value>
+        <time>00:00:01:221</time>
+        <value>0.925000012</value>
     </key>
     <key>
         <sampleX>0.385320008</sampleX>
         <sampleY>0.689999998</sampleY>
-        <time>00:00:01:655</time>
-        <value>0.699999988</value>
+        <time>00:00:01:637</time>
+        <value>1.000000000</value>
     </key>
     <key>
         <sampleX>0.621599972</sampleX>

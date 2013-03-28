@@ -65,6 +65,7 @@
 		15D5C98F1703EA8E00C0031A /* ofxTLVideoThumb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15D5C9501703EA8E00C0031A /* ofxTLVideoThumb.cpp */; };
 		15D5C9901703EA8E00C0031A /* ofxTLVideoTrack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15D5C9521703EA8E00C0031A /* ofxTLVideoTrack.cpp */; };
 		15D5C9911703EA8E00C0031A /* ofxTLZoomer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15D5C9541703EA8E00C0031A /* ofxTLZoomer.cpp */; };
+		15D5C9AD1704CE0B00C0031A /* TimelineSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15D5C9AB1704CE0B00C0031A /* TimelineSprite.cpp */; };
 		15F97ED11703B25900A256C9 /* SimpleToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F97ECF1703B25900A256C9 /* SimpleToggle.cpp */; };
 		236a2d63488857c724d2c9742e8b017b /* BitmapSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0c41d2a40ebf0ea99c25b0002282a30d /* BitmapSprite.cpp */; };
 		3d9cc78f25e6f38bdb4f2965109984a0 /* MouseEventController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = a137ce71b7618777e9824ada755e78b3 /* MouseEventController.cpp */; };
@@ -256,6 +257,8 @@
 		15D5C9531703EA8E00C0031A /* ofxTLVideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTLVideoTrack.h; sourceTree = "<group>"; };
 		15D5C9541703EA8E00C0031A /* ofxTLZoomer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTLZoomer.cpp; sourceTree = "<group>"; };
 		15D5C9551703EA8E00C0031A /* ofxTLZoomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTLZoomer.h; sourceTree = "<group>"; };
+		15D5C9AB1704CE0B00C0031A /* TimelineSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimelineSprite.cpp; sourceTree = "<group>"; };
+		15D5C9AC1704CE0B00C0031A /* TimelineSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineSprite.h; sourceTree = "<group>"; };
 		15F97ECF1703B25900A256C9 /* SimpleToggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleToggle.cpp; sourceTree = "<group>"; };
 		15F97ED01703B25900A256C9 /* SimpleToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleToggle.h; sourceTree = "<group>"; };
 		1e784229db97d412e197b3cca40470ac /* MouseEnabler.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = MouseEnabler.h; path = ../../src/MouseEnabler.h; sourceTree = SOURCE_ROOT; };
@@ -740,6 +743,8 @@
 		15F97ED21703B41100A256C9 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				15D5C9AB1704CE0B00C0031A /* TimelineSprite.cpp */,
+				15D5C9AC1704CE0B00C0031A /* TimelineSprite.h */,
 				15F97ECF1703B25900A256C9 /* SimpleToggle.cpp */,
 				15F97ED01703B25900A256C9 /* SimpleToggle.h */,
 			);
@@ -1037,6 +1042,7 @@
 				15D5C98F1703EA8E00C0031A /* ofxTLVideoThumb.cpp in Sources */,
 				15D5C9901703EA8E00C0031A /* ofxTLVideoTrack.cpp in Sources */,
 				15D5C9911703EA8E00C0031A /* ofxTLZoomer.cpp in Sources */,
+				15D5C9AD1704CE0B00C0031A /* TimelineSprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

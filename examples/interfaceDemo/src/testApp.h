@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "BaseSprite.h"
 #include "SimpleToggle.h"
-#include "ofxTimeline.h"
+#include "TimelineSprite.h"
 
 class testApp : public ofBaseApp{
 
@@ -25,17 +25,13 @@ public:
     
     void onToggle(ofMessage &e);
     void onToggle2(ofMessage &e);
-    void setupTimeline();
     
     BaseSprite *root;
     //BaseSprite *timelineSprite;
     SimpleToggle *toggle1;
     SimpleToggle *toggle2;
 
-    
-	ofLight light;
-	
-	ofxTimeline timeline;
+    TimelineSprite *timeline;
     
     
 };
