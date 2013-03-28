@@ -11,3 +11,11 @@ else
 fi
 
 ${PREFIX}YCAMInterlab/ofxTimeline.git
+
+${PREFIX}obviousjim/ofxTween.git
+
+${PREFIX}obviousjim/ofxMSATimer.git
+
+${PREFIX}Flightphase/ofxTextInputField.git
+
+${PREFIX}Flightphase/ofxRange.git

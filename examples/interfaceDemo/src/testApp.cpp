@@ -12,11 +12,16 @@ void testApp::setup(){
     
     string buttonPath = "toggle";
     toggle1 = new SimpleToggle(buttonPath);
-    toggle1->x = 150;
-    toggle1->y = 150;
+    toggle1->x = 300;
+    toggle1->y = 300;
     toggle1->addListener(SimpleToggle::ON_PRESS, this, &testApp::onToggle);
     
     root->addChild(toggle1);
+    
+    
+    //timelineSprite = new BaseSprite();
+    //root->addChild(timelineSpr)
+    setupTimeline();
     
 }
 
@@ -30,9 +35,35 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
+    ofBackground(30, 30, 30);
+    
     toggle1->renderFont();
     
     root->draw();
+    
+    // make a timeline sprite
+    float curtime = timeline.getCurrentTime();
+	timeline.draw();
+}
+
+//--------------------------------------------------------------
+void testApp::setupTimeline(){
+
+    //lets you use COMMAND+C and COMMAND+V actions on mac
+    ofxTimeline::removeCocoaMenusFromGlut("Empty Templates");
+
+    timeline.setup();
+    timeline.setLoopType(OF_LOOP_NORMAL);
+    timeline.setDurationInSeconds(30);
+
+    //this is the simplest example and is really flexible
+    emptyTrack = new ofxTLEmptyTrack();
+    timeline.addTrack("My Custom Track", emptyTrack);
+
+    //a very simple color keyframe
+    emptyKeyframes = new ofxTLEmptyKeyframes();
+    emptyKeyframes->setXMLFileName("MyEmptyKeyframes.xml");
+    timeline.addTrack("My Custom Keyframes", emptyKeyframes);
 }
 
 //--------------------------------------------------------------
