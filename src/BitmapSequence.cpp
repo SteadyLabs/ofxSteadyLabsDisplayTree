@@ -30,17 +30,17 @@
 #include "BitmapSequence.h"
 
 string BitmapSequence::ON_PLAY_COMPLETE = "onPlayComplete";
-BitmapSequence::BitmapSequence(){
+BitmapSequence::BitmapSequence():BaseMovie(){
     init();
 }
 
-BitmapSequence::BitmapSequence( string inDir ){
+BitmapSequence::BitmapSequence( string inDir ):BaseMovie(){
     init();
     loadDir( inDir );
 }
 
 void BitmapSequence::init(){
-    BaseMovie::BaseMovie();//super?
+    //BaseMovie::BaseMovie();//super?
     usingFrames = true;//default this to true
     fps = 30;
     curFrame = totalFrames = 0;

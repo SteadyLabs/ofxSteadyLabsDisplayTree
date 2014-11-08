@@ -29,6 +29,6 @@
 #include <iostream>
 #include "BaseMovie.h"
 
-BaseMovie::BaseMovie(){
-    BaseSprite::BaseSprite();
+BaseMovie::BaseMovie():BaseSprite(){
+    //BaseSprite::BaseSprite();
 }

@@ -15,11 +15,11 @@ string SimpleButton::ON_RELEASE = "onRelease";
 string SimpleButton::ON_RELEASE_OUTSIDE = "onReleaseOutside";
 
 
-SimpleButton::SimpleButton(){
+SimpleButton::SimpleButton():BaseSprite(){
 
     cout<< "SimpleButton::constructor\n";
     
-    BaseSprite::BaseSprite();
+    
     cout<< "SimpleButton::constructor::2\n";
     //mouseEnabler = NULL;
     image = NULL;
@@ -29,10 +29,10 @@ SimpleButton::SimpleButton(){
 }
 
 
-SimpleButton::SimpleButton(string inPath){
+SimpleButton::SimpleButton(string inPath):BaseSprite(){
     
     
-    BaseSprite::BaseSprite();
+    
     cout<< "SimpleButton::constructor::2\n";
     //mouseEnabler = NULL;
     image = NULL;

@@ -32,14 +32,14 @@ using namespace std;
 
 void BitmapSprite::init()
 {
-    BaseSprite::BaseSprite();
+   
     image = new ofImage();
     hasAlpha = true;
     hitOnAlpha = true;
     alphaHitThreshold = 20;//it has to be almost totally transparent to not hit
 }
 
-BitmapSprite::BitmapSprite(){
+BitmapSprite::BitmapSprite(): BaseSprite(){
 	init();
 }
 

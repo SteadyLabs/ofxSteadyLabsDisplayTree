@@ -28,8 +28,8 @@
 #include "BaseSprite.h"
 
 
-BaseSprite::BaseSprite(){
-    DisplayObject::DisplayObject();
+BaseSprite::BaseSprite():DisplayObject(){
+    //nada
 }
 
 

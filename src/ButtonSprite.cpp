@@ -34,7 +34,7 @@ string ButtonSprite::ON_RELEASE_OUTSIDE = "onReleaseOutside";
 string ButtonSprite::ON_ROLLOVER = "onRollover";
 string ButtonSprite::ON_ROLLOUT = "onRollout";
 
-ButtonSprite::ButtonSprite(){
+ButtonSprite::ButtonSprite():BaseSprite(){
     // image = new ofImage();
     
     hasAlpha = true;
@@ -43,7 +43,7 @@ ButtonSprite::ButtonSprite(){
 }
 
 
-ButtonSprite::ButtonSprite( string inDir ){
+ButtonSprite::ButtonSprite( string inDir ):BaseSprite(){
     init();
     loadFile( inDir );
 }
@@ -62,7 +62,7 @@ void ButtonSprite::loadFile(string inDir){
 }
 
 void ButtonSprite::init(){
-    BaseSprite::BaseSprite();//super?
+    //BaseSprite::BaseSprite();//super?
     //verbose = true;
     enableMouseEvents();
     //enablePQEvents();
