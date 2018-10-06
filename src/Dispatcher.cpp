@@ -32,7 +32,7 @@ Dispatcher::Dispatcher(){
     
 }
 
-ofEvent< ofMessage >* Dispatcher::getEventForMessage( string inEventName ){
+ofEvent< ofMessage >* Dispatcher::getEventForMessage( std::string inEventName ){
     StringToEventPtrMap::iterator iter;
     iter = nameToEvent.find( inEventName );
     ofEvent< ofMessage >* foundEvent;
@@ -51,7 +51,7 @@ ofEvent< ofMessage >* Dispatcher::getEventForMessage( string inEventName ){
     
 }
 
-void Dispatcher::dispatchEvent( string inEventName ){
+void Dispatcher::dispatchEvent( std::string inEventName ){
     ofEvent<ofMessage>* myEvent = getEventForMessage(inEventName);
     ofMessage myMessage( "" );
     //ofNotifyEvent(myEvent, myMessage);
@@ -59,7 +59,7 @@ void Dispatcher::dispatchEvent( string inEventName ){
 }
 
 
-void Dispatcher::dispatchEvent( string inEventName, string inMessage ){
+void Dispatcher::dispatchEvent( std::string inEventName, std::string inMessage ){
     ofEvent<ofMessage>* myEvent = getEventForMessage(inEventName);
     ofMessage myMessage( inMessage );
     myEvent->notify( this, myMessage );

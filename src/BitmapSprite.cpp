@@ -32,7 +32,7 @@ using namespace std;
 
 void BitmapSprite::init()
 {
-    BaseSprite::BaseSprite();
+//    BaseSprite::BaseSprite();
     image = new ofImage();
     hasAlpha = true;
     hitOnAlpha = true;
@@ -69,10 +69,10 @@ bool BitmapSprite::hitTest( int tx, int ty ){
 }
 
 void BitmapSprite::loadFile(string inFile){
-    image->loadImage( inFile.c_str() );
+    image->load( inFile.c_str() );
     //image->setImageType( OF_IMAGE_GRAYSCALE );
-    width = image->width;
-    height = image->height;
+    width = image->getWidth();
+    height = image->getHeight();
 }
 
 void BitmapSprite::render(){

@@ -31,7 +31,7 @@
 CaptureSprite::CaptureSprite( int inWidth, int inHeight, int inSamples ){
     fbo.allocate(inWidth, inHeight, GL_RGBA8, inSamples);
 //    fbo.
-    BaseSprite::BaseSprite();
+//    BaseSprite::BaseSprite();
     width = inWidth;
     height = inHeight;
 }

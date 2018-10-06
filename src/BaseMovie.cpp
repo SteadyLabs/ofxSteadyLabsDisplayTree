@@ -30,5 +30,5 @@
 #include "BaseMovie.h"
 
 BaseMovie::BaseMovie(){
-    BaseSprite::BaseSprite();
+//    BaseSprite::BaseSprite();
 }

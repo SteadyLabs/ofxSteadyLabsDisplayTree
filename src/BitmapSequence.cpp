@@ -40,7 +40,7 @@ BitmapSequence::BitmapSequence( string inDir ){
 }
 
 void BitmapSequence::init(){
-    BaseMovie::BaseMovie();//super?
+//    BaseMovie::BaseMovie();//super?
     usingFrames = true;//default this to true
     fps = 30;
     curFrame = totalFrames = 0;
@@ -65,7 +65,7 @@ void BitmapSequence::loadDir(string inDir){
             ofImage* curImage = new ofImage();
             bool loaded = false;
             try {
-                 loaded = curImage->loadImage( curFile );
+                 loaded = curImage->load( curFile );
             } catch ( std::exception& e ) {
                 cout << "BitmapSequence::loadDir::Error trying to load image from:" << inDir<< "\n";
             }
@@ -102,8 +102,8 @@ void BitmapSequence::useTime(){
 
 void BitmapSequence::setDimensions(){
 
-    width = images[ curFrame ]->width;
-    height = images[ curFrame ]->height;
+    width = images[ curFrame ]->getWidth();
+    height = images[ curFrame ]->getHeight();
     //cout << "BitmapSequence::setDimensions::width:"<<width<<"\n";
     
 }

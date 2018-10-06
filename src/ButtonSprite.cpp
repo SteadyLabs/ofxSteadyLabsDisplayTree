@@ -62,7 +62,7 @@ void ButtonSprite::loadFile(string inDir){
 }
 
 void ButtonSprite::init(){
-    BaseSprite::BaseSprite();//super?
+//    BaseSprite::BaseSprite();//super?
     //verbose = true;
     enableMouseEvents();
     //enablePQEvents();

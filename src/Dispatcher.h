@@ -33,7 +33,7 @@
 
 class Dispatcher{
 
-    typedef std::map <string, ofEvent< ofMessage >* > StringToEventPtrMap; 
+    typedef std::map <std::string, ofEvent< ofMessage >* > StringToEventPtrMap;
     
 public:
     Dispatcher();
@@ -46,7 +46,7 @@ public:
     }
     */
     template <class ListenerClass, class ArgumentsType>
-    void addListener(string inEvent, ListenerClass  * listener, void (ListenerClass::*listenerMethod)( ArgumentsType&)){
+    void addListener(std::string inEvent, ListenerClass  * listener, void (ListenerClass::*listenerMethod)( ArgumentsType&)){
         ofEvent<ofMessage>* myEvent = getEventForMessage( inEvent );
         //myEvent += Poco::delegate( listener, listenerMethod );
         ofAddListener( *myEvent, listener, listenerMethod);
@@ -55,7 +55,7 @@ public:
     }
     
     template <class ListenerClass, class ArgumentsType>
-    void removeListener(string inEvent, ListenerClass  * listener, void (ListenerClass::*listenerMethod)( ArgumentsType&)){
+    void removeListener(std::string inEvent, ListenerClass  * listener, void (ListenerClass::*listenerMethod)( ArgumentsType&)){
         ofEvent<ofMessage>* myEvent = getEventForMessage( inEvent );
         //myEvent += Poco::delegate( listener, listenerMethod );
         ofRemoveListener( *myEvent, listener, listenerMethod);
@@ -63,11 +63,11 @@ public:
     }
     
     
-    void dispatchEvent( string inEvent );
-    void dispatchEvent( string inEvent, string inMessage );    
+    void dispatchEvent(std::string inEvent );
+    void dispatchEvent( std::string inEvent, std::string inMessage );
                 
 protected:
-    ofEvent< ofMessage >* getEventForMessage( string inEventName );                  
+    ofEvent< ofMessage >* getEventForMessage( std::string inEventName );
     StringToEventPtrMap nameToEvent;
 private:
             //template <class EventType,typename ArgumentsType, class ListenerClass

@@ -31,6 +31,7 @@
 
 #include "ofMain.h"
 #include "Dispatcher.h"
+
 //#include "InteractionEnabler.h"
 
 class InteractionEnabler;
@@ -38,7 +39,7 @@ class MouseEnabler;
 
 class DisplayObject : public ofRectangle, public Dispatcher {
 public:
-    typedef map< string, DisplayObject*> NameObjectHash;
+    typedef std::map<string, DisplayObject*> NameObjectHash;
     
     DisplayObject();
     virtual ~DisplayObject();

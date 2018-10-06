@@ -36,7 +36,7 @@
 class BaseSprite : public DisplayObject{
 
     public:
-        typedef map< string, BaseSprite> NameSpriteHash;
+        typedef std::map< std::string, BaseSprite> NameSpriteHash;
     
         BaseSprite();
         ~BaseSprite();

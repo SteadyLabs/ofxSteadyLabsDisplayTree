@@ -55,7 +55,7 @@ void  VideoSprite::loadFile( string inFile, bool inIsLooped ){
 	_isLooped = inIsLooped;
 
     video = new ofVideoPlayer();
-    video->loadMovie( inFile.c_str() );
+    video->load( inFile.c_str() );
     if( !_isLooped ) video->setLoopState(OF_LOOP_NONE);
 
 }

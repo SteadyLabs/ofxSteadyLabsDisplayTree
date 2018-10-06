@@ -29,7 +29,7 @@
 
 
 BaseSprite::BaseSprite(){
-    DisplayObject::DisplayObject();
+//    DisplayObject::DisplayObject();
 }
 
 

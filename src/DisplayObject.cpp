@@ -103,7 +103,7 @@ int DisplayObject::draw( int inRenderOrder){
     
     
     ofScale( scaleX, scaleY);
-    ofRotate( rotation, 0, 0, 1 );
+    ofRotateDeg( rotation, 0, 0, 1 );
     
     //HAZARD: i have no idea why this works... Mike Manh
     ofTranslate( -registrationX, -registrationY );
