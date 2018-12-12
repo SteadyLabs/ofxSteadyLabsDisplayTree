@@ -28,7 +28,7 @@ The normal ofx loops goes update, draw. Pretty simple. We added one more: event.
 
 This way, an event manager can collect events and only execute them in a single phase, and the developer can be certain there won't be events popping up in the middle of an update. We have written one for mouse events, and the model can be followed for any other events.
 
-##Events
+## Events
 All DisplayObjects extend Dispatcher, which gives them the capability to dispatch an event specified by an unique string. Additionally, it can dispatch a message with each event. For instance, the wheels can listen to the "brake" event from the frame, and can decelerate. Additionally, the brake event can also specify a second string like "slowly" or "hard", to modify how quickly the wheels decelerate.
 
 It's easy, just do:
